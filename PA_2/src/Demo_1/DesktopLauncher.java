@@ -9,7 +9,7 @@ public class DesktopLauncher  {
 	 */
 	public static void main(String[] args) {
 		
-		//HELLU!!!!
+		//HELLU!!!! I even added code ^^
 		new LwjglApplication(new DemoGame(), "Vårat Dem0000", 500,400,true);
 
 	}
