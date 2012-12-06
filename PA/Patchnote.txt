@@ -1,0 +1,15 @@
+La till:
+Stöd för flera plattformar
+Kollisionshantering för flera plattformar, fortfarande buggat
+Bakgrundsrörelse
+Gjorde delar utav koden mer läslig
+Spelet
+
+TODO:
+Fixa ännu mer läslig kod!		[Henrik]
+Ändra synligheten på vissa variabler	[Henrik]
+Fixa Kollisionshantering
+Hopp-funktion 				[Villiam]
+Göra applikationsfönstret större
+Fixa bilder				[Nils & Isak]
+Fixa så att player alltid befinner sig inom ramarna [Nils]
