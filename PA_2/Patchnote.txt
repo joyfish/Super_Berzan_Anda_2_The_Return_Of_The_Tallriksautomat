@@ -1,0 +1,15 @@
+La till:
+Stöd för flera plattformar
+Kollisionshantering för flera plattformar, med många fetures
+implementerade bakgrundsrörelse
+Gjorde delar utav koden mer läslig
+Spelet
+
+TODO:
+Fixa ännu mer läslig kod!		[Henrik]
+Ändra synligheten på vissa variabler	[Henrik]
+Fixa Kollisionshantering
+Hopp-funktion 				[Villiam] Check, dock inte på plattformar. Måste fixa bättre gravity.
+Göra applikationsfönstret större
+Fixa bilder				[Nils & Isak]
+Fixa så att player alltid befinner sig inom ramarna [Nils]
