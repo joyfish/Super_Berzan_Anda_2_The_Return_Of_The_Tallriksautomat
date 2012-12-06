@@ -1,13 +1,15 @@
 package linking;
 
-public class Master {
+import screen.GameScreen;
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+import com.badlogic.gdx.Game;
 
+public class Master extends Game {
+		
+
+	@Override
+	public void create() {
+		this.setScreen(new GameScreen());		
 	}
 
 }
