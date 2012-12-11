@@ -1,4 +1,4 @@
-package Demo_1;
+package entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -85,17 +85,14 @@ public class Player {
 	/**
 	 * om figuren inte faller (falling == false) så får figuren hastighet uppåt
 	 */
-	public void jump() {
-		
-		if(falling == false)
-		{
-			
-			setSpeed(new Vector2(getSpeed().add(0, 7)));
-			
+	public void jump() {	
+		if(falling == false){
+			setSpeed(new Vector2(getSpeed().add(0, 7)));			
 		}
-		
-		
-		
+	}
+	
+	public boolean isFalling(){
+		return falling;
 	}
 	
 }

@@ -1,4 +1,5 @@
-package Demo_1;
+package launchers;
+
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 

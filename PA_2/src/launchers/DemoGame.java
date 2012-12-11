@@ -1,4 +1,6 @@
-package Demo_1;
+package launchers;
+
+import Demo_1.GameScreen;
 
 import com.badlogic.gdx.Game;
 

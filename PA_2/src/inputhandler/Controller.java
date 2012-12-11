@@ -1,6 +1,11 @@
-package Demo_1;
+package inputhandler;
+
+import Demo_1.Background;
+import Demo_1.GameScreen;
 
 import com.badlogic.gdx.math.Vector2;
+
+import entities.Player;
 
 public class Controller {
 

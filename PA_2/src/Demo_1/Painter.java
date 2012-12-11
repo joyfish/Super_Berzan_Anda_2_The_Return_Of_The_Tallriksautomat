@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import entities.Plattform;
+import entities.Player;
+
 public class Painter {
 
 	public OrthographicCamera cam;

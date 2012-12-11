@@ -1,9 +1,14 @@
-package Demo_1;
+package collision;
 
 import java.util.ArrayList;
 
+import Demo_1.GameScreen;
+
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+
+import entities.Plattform;
+import entities.Player;
 
 public class AreaChecker {
 	private Player player;
