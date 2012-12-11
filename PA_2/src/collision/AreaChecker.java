@@ -68,8 +68,7 @@ public class AreaChecker {
 	private boolean comesFromBelow(Plattform p) {
 		if (player.getPosition().y + player.getTexture().getHeight() < p.getPosition().y + p.getSize().y
 				&& player.getPosition().y + player.image.getHeight() > p
-						.getPosition().y) {
-			System.out.println("true");
+						.getPosition().y) {			
 			return true;
 		} else {
 			return false;
