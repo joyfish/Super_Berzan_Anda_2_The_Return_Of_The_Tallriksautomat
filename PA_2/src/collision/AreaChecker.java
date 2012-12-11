@@ -26,10 +26,13 @@ public class AreaChecker {
 		for (Plattform p : plattformList) {
 			boolean b = isOverlapping(p);
 			if (b == true) {
-				if (comesFromAbove(p))
+				if (comesFromAbove(p)){
 					player.speed.y = 0.1f;
-				if (comesFromBelow(p))
+				}
+				if (comesFromBelow(p)){
 					player.speed.y = -0.1f;
+					player.position.y -= 1f;
+				}
 				if (comesFromLeft(p)) {
 					player.speed.x = -0.1f;
 					player.position.x -= 10f;
@@ -63,9 +66,10 @@ public class AreaChecker {
 	}
 
 	private boolean comesFromBelow(Plattform p) {
-		if (player.getPosition().y < p.getPosition().y
+		if (player.getPosition().y + player.getTexture().getHeight() < p.getPosition().y + p.getSize().y
 				&& player.getPosition().y + player.image.getHeight() > p
 						.getPosition().y) {
+			System.out.println("true");
 			return true;
 		} else {
 			return false;
@@ -82,7 +86,7 @@ public class AreaChecker {
 	}
 
 	private boolean comesFromRight(Plattform p) {
-		if (player.getPosition().x < p.getPosition().x && player.getPosition().x +player.image.getWidth() > p.getPosition().x + p.getSize().x ) {
+		if (player.getPosition().x < p.getPosition().x + p.getSize().x && player.getPosition().x +player.image.getWidth() > p.getPosition().x + p.getSize().x ) {
 			return true;
 		} else {
 			return false;
