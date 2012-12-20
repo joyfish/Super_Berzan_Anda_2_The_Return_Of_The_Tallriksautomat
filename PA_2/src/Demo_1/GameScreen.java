@@ -2,6 +2,8 @@ package Demo_1;
 
 import inputhandler.Controller;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import collision.AreaChecker;
@@ -27,10 +29,12 @@ public class GameScreen implements Screen, InputProcessor{
 	AreaChecker areaChecker;
 	private ArrayList<Plattform> plattformList;
 	
+	public Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+	
 	public GameScreen(){
 		super();		
 		player = new Player();
-		background = new Background();
+		background = new Background(this);
 		addPlattforms();		
 		plattformList = background.getPlattforms();
 		painter = new Painter(this, player, background);
@@ -41,10 +45,11 @@ public class GameScreen implements Screen, InputProcessor{
 		
 	}
 	
+	
+
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}	
 	
 	public ArrayList<Plattform> getPlattforms(){

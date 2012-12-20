@@ -48,8 +48,7 @@ public class Controller {
 			}
 		}
 						
-			if (p.state == State.Running) {
-				System.out.println("JumpRun!");
+			if (p.state == State.Running) {				
 				if (upDown) {
 				p.jump();
 				p.state = State.Jumprunning;

@@ -1,5 +1,7 @@
 package Demo_1;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -15,8 +17,12 @@ public class Background {
 	public Texture background;	
 	private float BORDERLINE = 50f; 
 	private ArrayList<Plattform> plattformList;
+	private GameScreen master;
+	private Dimension Screen;
 	
-	public Background(){
+	public Background(GameScreen Master){
+		Screen = Toolkit.getDefaultToolkit().getScreenSize();
+		master = Master;
 		plattformList = new ArrayList<>();
 		offset = new Vector2(-500,-400);
 		background = new Texture(Gdx.files.internal("BakrundDemo2.1.png"));
@@ -26,7 +32,7 @@ public class Background {
 		if (playerRectangle.x <= BORDERLINE) {
 			offset.x += 5; 
 		}		
-		if (playerRectangle.x + playerRectangle.width >= 500 - BORDERLINE) {
+		if (playerRectangle.x + playerRectangle.width >= Screen.width/2 - BORDERLINE) {
 			offset.x -= 5;
 		}
 		
