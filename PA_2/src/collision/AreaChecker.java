@@ -28,27 +28,26 @@ public class AreaChecker {
 			boolean b = isOverlapping(p);
 			if (b == true) {
 				if (comesFromAbove(p)){
-					player.speed.y = 0.1f;
+					player.getSpeed().y = 0.1f;
 					player.state = State.Standing;				
 				}
 				if (comesFromBelow(p)){
-					player.speed.y = -0.1f;
-					player.position.y -= 1f;
+					player.getSpeed().y = -0.1f;
+					player.getPosition().y -= 1f;
 				}
 				if (comesFromLeft(p)) {
-					player.speed.x = -0.1f;
-					player.position.x -= 10f;
+					player.getSpeed().x = -0.1f;
+					player.getPosition().x -= 10f;
 				}
 				if (comesFromRight(p)) {
-					player.speed.x = 0.1f;
-					player.position.x += 10;
+					player.getSpeed().x = 0.1f;
+					player.getPosition().x += 10;
 				}
 			}
 		}
 		
 		if(player.getPosition().y <= 0){
-			player.state = State.Standing;
-			System.out.println("wololol");
+			player.state = State.Standing;			
 		}
 		
 		if (!(player.state == State.Standing || player.state == State.Running)) {			

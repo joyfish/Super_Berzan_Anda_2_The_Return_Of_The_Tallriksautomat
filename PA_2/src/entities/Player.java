@@ -6,26 +6,28 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player {
-
-	public Vector2 position;
-	public Vector2 speed;
 	public static float maxSpeed = 5f;
 	public static float acceleration = 0.15f;
 	public static float deAcceleration = 0.98f;
 	public static float stopSpeed = 1.5f;
+	public static Vector2 Gravity = new Vector2(0, -0.05f);;
+	
+	private Vector2 position;
+	private Vector2 speed;
+	
 	public Texture image;
 	public Rectangle rectangle;
-	public Vector2 Gravity = new Vector2(0, -0.05f);
+	
 	public State state;
 	/**
 	 * faller figuren? true eller false
 	 */
-	public Boolean falling;
+	private Boolean falling;
 	public static float maxJumpSpeed = 7f;
 
 	public Player() {
 		speed = new Vector2(0, 0);
-		position = new Vector2(120, 40);
+		position = new Vector2(120, 40);		
 		image = new Texture(Gdx.files.internal("PlayerDemo2.png"));
 		state = State.Jumping;
 		falling = true;
