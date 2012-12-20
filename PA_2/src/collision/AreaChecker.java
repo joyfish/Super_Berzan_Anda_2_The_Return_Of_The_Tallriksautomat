@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 import entities.Plattform;
 import entities.Player;
+import entities.State;
 
 public class AreaChecker {
 	private Player player;
@@ -28,6 +29,7 @@ public class AreaChecker {
 			if (b == true) {
 				if (comesFromAbove(p)){
 					player.speed.y = 0.1f;
+					player.state = State.Standing;				
 				}
 				if (comesFromBelow(p)){
 					player.speed.y = -0.1f;
@@ -44,15 +46,14 @@ public class AreaChecker {
 			}
 		}
 		
-		if (player.getPosition().y <= 0) {
-			player.gravity(true);
-			
-			player.falling = false;
-		} else {
-			player.gravity(false);
-			
-			player.falling = true;
+		if(player.getPosition().y <= 0){
+			player.state = State.Standing;
+			System.out.println("wololol");
 		}
+		
+		if (!(player.state == State.Standing || player.state == State.Running)) {			
+			player.gravity();
+		} 
 	}
 
 	private boolean comesFromAbove(Plattform p) {

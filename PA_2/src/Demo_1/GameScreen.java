@@ -60,6 +60,7 @@ public class GameScreen implements Screen, InputProcessor{
 		controller.move(LeftDown,RightDown,DownDown,UpDown);		
 		painter.render();	
 		background.update(player.getRectangle());
+		player.act();
 		for(Plattform p : plattformList){
 		p.setOffset(background.getOffset());
 		}
