@@ -21,8 +21,8 @@ public class Controller {
 	}
 
 	public void move(boolean leftDown, boolean rightDown, boolean downDown,
-			boolean upDown) {
-
+			boolean upDown) {		
+		
 		if (p.state == State.Standing) {
 			if (leftDown) {
 				p.setSpeed(new Vector2(p.getSpeed()
@@ -33,25 +33,31 @@ public class Controller {
 				p.setSpeed(new Vector2(p.getSpeed().add(p.getAcceleration(), 0)));
 				p.state = State.Running;
 			}
-		} else {
-			// Dont do it!
-		}
-		if (downDown) {
-			// p.setSpeed(new Vector2(p.getSpeed().add(0,
-			// -p.getAcceleration())));
-			// tills vi implementerat stegar bör man inte kunna gå nedåt
-		}
-		if (upDown) {
-			if (p.state == State.Running) {
-				p.jump();
-				p.state = State.Jumprunning;
-				// p.setSpeed(new Vector2(p.getSpeed().add(0,
-				// p.getAcceleration())));
-			} else if (p.state == State.Standing) {
+			if(upDown){
 				p.jump();
 				p.state = State.Jumping;
 			}
 		}
+		
+		if (p.state == State.Jumping){			
+			if(leftDown){
+				p.setSpeed(new Vector2(p.getSpeed().add(-p.getAcceleration(),0)));
+			}
+			if(rightDown){
+				p.setSpeed(new Vector2(p.getSpeed().add(p.getAcceleration(),0)));
+			}
+		}
+						
+			if (p.state == State.Running) {
+				System.out.println("JumpRun!");
+				if (upDown) {
+				p.jump();
+				p.state = State.Jumprunning;
+				}				
+			} 
+		
+		
+		
 
 		if (p.getSpeed().x > p.getMaxSpeed()) {
 			p.setSpeed(new Vector2(p.getMaxSpeed(), p.getSpeed().y));
@@ -64,11 +70,7 @@ public class Controller {
 		}
 		if (p.getSpeed().y < -p.getMaxJumpSpeed()) {
 			p.setSpeed(new Vector2(p.getSpeed().x, -p.getMaxJumpSpeed()));
-		}
-	
-		if(p.state == State.Running && !(leftDown || rightDown)){
-			p.state = State.Standing;
-		}
+		}		
 		
 		p.setPosition(p.getPosition().add(p.getSpeed()));
 

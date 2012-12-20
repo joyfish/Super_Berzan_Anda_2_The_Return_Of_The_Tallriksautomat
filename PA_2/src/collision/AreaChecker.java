@@ -29,26 +29,27 @@ public class AreaChecker {
 			if (b == true) {
 				if (comesFromAbove(p)){
 					player.getSpeed().y = 0.1f;
-					player.state = State.Standing;				
+					player.state = State.Standing;					
 				}
 				if (comesFromBelow(p)){
 					player.getSpeed().y = -0.1f;
-					player.getPosition().y -= 1f;
+					player.getPosition().y -= 1f;					
 				}
 				if (comesFromLeft(p)) {
 					player.getSpeed().x = -0.1f;
-					player.getPosition().x -= 10f;
+					player.getPosition().x -= 10f;					
 				}
 				if (comesFromRight(p)) {
 					player.getSpeed().x = 0.1f;
-					player.getPosition().x += 10;
+					player.getPosition().x += 10;					
 				}
+			} else if (player.getPosition().y > 0 && player.state == State.Running){
+				player.state = State.Jumprunning;
 			}
 		}
 		
 		if(player.getPosition().y <= 0){
-			player.state = State.Standing;
-			
+			player.state = State.Standing;			
 		}
 		
 		if (!(player.state == State.Standing || player.state == State.Running)) {			

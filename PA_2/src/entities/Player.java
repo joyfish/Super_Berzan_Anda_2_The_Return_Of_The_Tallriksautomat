@@ -10,8 +10,8 @@ public class Player {
 	public static float acceleration = 0.15f;
 	public static float deAcceleration = 0.98f;
 	public static float stopSpeed = 1.5f;
-	public static Vector2 Gravity = new Vector2(0, -0.05f);;
-	public static float maxJumpSpeed = 7f;
+	public static Vector2 Gravity = new Vector2(0, -0.1f);;
+	public static float maxJumpSpeed = 6f;
 
 	private Vector2 position;
 	private Vector2 speed;
@@ -46,6 +46,8 @@ public class Player {
 		}
 		if (state == State.Jumping) {
 			falling = true;
+			speed.x *= (1
+					);
 		}
 		if (state == State.Jumprunning) {
 			falling = true;
