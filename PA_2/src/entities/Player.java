@@ -11,37 +11,38 @@ public class Player {
 	public static float deAcceleration = 0.98f;
 	public static float stopSpeed = 1.5f;
 	public static Vector2 Gravity = new Vector2(0, -0.05f);;
-	
+	public static float maxJumpSpeed = 7f;
+
 	private Vector2 position;
 	private Vector2 speed;
-	
+	public State state;
+
 	public Texture image;
 	public Rectangle rectangle;
-	
-	public State state;
+
 	/**
 	 * faller figuren? true eller false
 	 */
 	private Boolean falling;
-	public static float maxJumpSpeed = 7f;
 
 	public Player() {
 		speed = new Vector2(0, 0);
-		position = new Vector2(120, 40);		
+		position = new Vector2(120, 40);
 		image = new Texture(Gdx.files.internal("PlayerDemo2.png"));
 		state = State.Jumping;
 		falling = true;
 	}
 
 	public void act() {
-		//Gör en viss animation utifrån vilket state han är i
+		// Gör en viss animation utifrån vilket state han är i
 		if (state == State.Running) {
 			falling = false;
 			speed.y = 0;
-		}		
+		}
 		if (state == State.Standing) {
 			falling = false;
 			speed.y = 0;
+			speed.x = 0;
 		}
 		if (state == State.Jumping) {
 			falling = true;
@@ -58,6 +59,10 @@ public class Player {
 		} else {
 			speed.add(Gravity);
 		}
+	}
+
+	public void setState(State s) {
+		state = s;
 	}
 
 	public Rectangle getRectangle() {
@@ -110,10 +115,7 @@ public class Player {
 	 * om figuren inte faller (falling == false) så får figuren hastighet uppåt
 	 */
 	public void jump() {
-		if (isStanding()) {
-			setSpeed(new Vector2(getSpeed().add(0, 7)));
-			state = State.Jumping;
-		}
+		setSpeed(new Vector2(getSpeed().add(0, 7)));
 	}
 
 	public boolean isFalling() {

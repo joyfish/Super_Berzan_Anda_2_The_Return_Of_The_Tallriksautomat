@@ -47,7 +47,8 @@ public class AreaChecker {
 		}
 		
 		if(player.getPosition().y <= 0){
-			player.state = State.Standing;			
+			player.state = State.Standing;
+			
 		}
 		
 		if (!(player.state == State.Standing || player.state == State.Running)) {			
