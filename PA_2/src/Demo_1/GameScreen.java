@@ -166,6 +166,7 @@ public class GameScreen implements Screen, InputProcessor{
 		background.addPlattform(new Vector2(101, 101), new Vector2(200,60));
 		background.addPlattform(new Vector2(202, 202), new Vector2(200,60));
 		background.addPlattform(new Vector2(505, 101), new Vector2(200,60));
+		
 	}
 	
 }

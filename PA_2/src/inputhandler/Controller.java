@@ -13,7 +13,7 @@ public class Controller {
 	public GameScreen gamescreen;
 	public Player p;
 	public Background b;
-
+	
 	public Controller(GameScreen Gamescreen) {
 		gamescreen = Gamescreen;
 		p = gamescreen.getPlayer();

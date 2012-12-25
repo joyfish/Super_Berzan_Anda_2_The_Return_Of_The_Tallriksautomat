@@ -47,8 +47,7 @@ public class Background {
 	}
 	
 	public void addPlattform(Vector2 StartPosition, Vector2 Size){
-		plattformList.add(new Plattform(StartPosition, Size));
-		System.out.println(plattformList);
+		plattformList.add(new Plattform(StartPosition, Size));		
 	}
 	
 	public void setOffset(Vector2 newOffset){
