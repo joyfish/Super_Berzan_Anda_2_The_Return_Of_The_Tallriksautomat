@@ -11,7 +11,7 @@ public class DesktopLauncher  {
 	/**
 	 * @param args
 	
-	 */
+	 */ 
 	public DesktopLauncher(){
 		new LwjglApplication(new DemoGame(), "Vårat Dem0000", screen.width/2,screen.height/2,true);
 	}

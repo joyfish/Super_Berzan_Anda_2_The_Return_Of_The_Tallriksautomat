@@ -13,10 +13,12 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import entities.Plattform;
 import entities.Player;
+import entities.Talkzone;
 
 
 
@@ -28,21 +30,23 @@ public class GameScreen implements Screen, InputProcessor{
 	boolean UpDown = false, DownDown = false, RightDown = false, LeftDown = false;
 	AreaChecker areaChecker;
 	private ArrayList<Plattform> plattformList;
-	
+	private ArrayList<Talkzone> talkzoneList;
 	public Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	public GameScreen(){
 		super();		
+		talkzoneList = new ArrayList<Talkzone>();
 		player = new Player();
 		background = new Background(this);
 		addPlattforms();		
 		plattformList = background.getPlattforms();
 		painter = new Painter(this, player, background);
-		controller = new Controller(this);
+		controller = new Controller(this);		
 		areaChecker = new AreaChecker(this, player);
+		addTalkzones();
 		
-		Gdx.input.setInputProcessor(this);
 		
+		Gdx.input.setInputProcessor(this);		
 	}
 	
 	
@@ -121,6 +125,7 @@ public class GameScreen implements Screen, InputProcessor{
 		if(arg0 == Keys.RIGHT) RightDown = false;
 		if(arg0 == Keys.UP)UpDown = false;
 		if(arg0 == Keys.DOWN)DownDown = false;
+		if(arg0 == Keys.T) background.activateTalkzones(player.getRectangle());
 		return false;
 	}
 
@@ -160,13 +165,21 @@ public class GameScreen implements Screen, InputProcessor{
 	
 	public Background getBackground(){
 		return background;
-	}
-
+	}		
+	
 	private void addPlattforms(){ 
 		background.addPlattform(new Vector2(101, 101), new Vector2(200,60));
 		background.addPlattform(new Vector2(202, 202), new Vector2(200,60));
-		background.addPlattform(new Vector2(505, 101), new Vector2(200,60));
-		
+		background.addPlattform(new Vector2(505, 101), new Vector2(200,60));		
+	}
+
+	private void addTalkzones(){
+		background.addTalkzone(new Vector2(0,0), "Welcome to zone 1");
+		background.addTalkzone(new Vector2(400,0), "Welcome to zone 2");
+	}
+	
+	public ArrayList<Talkzone> getTalkzones() {
+		return talkzoneList;
 	}
 	
 }

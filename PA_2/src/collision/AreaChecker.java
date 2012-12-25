@@ -10,17 +10,20 @@ import com.badlogic.gdx.math.Rectangle;
 import entities.Plattform;
 import entities.Player;
 import entities.State;
+import entities.Talkzone;
 
 public class AreaChecker {
 	private Player player;
 	private ArrayList<Plattform> plattformList;
 	private GameScreen superGame;
+	private ArrayList<Talkzone> tz;
 
 	public AreaChecker(GameScreen SuperGame, Player play) {
 		player = play;
 		plattformList = new ArrayList<>();
 		superGame = SuperGame;
 		plattformList = superGame.getPlattforms();
+		tz = superGame.getTalkzones();		
 	}
 
 	public void update() {
@@ -47,6 +50,18 @@ public class AreaChecker {
 				player.state = State.Jumprunning;
 			}
 		}
+		
+		//for(Talkzones tz : Talkzones()){
+		for (int i = 0; i < tz.size(); i++) {
+			Talkzone talkzone = tz.get(i);
+			if(Intersector.overlapRectangles(player.getRectangle() , talkzone.getZone())){
+				talkzone.entered();
+			} else {
+				talkzone.exited();
+			}
+		}
+			
+		//}
 		
 		if(player.getPosition().y <= 0){
 			player.state = State.Standing;			
