@@ -77,6 +77,7 @@ public class GameScreen implements Screen, InputProcessor{
 		}
 		for(Enemy e : enemyList){
 			e.setOffset(background.getOffset());
+			e.act();
 		}
 	}
 

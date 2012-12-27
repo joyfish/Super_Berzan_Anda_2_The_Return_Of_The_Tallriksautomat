@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import entities.Enemy;
+import entities.Missile;
 import entities.Plattform;
 import entities.Player;
 import entities.Talkzone;
@@ -38,11 +39,16 @@ public class Painter {
 		spritebatch.draw(background.getTexture(), background.getOffset().x, background.getOffset().y);
 		spritebatch.draw(player.getTexture(), player.getPosition().x, player.getPosition().y);
 		for(Enemy e : enemyList){
+			Missile m = e.getMissile();
+			spritebatch.draw(m.getTexture(),m.getPosition().x + e.getOffset().x, m.getPosition().y + e.getOffset().y);
 			spritebatch.draw(e.getTexture(),e.getPosition().x + e.getOffset().x,e.getPosition().y + e.getOffset().y);
 		}
 		for(Plattform p : plattformList){
 		spritebatch.draw(p.getTexture(), p.getPosition().x,p.getPosition().y ,p.getTexture().getWidth(),p.getTexture().getHeight());
 		}
+		
+		
+		
 		for (int i = 0; i < talkzoneList.size(); i++) {
 			//Draw talkzones		
 		}
