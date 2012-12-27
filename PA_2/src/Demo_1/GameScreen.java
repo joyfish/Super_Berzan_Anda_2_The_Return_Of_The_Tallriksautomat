@@ -13,9 +13,9 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import entities.Enemy;
 import entities.Plattform;
 import entities.Player;
 import entities.Talkzone;
@@ -32,10 +32,12 @@ public class GameScreen implements Screen, InputProcessor{
 	private ArrayList<Plattform> plattformList;
 	private ArrayList<Talkzone> talkzoneList;
 	public Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+	private ArrayList<Enemy> enemyList;
 	
 	public GameScreen(){
 		super();		
 		talkzoneList = new ArrayList<Talkzone>();
+		enemyList = new ArrayList<Enemy>();
 		player = new Player();
 		background = new Background(this);
 		addPlattforms();		
@@ -45,7 +47,7 @@ public class GameScreen implements Screen, InputProcessor{
 		areaChecker = new AreaChecker(this, player);
 		addTalkzones();
 		
-		
+		enemyList.add(new Enemy(new Vector2(500,400)));		
 		Gdx.input.setInputProcessor(this);		
 	}
 	
@@ -72,6 +74,9 @@ public class GameScreen implements Screen, InputProcessor{
 		player.act();
 		for(Plattform p : plattformList){
 		p.setOffset(background.getOffset());
+		}
+		for(Enemy e : enemyList){
+			e.setOffset(background.getOffset());
 		}
 	}
 
@@ -181,5 +186,13 @@ public class GameScreen implements Screen, InputProcessor{
 	public ArrayList<Talkzone> getTalkzones() {
 		return talkzoneList;
 	}
+
+	public ArrayList<Enemy> getEnemies() {
+		return enemyList;
+	}
+
+
+
+	
 	
 }

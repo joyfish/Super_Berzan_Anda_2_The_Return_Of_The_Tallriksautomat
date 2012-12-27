@@ -46,7 +46,7 @@ public class Player {
 		}
 		if (state == State.Jumping) {
 			falling = true;
-			speed.x *= (1
+			speed.x *= (0.99
 					);
 		}
 		if (state == State.Jumprunning) {
