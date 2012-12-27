@@ -33,6 +33,7 @@ public class GameScreen implements Screen, InputProcessor{
 	private ArrayList<Talkzone> talkzoneList;
 	public Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 	private ArrayList<Enemy> enemyList;
+	public Dimension applicationSize;
 	
 	public GameScreen(){
 		super();		
@@ -77,13 +78,13 @@ public class GameScreen implements Screen, InputProcessor{
 		}
 		for(Enemy e : enemyList){
 			e.setOffset(background.getOffset());
-			e.act();
+			e.act(this);
 		}
 	}
 
 	@Override
 	public void resize(int width, int height) {
-
+		applicationSize = new Dimension(width,height);
 	}
 
 	@Override

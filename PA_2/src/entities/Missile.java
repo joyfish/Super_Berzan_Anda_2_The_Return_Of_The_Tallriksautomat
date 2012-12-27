@@ -1,5 +1,7 @@
 package entities;
 
+import Demo_1.GameScreen;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
@@ -8,11 +10,17 @@ import com.badlogic.gdx.math.Vector2;
 public class Missile {
 	private Texture texture;
 	private Vector2 position;	
-	private Vector2 speed;
+	private Vector2 speed;	
 	
-	public Missile(Vector2 startPosition){
+	public Missile(Vector2 startPosition, Vector2 playerPos, GameScreen master){
 		position = startPosition;
-		speed = new Vector2(1,0);
+		if(playerPos.x  > startPosition.x + master.getBackground().getOffset().x ){
+			speed = new Vector2(2,0);
+			position.add(32,0);
+		} else {
+			speed = new Vector2(-2,0);
+		}
+		
 		texture = new Texture(Gdx.files.internal("zemisileshue.png"));
 	}
 	public Vector2 getPosition(){
@@ -20,7 +28,7 @@ public class Missile {
 	}
 	
 	public void act(){
-		position.add(speed);
+		position.add(speed);		
 	}
 	
 	public Rectangle getRectangle(){
