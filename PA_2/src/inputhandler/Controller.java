@@ -13,6 +13,7 @@ public class Controller {
 	public GameScreen gamescreen;
 	public Player p;
 	public Background b;
+	public Boolean LookingRight=true;
 	
 	public Controller(GameScreen Gamescreen) {
 		gamescreen = Gamescreen;
@@ -20,6 +21,11 @@ public class Controller {
 		b = gamescreen.getBackground();
 	}
 
+	public Boolean getDirection(){
+		return LookingRight;
+	}
+	
+	
 	public void move(boolean leftDown, boolean rightDown, boolean downDown,
 			boolean upDown) {		
 		 
@@ -54,6 +60,18 @@ public class Controller {
 				p.state = State.Jumprunning;
 				}				
 			} 
+			
+			
+		//							TODO
+		//if (p.getSpeed().x>0){
+		//	
+		//	p.state=State.Right;
+		//}
+		//if (p.getSpeed().x<0){
+		//	p.state=State.Left;
+		//}
+		//System.out.println(lookingright);	
+			
 		
 		
 		
@@ -72,6 +90,8 @@ public class Controller {
 		}		
 		
 		p.setPosition(p.getPosition().add(p.getSpeed()));
+		
+		
 
 	}
 

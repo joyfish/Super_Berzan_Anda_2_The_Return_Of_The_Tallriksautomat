@@ -1,5 +1,5 @@
 package entities;
 
 public enum State {
-	Standing, Jumping, Running, Jumprunning;
+	Standing, Jumping, Running, Jumprunning,Left,Right;
 }

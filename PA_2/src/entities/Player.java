@@ -16,6 +16,7 @@ public class Player {
 	private Vector2 position;
 	private Vector2 speed;
 	public State state;
+	public Boolean lookingright=true;
 
 	public Texture image;
 	public Rectangle rectangle;
@@ -28,7 +29,7 @@ public class Player {
 	public Player() {
 		speed = new Vector2(0, 0);
 		position = new Vector2(120, 40);
-		image = new Texture(Gdx.files.internal("PlayerDemo2.png"));
+		image = new Texture(Gdx.files.internal("gubbeconsept2.png"));
 		state = State.Jumping;
 		falling = true;
 	}
@@ -52,6 +53,13 @@ public class Player {
 		if (state == State.Jumprunning) {
 			falling = true;
 		}
+		if (speed.x>0){
+			lookingright=true;
+		}
+		if (speed.x<0){
+			lookingright=false;
+		}
+		System.out.println(lookingright);
 
 	}
 
