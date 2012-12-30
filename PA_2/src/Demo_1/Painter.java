@@ -38,6 +38,9 @@ public class Painter {
 		spritebatch.begin();
 		spritebatch.draw(background.getTexture(), background.getOffset().x, background.getOffset().y);
 		spritebatch.draw(player.getTexture(), player.getPosition().x, player.getPosition().y);
+		
+		
+		
 		for(Enemy e : enemyList){
 			if(e.isReady() == false){
 			Missile m = e.getMissile();

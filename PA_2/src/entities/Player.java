@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player {
-	public static float maxSpeed = 5f;
+	public static float maxSpeed = 20f;
 	public static float acceleration = 0.15f;
 	public static float deAcceleration = 0.98f;
 	public static float stopSpeed = 1.5f;
@@ -18,7 +18,16 @@ public class Player {
 	public State state;
 	public Boolean lookingright=true;
 
-	public Texture image;
+	
+	/**
+	 * ser figuren åt höger elelr vänster, vi bästämde att ha en bild för båda fallen, detta kommer gälla
+	 * för alla bilder i animationen om vi inte hittar ett bättre sätt.
+	 * annars brukr det skrivas
+	 * drawImage(Image img, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2, ImageObserver observer);  
+	 * drawImage(Image,0,0,width,height,width,0,0height,null);  
+	 */
+	
+	public Texture lookingrightIMG,servanster;
 	public Rectangle rectangle;
 
 	/**
@@ -29,7 +38,8 @@ public class Player {
 	public Player() {
 		speed = new Vector2(0, 0);
 		position = new Vector2(120, 40);
-		image = new Texture(Gdx.files.internal("gubbeconsept2.png"));
+		lookingrightIMG = new Texture(Gdx.files.internal("gubbeconsept2.png"));
+		servanster = new Texture(Gdx.files.internal("gubbeconsept1.png"));
 		state = State.Jumping;
 		falling = true;
 	}
@@ -59,8 +69,9 @@ public class Player {
 		if (speed.x<0){
 			lookingright=false;
 		}
-		System.out.println(lookingright);
-
+	}
+	public Boolean GetLookingRight(){
+		return lookingright;
 	}
 
 	public void gravity() {
@@ -76,8 +87,8 @@ public class Player {
 	}
 
 	public Rectangle getRectangle() {
-		rectangle = new Rectangle(position.x, position.y, image.getWidth(),
-				image.getHeight());
+		rectangle = new Rectangle(position.x, position.y, lookingrightIMG.getWidth(),
+				lookingrightIMG.getHeight());
 		return rectangle;
 	}
 
@@ -114,7 +125,12 @@ public class Player {
 	}
 
 	public Texture getTexture() {
-		return image;
+		if (lookingright){
+			return lookingrightIMG;
+		}else{
+			return servanster;
+		}
+		
 	}
 
 	public float getStopSpeed() {

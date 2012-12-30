@@ -74,7 +74,7 @@ public class AreaChecker {
 
 	private boolean comesFromAbove(Plattform p) {
 		if (player.getPosition().y < p.getPosition().y + p.getSize().y
-				&& player.getPosition().y + player.image.getHeight() > p
+				&& player.getPosition().y + player.lookingrightIMG.getHeight() > p
 						.getPosition().y + p.getTexture().getHeight()) {
 			return true;
 		} else {
@@ -84,7 +84,7 @@ public class AreaChecker {
 
 	private boolean comesFromBelow(Plattform p) {
 		if (player.getPosition().y + player.getTexture().getHeight() < p.getPosition().y + p.getSize().y
-				&& player.getPosition().y + player.image.getHeight() > p
+				&& player.getPosition().y + player.lookingrightIMG.getHeight() > p
 						.getPosition().y) {			
 			return true;
 		} else {
@@ -93,7 +93,7 @@ public class AreaChecker {
 	}
 
 	private boolean comesFromLeft(Plattform p) {
-		if (player.getPosition().x + player.image.getWidth() > p.getPosition().x
+		if (player.getPosition().x + player.lookingrightIMG.getWidth() > p.getPosition().x
 				&& player.getPosition().x < p.getPosition().x) {
 			return true;
 		} else {
@@ -102,7 +102,7 @@ public class AreaChecker {
 	}
 
 	private boolean comesFromRight(Plattform p) {
-		if (player.getPosition().x < p.getPosition().x + p.getSize().x && player.getPosition().x +player.image.getWidth() > p.getPosition().x + p.getSize().x ) {
+		if (player.getPosition().x < p.getPosition().x + p.getSize().x && player.getPosition().x +player.lookingrightIMG.getWidth() > p.getPosition().x + p.getSize().x ) {
 			return true;
 		} else {
 			return false;

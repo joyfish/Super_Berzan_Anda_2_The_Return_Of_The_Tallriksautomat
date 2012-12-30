@@ -169,6 +169,9 @@ public class GameScreen implements Screen, InputProcessor{
 	public Player getPlayer(){
 		return player;
 	}
+	public Controller getController(){
+		return controller;
+	}
 	
 	public Background getBackground(){
 		return background;
