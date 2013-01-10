@@ -2,6 +2,7 @@ package entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -17,7 +18,7 @@ public class Player {
 	private Vector2 speed;
 	public State state;
 	public Boolean lookingright=true;
-
+	private Sprite sprite;
 	
 	/**
 	 * ser figuren åt höger elelr vänster, vi bästämde att ha en bild för båda fallen, detta kommer gälla
@@ -38,10 +39,11 @@ public class Player {
 	public Player() {
 		speed = new Vector2(0, 0);
 		position = new Vector2(120, 40);
-		lookingrightIMG = new Texture(Gdx.files.internal("gubbeconsept2.png"));
-		servanster = new Texture(Gdx.files.internal("gubbeconsept1.png"));
+		lookingrightIMG = new Texture(Gdx.files.internal("PlayerDemo1.png"));
+		servanster = new Texture(Gdx.files.internal("PlayerDemo1.png"));
 		state = State.Jumping;
 		falling = true;
+		sprite = new Sprite(lookingrightIMG);
 	}
 
 	public void act() {
@@ -150,6 +152,12 @@ public class Player {
 
 	public boolean isStanding() {
 		return !falling;
+	}
+
+	public Sprite getSprite() {
+		sprite.setX(position.x);
+		sprite.setY(position.y);
+		return sprite;
 	}
 
 }

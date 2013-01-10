@@ -4,6 +4,7 @@ import Demo_1.GameScreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
 public class Enemy {
@@ -14,11 +15,13 @@ public class Enemy {
 	private Texture texture;
 	private Vector2 offset;
 	private Missile misil;
-
+	private Sprite sprite;
+	
 	public Enemy(Vector2 Position) {
 		texture = new Texture(Gdx.files.internal("PlayerDemo1.png"));
 		position = Position;
 		offset = new Vector2(0, 0);
+		sprite = new Sprite(texture);
 
 	}
 
@@ -58,5 +61,11 @@ public class Enemy {
 	public void setOffset(Vector2 offset2) {
 		offset = offset2;
 	}
-
+	
+	public Sprite getSprite(){
+		sprite.setX(position.x + offset.x);
+		sprite.setY(position.y + offset.y);
+		return sprite;
+	}
+	
 }

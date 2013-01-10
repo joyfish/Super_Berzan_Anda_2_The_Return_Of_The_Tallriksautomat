@@ -3,6 +3,7 @@ package Demo_1;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import entities.Enemy;
@@ -32,6 +33,37 @@ public class Painter {
 		plattformList = gs.getPlattforms(); 
 		talkzoneList = gs.getTalkzones();
 		enemyList = gs.getEnemies();
+	}
+	
+	public void renderSprites(){
+		spritebatch.begin();
+		Sprite s;
+		spritebatch.draw(background.getTexture(), background.getOffset().x, background.getOffset().y);
+		
+		s = player.getSprite();
+		s.draw(spritebatch);
+		
+		for(Enemy e : enemyList){
+			if(e.isReady() == false){
+				Missile m = e.getMissile();
+				s = m.getSprite();
+				s.draw(spritebatch);
+			}
+			s = e.getSprite();
+			s.draw(spritebatch);
+		}
+		
+		for(Plattform p: plattformList){
+			s = p.getSprite();
+			s.draw(spritebatch);
+		}
+		
+		for(Talkzone t : talkzoneList){
+			//s = t.getSprite();
+			//s.draw(spritebatch);
+		}
+		
+		spritebatch.end();
 	}
 	
 	public void render(){

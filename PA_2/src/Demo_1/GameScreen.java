@@ -70,7 +70,7 @@ public class GameScreen implements Screen, InputProcessor{
 		
 		areaChecker.update();
 		controller.move(LeftDown,RightDown,DownDown,UpDown);		
-		painter.render();	
+		painter.renderSprites();	
 		background.update(player.getRectangle());
 		player.act();
 		for(Plattform p : plattformList){
