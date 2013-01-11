@@ -19,7 +19,8 @@ public class Plattform {
 		this.size = Size;
 		this.rectangle = new Rectangle(position.x,position.y,size.x,size.y);
 		offset = new Vector2(0, 0);		
-		sprite = new Sprite(t);
+		sprite = new Sprite(t);										
+		sprite.setSize(Size.x, Size.y);		
 	}
 	
 	public void setOffset(Vector2 Offset){		
@@ -48,7 +49,7 @@ public class Plattform {
 
 	public Sprite getSprite() {
 		sprite.setX(position.x + offset.x);
-		sprite.setY(position.y + offset.y);
+		sprite.setY(position.y + offset.y);		
 		return sprite;
 	}
 
