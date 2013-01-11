@@ -28,11 +28,10 @@ public class Painter {
 		player = Player;
 		background = Background;
 		spritebatch = new SpriteBatch();
-		cam = new OrthographicCamera(20,20);
-		cam.position.set(10, 10, 0);
+		cam = new OrthographicCamera(20,20);		
 		plattformList = gs.getPlattforms(); 
 		talkzoneList = gs.getTalkzones();
-		enemyList = gs.getEnemies();
+		enemyList = gs.getEnemies();			
 	}
 	
 	public void renderSprites(){

@@ -37,6 +37,7 @@ public class Background {
 		offset = new Vector2(-500,-400);
 		background = new Texture(Gdx.files.internal("BakrundDemo2.1.png"));
 		talkzoneList = Master.getTalkzones();
+		
 	}		
 	
 	

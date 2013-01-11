@@ -58,8 +58,8 @@ public class Enemy {
 		return offset;
 	}
 
-	public void setOffset(Vector2 offset2) {
-		offset = offset2;
+	public void setOffset(Vector2 offset2) {		
+		offset = new Vector2(offset.x + 500, offset.y + 400);
 	}
 	
 	public Sprite getSprite(){

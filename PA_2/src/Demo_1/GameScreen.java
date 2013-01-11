@@ -47,8 +47,7 @@ public class GameScreen implements Screen, InputProcessor{
 		controller = new Controller(this);		
 		areaChecker = new AreaChecker(this, player);
 		addTalkzones();
-		
-		enemyList.add(new Enemy(new Vector2(500,400)));		
+		addEnemies();
 		Gdx.input.setInputProcessor(this);		
 	}
 	
@@ -70,7 +69,7 @@ public class GameScreen implements Screen, InputProcessor{
 		
 		areaChecker.update();
 		controller.move(LeftDown,RightDown,DownDown,UpDown);		
-		painter.renderSprites();	
+		painter.renderSprites();
 		background.update(player.getRectangle());
 		player.act();
 		for(Plattform p : plattformList){
@@ -133,6 +132,7 @@ public class GameScreen implements Screen, InputProcessor{
 		if(arg0 == Keys.UP)UpDown = false;
 		if(arg0 == Keys.DOWN)DownDown = false;
 		if(arg0 == Keys.T) background.activateTalkzones(player.getRectangle());
+		if(arg0 == Keys.P)System.out.println("X: " + (player.getPosition().x - background.getOffset().x) +" || Y: " + player.getPosition().y); 
 		return false;
 	}
 
@@ -177,16 +177,45 @@ public class GameScreen implements Screen, InputProcessor{
 		return background;
 	}		
 	
-	private void addPlattforms(){ 
-		background.addPlattform(new Vector2(101, 101), new Vector2(200,60));
-		background.addPlattform(new Vector2(202, 202), new Vector2(200,60));
-		background.addPlattform(new Vector2(505, 101), new Vector2(200,60));		
+	private void addPlattforms(){ 			
+		background.addPlattform(new Vector2(), new Vector2());
+		background.addPlattform(new Vector2(300,0), new Vector2(100,150));
+		background.addPlattform(new Vector2(600,100), new Vector2(200,60));
+		background.addPlattform(new Vector2(900,0), new Vector2(150,200));
+		background.addPlattform(new Vector2(1500,150), new Vector2(200,30));
+		background.addPlattform(new Vector2(1800,50), new Vector2(200,60));
+		background.addPlattform(new Vector2(1800,250), new Vector2(200,60));
+		background.addPlattform(new Vector2(2100,0), new Vector2(150,300));
+		background.addPlattform(new Vector2(2600,0), new Vector2(100,100)); //Special guy
+		background.addPlattform(new Vector2(2750,200), new Vector2(200,60));
+		background.addPlattform(new Vector2(3000,0), new Vector2(200,200)); //Change background at crossing 3000
+		background.addPlattform(new Vector2(3700,100), new Vector2(200,60));
+		background.addPlattform(new Vector2(3950,0), new Vector2(100,150));
+		background.addPlattform(new Vector2(4250,100), new Vector2(50,50));
+		background.addPlattform(new Vector2(4350,0), new Vector2(100,250));
+		background.addPlattform(new Vector2(5050,0), new Vector2(75,75));
+		background.addPlattform(new Vector2(5250,0), new Vector2(200,200));
+		background.addPlattform(new Vector2(5500,200), new Vector2(200,60));
+		background.addPlattform(new Vector2(5750,300), new Vector2(200,60));
+		background.addPlattform(new Vector2(5900,0), new Vector2(50,300));
+		background.addPlattform(new Vector2(6000,100), new Vector2(50,50));
+		background.addPlattform(new Vector2(6200,150), new Vector2(200,60));
+		background.addPlattform(new Vector2(6450,50), new Vector2(100,30));
+		background.addPlattform(new Vector2(6450,300), new Vector2(100,30));
+		background.addPlattform(new Vector2(6650,150), new Vector2(200,60));
+		background.addPlattform(new Vector2(6850,0), new Vector2(50,300));
+		background.addPlattform(new Vector2(6900,250), new Vector2(100,10));
+		background.addPlattform(new Vector2(7100,150), new Vector2(200,60));  
+		background.addPlattform(new Vector2(), new Vector2()); //Classroom zone starts here
 		
 	}
 
+	private void addEnemies(){
+		
+	}
+	
 	private void addTalkzones(){
-		background.addTalkzone(new Vector2(0,0), "Welcome to zone 1");
-		background.addTalkzone(new Vector2(400,0), "Welcome to zone 2");
+		
 	}
 	
 	public ArrayList<Talkzone> getTalkzones() {

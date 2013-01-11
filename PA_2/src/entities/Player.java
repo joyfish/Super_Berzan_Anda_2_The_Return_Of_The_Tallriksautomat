@@ -38,7 +38,7 @@ public class Player {
 
 	public Player() {
 		speed = new Vector2(0, 0);
-		position = new Vector2(120, 40);
+		position = new Vector2(10, 10);
 		lookingrightIMG = new Texture(Gdx.files.internal("PlayerDemo1.png"));
 		servanster = new Texture(Gdx.files.internal("PlayerDemo1.png"));
 		state = State.Jumping;
