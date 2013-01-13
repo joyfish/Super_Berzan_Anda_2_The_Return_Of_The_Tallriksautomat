@@ -48,8 +48,16 @@ public class Controller {
 			if (rightDown) {
 				p.setSpeed(new Vector2(p.getSpeed().add(p.getAcceleration(), 0)));
 			}
+			if(downDown){
+				p.extraGravity();
+			}
 		}
-
+		if(p.state == State.Jumprunning){
+			if(downDown){
+				p.extraGravity();
+			}
+		}
+		
 		if (p.state == State.Running) {
 			if (upDown) {
 				p.jump();

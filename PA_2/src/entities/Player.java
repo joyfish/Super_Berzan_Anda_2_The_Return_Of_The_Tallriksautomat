@@ -146,6 +146,12 @@ public class Player {
 		setSpeed(new Vector2(getSpeed().add(0, 5.5f)));
 	}
 
+	public void extraGravity(){
+		if(falling){
+			getSpeed().add(0, -1);
+		}
+	}
+	
 	public boolean isFalling() {
 		return falling;
 	}

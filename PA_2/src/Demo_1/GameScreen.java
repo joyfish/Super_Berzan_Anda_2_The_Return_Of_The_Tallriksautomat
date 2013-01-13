@@ -130,8 +130,8 @@ public class GameScreen implements Screen, InputProcessor{
 	public boolean keyUp(int arg0) {
 		if(arg0 == Keys.LEFT) LeftDown = false;
 		if(arg0 == Keys.RIGHT) RightDown = false;
-		if(arg0 == Keys.UP)UpDown = false;
-		if(arg0 == Keys.DOWN)DownDown = false;
+		if(arg0 == Keys.UP) UpDown = false;
+		if(arg0 == Keys.DOWN) DownDown = false;
 		if(arg0 == Keys.T) background.activateTalkzones(player.getRectangle());
 		return false;
 	}
