@@ -38,17 +38,17 @@ public class AreaChecker {
 					player.getSpeed().y = -0.1f;
 					player.getPosition().y -= 1f;					
 				}
-				if (comesFromLeft(p)) {
+				if (comesFromLeftOfPlattform(p) && (player.state != State.Standing  && player.state != State.Running)) {
 					player.getSpeed().x = -0.1f;
-					player.getPosition().x -= 10f;					
+					player.getPosition().x -= 5f;					
 				}
-				if (comesFromRight(p)) {
+				if (comesFromRightOfPlattform(p)  && (player.state != State.Standing  && player.state != State.Running)) {
 					player.getSpeed().x = 0.1f;
-					player.getPosition().x += 10;					
+					player.getPosition().x += 5f;					
 				}
-			} else if (player.getPosition().y > 0 && player.state == State.Running){
+			} else if (player.getPosition().y > 0 && (player.state == State.Running)){
 				player.state = State.Jumprunning;
-			}
+			} 
 		}
 		
 		//for(Talkzones tz : Talkzones()){
@@ -73,9 +73,9 @@ public class AreaChecker {
 	}
 
 	private boolean comesFromAbove(Plattform p) {
-		if (player.getPosition().y < p.getPosition().y + p.getSize().y
-				&& player.getPosition().y + player.lookingrightIMG.getHeight() > p
-						.getPosition().y + p.getTexture().getHeight()) {
+		float plattformYandHeight = p.getPosition().y + p.getSize().y;
+		if (player.getPosition().y < plattformYandHeight
+				&& player.getPosition().y  > plattformYandHeight - 10) {
 			return true;
 		} else {
 			return false;
@@ -83,26 +83,26 @@ public class AreaChecker {
 	}
 
 	private boolean comesFromBelow(Plattform p) {
-		if (player.getPosition().y + player.getTexture().getHeight() < p.getPosition().y + p.getSize().y
-				&& player.getPosition().y + player.lookingrightIMG.getHeight() > p
-						.getPosition().y) {			
+		float playerYandHeight = player.getPosition().y + player.getTexture().getHeight();		
+		if (playerYandHeight < p.getPosition().y + 10 && playerYandHeight > p.getPosition().y) {			
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	private boolean comesFromLeft(Plattform p) {
-		if (player.getPosition().x + player.lookingrightIMG.getWidth() > p.getPosition().x
-				&& player.getPosition().x < p.getPosition().x) {
+	private boolean comesFromLeftOfPlattform(Plattform p) {
+		float playerXandWidth = player.getPosition().x + player.lookingrightIMG.getWidth();
+		if (playerXandWidth > p.getPosition().x && playerXandWidth < p.getPosition().x+10) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	private boolean comesFromRight(Plattform p) {
-		if (player.getPosition().x < p.getPosition().x + p.getSize().x && player.getPosition().x +player.lookingrightIMG.getWidth() > p.getPosition().x + p.getSize().x ) {
+	private boolean comesFromRightOfPlattform(Plattform p) {
+		float plattformXandWidth = p.getPosition().x + p.getSize().x;
+		if (player.getPosition().x < plattformXandWidth && player.getPosition().x > p.getPosition().x + p.getSize().x-10 ) {
 			return true;
 		} else {
 			return false;
