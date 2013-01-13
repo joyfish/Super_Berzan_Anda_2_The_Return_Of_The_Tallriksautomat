@@ -178,7 +178,7 @@ public class GameScreen implements Screen, InputProcessor{
 	}		
 	
 	private void addPlattforms(){ 			
-		background.addPlattform(new Vector2(), new Vector2());
+		background.addPlattform(new Vector2(), new Vector2());		
 		background.addPlattform(new Vector2(300,0), new Vector2(100,150));
 		background.addPlattform(new Vector2(600,100), new Vector2(200,60));
 		background.addPlattform(new Vector2(900,0), new Vector2(150,200));
@@ -207,7 +207,21 @@ public class GameScreen implements Screen, InputProcessor{
 		background.addPlattform(new Vector2(6900,250), new Vector2(100,10));
 		background.addPlattform(new Vector2(7100,150), new Vector2(200,60));  
 		background.addPlattform(new Vector2(), new Vector2()); //Classroom zone starts here
-		
+		background.addPlattform(new Vector2(7500,0), new Vector2(100,100));
+		background.addPlattform(new Vector2(7600,175), new Vector2(100,30));		
+		background.addPlattform(new Vector2(7750,0), new Vector2(100,175));
+		background.addPlattform(new Vector2(7750,300), new Vector2(200,30));
+		background.addPlattform(new Vector2(8000,175), new Vector2(200,60));
+		background.addPlattform(new Vector2(8500,0), new Vector2(100,100));
+		background.addPlattform(new Vector2(8700,0), new Vector2(100,200));
+		background.addPlattform(new Vector2(8900,200), new Vector2(200,60));
+		background.addPlattform(new Vector2(9200,0), new Vector2(100,150));
+		background.addPlattform(new Vector2(9500,150), new Vector2(100,500));
+		background.addPlattform(new Vector2(9800,0), new Vector2(100,100));
+		background.addPlattform(new Vector2(10000,200), new Vector2(100,30));
+		background.addPlattform(new Vector2(10100,0), new Vector2(100,100));
+		background.addPlattform(new Vector2(10275,150), new Vector2(100,30));
+		background.addPlattform(new Vector2(), new Vector2()); // ?-Zone. Can't do yet because of no Y axis movement
 	}
 
 	private void addEnemies(){
