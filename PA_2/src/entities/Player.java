@@ -143,7 +143,7 @@ public class Player {
 	 * om figuren inte faller (falling == false) så får figuren hastighet uppåt
 	 */
 	public void jump() {
-		setSpeed(new Vector2(getSpeed().add(0, 7)));
+		setSpeed(new Vector2(getSpeed().add(0, 5.5f)));
 	}
 
 	public boolean isFalling() {

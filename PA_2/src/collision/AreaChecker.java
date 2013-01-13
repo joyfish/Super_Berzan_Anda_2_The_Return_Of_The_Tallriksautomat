@@ -38,11 +38,11 @@ public class AreaChecker {
 					player.getSpeed().y = -0.1f;
 					player.getPosition().y -= 1f;					
 				}
-				if (comesFromLeftOfPlattform(p) && (player.state != State.Standing  && player.state != State.Running)) {
+				if (comesFromLeftOfPlattform(p) && (player.state != State.Standing)) {
 					player.getSpeed().x = -0.1f;
 					player.getPosition().x -= 5f;					
 				}
-				if (comesFromRightOfPlattform(p)  && (player.state != State.Standing  && player.state != State.Running)) {
+				if (comesFromRightOfPlattform(p)  && (player.state != State.Standing)) {
 					player.getSpeed().x = 0.1f;
 					player.getPosition().x += 5f;					
 				}
