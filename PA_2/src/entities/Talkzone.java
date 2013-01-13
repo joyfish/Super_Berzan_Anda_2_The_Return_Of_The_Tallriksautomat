@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Talkzone {
 	private Vector2 position;
-	private Vector2 size = new Vector2(200,200);
+	private Vector2 size = new Vector2(100,100);
 	private Vector2 offset;
 	private String message;
 	private boolean isInside = false;
@@ -16,8 +16,17 @@ public class Talkzone {
 		offset = new Vector2(-500,-400);
 	}
 	
+	public Talkzone(Vector2 Position, Vector2 Size, String m){		
+		this(Position,m);
+		size = Size;
+	}
+	
 	public boolean isInside(){
 		return isInside;
+	}
+	
+	public void setSize(Vector2 v){
+		size = v;
 	}
 	
 	public void entered(){

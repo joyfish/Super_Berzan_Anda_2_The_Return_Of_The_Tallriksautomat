@@ -2,9 +2,14 @@ package Demo_1;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Rectangle;
 
 import entities.Enemy;
 import entities.Missile;
@@ -14,15 +19,18 @@ import entities.Talkzone;
 
 public class Painter {
 
+	private boolean drawText = false;
+	private String message = "";
 	public OrthographicCamera cam;
 	public GameScreen gs;
-
+	public int ticker = 0;
 	public Player player;
 	public Background background;	
 	private ArrayList<Plattform> plattformList;
 	public SpriteBatch spritebatch;
 	private ArrayList<Talkzone> talkzoneList;
 	private ArrayList<Enemy> enemyList;
+	private ShapeRenderer shaperenderer;
 	
 	public Painter(GameScreen gs,Player Player, Background Background){
 		player = Player;
@@ -33,9 +41,13 @@ public class Painter {
 		plattformList = gs.getPlattforms(); 
 		talkzoneList = gs.getTalkzones();
 		enemyList = gs.getEnemies();
+		shaperenderer = new ShapeRenderer();
 	}
 	
+	
+	
 	public void renderSprites(){
+		ticker++;
 		spritebatch.begin();
 		Sprite s;
 		spritebatch.draw(background.getTexture(), background.getOffset().x, background.getOffset().y);
@@ -56,14 +68,26 @@ public class Painter {
 		for(Plattform p: plattformList){
 			s = p.getSprite();
 			s.draw(spritebatch);
-		}
-		
-		for(Talkzone t : talkzoneList){
-			//s = t.getSprite();
-			//s.draw(spritebatch);
-		}
+		}				
 		
 		spritebatch.end();
+		shaperenderer.begin(ShapeType.Rectangle);					
+		shaperenderer.setColor(.7f, 0, .9f, .9f);
+		for(Talkzone t : talkzoneList){
+			Rectangle r = t.getZone();
+			shaperenderer.rect(r.x, r.y, r.width, r.height);						
+		}
+		shaperenderer.end();
+		if(drawText){
+			
+		BitmapFont bmf = new BitmapFont();
+		spritebatch.begin();		
+		bmf.draw(spritebatch, message, 10, 300);
+		spritebatch.end();
+		}
+		if(ticker > 500){
+			drawText = false;
+		}
 	}
 	
 	public void render(){
@@ -90,6 +114,14 @@ public class Painter {
 			//Draw talkzones		
 		}
 		spritebatch.end();
+	}
+
+
+
+	public void drawText(String m) {
+		drawText = true;
+		message = m;
+		ticker = 0;
 	}
 	
 }

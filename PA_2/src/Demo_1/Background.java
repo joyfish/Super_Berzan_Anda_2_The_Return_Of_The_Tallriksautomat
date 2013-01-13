@@ -108,14 +108,7 @@ public class Background {
 	 * send in the players rectangle with player.getRectangle() or something like that
 	 * @param playerRectangle
 	 */
-	public void activateTalkzones(Rectangle playerRectangle){
-		for (int i = 0; i < talkzoneList.size(); i++) {
-			Talkzone tz = talkzoneList.get(i);
-			if(Intersector.overlapRectangles(tz.getZone(), playerRectangle)){
-				System.out.println(tz.getMessage());
-			}
-		}
-	}
+	
 	
 }
   

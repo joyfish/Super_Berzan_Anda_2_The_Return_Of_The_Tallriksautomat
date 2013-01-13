@@ -1,26 +1,45 @@
 package inputhandler;
 
+import java.util.ArrayList;
+
 import Demo_1.Background;
 import Demo_1.GameScreen;
+import Demo_1.Painter;
 
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import entities.Player;
 import entities.State;
+import entities.Talkzone;
 
 public class Controller {
 
-	public GameScreen gamescreen;
-	public Player p;
-	public Background b;
-	public Boolean dontmoveL = false, dontmoveR = false;
-
+	private GameScreen gamescreen;
+	private Player p;
+	private Background b;
+	public Boolean dontmoveL = false, dontmoveR = false;	
+	private ArrayList<Talkzone> talkzoneList;
+	private Painter painter;
+	
 	public Controller(GameScreen Gamescreen) {
 		gamescreen = Gamescreen;
 		p = gamescreen.getPlayer();
 		b = gamescreen.getBackground();
+		talkzoneList = b.getTalkzones();
+		painter = gamescreen.getPainter();
 	}
 
+	public void activateTalkzones(Rectangle playerRectangle){		
+			for (int i = 0; i < talkzoneList.size(); i++) {
+				Talkzone tz = talkzoneList.get(i);
+				if(Intersector.overlapRectangles(tz.getZone(), playerRectangle)){
+					painter.drawText(tz.getMessage());
+			}
+		}
+	}
+	
 	public void move(boolean leftDown, boolean rightDown, boolean downDown,
 			boolean upDown) {
 
