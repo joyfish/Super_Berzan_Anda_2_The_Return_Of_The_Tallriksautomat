@@ -39,8 +39,8 @@ public class Player {
 	public Player() {
 		speed = new Vector2(0, 0);
 		position = new Vector2(120, 40);
-		lookingrightIMG = new Texture(Gdx.files.internal("PlayerDemo1.png"));
-		servanster = new Texture(Gdx.files.internal("PlayerDemo1.png"));
+		lookingrightIMG = new Texture(Gdx.files.internal("gubbeconsept2.png"));
+		servanster = new Texture(Gdx.files.internal("gubbeconsept1.png"));
 		state = State.Jumping;
 		falling = true;
 		sprite = new Sprite(lookingrightIMG);
@@ -66,10 +66,10 @@ public class Player {
 			falling = true;
 		}
 		if (speed.x>0){
-			lookingright=true;
+			lookingright=true;		
 		}
 		if (speed.x<0){
-			lookingright=false;
+			lookingright=false;		
 		}
 	}
 	public Boolean GetLookingRight(){
@@ -126,6 +126,13 @@ public class Player {
 		return deAcceleration;
 	}
 
+	public void setLeftSprite(){
+		sprite.setTexture(servanster);
+	}
+	
+	public void setRightSprite(){
+		sprite.setTexture(lookingrightIMG);
+	}
 	public Texture getTexture() {
 		if (lookingright){
 			return lookingrightIMG;

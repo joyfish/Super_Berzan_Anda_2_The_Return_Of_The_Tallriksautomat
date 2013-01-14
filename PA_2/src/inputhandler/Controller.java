@@ -42,7 +42,8 @@ public class Controller {
 	
 	public void move(boolean leftDown, boolean rightDown, boolean downDown,
 			boolean upDown) {
-
+		if(leftDown) p.setLeftSprite();
+		if(rightDown) p.setRightSprite();
 		if (p.state == State.Standing) {
 			if (leftDown) {
 				p.setSpeed(new Vector2(p.getSpeed()
