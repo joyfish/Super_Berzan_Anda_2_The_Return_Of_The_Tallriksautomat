@@ -9,8 +9,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 public class DesktopLauncher  {
 	public Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 	/**
-	 * @param args
-	
+	 * @param args	
 	 */ 
 	public DesktopLauncher(){
 		new LwjglApplication(new DemoGame(), "Vårat Dem0000", screen.width/2,screen.height/2,true);

@@ -32,6 +32,7 @@ public class AreaChecker {
 			if (b == true) {
 				if (comesFromAbove(p)){
 					player.getSpeed().y = 0.1f;
+					player.getPosition().y = p.getPosition().y+p.getSize().y;
 					player.state = State.Standing;					
 				}
 				if (comesFromBelow(p)){
@@ -63,8 +64,9 @@ public class AreaChecker {
 			
 		//}
 		
-		if(player.getPosition().y <= 0){
-			player.state = State.Standing;			
+		if(player.getPosition().y + player.getSpeed().y <= 0){
+			player.state = State.Standing;
+			player.getPosition().y = 0;
 		}
 		
 		if (!(player.state == State.Standing || player.state == State.Running)) {			
@@ -74,7 +76,7 @@ public class AreaChecker {
 
 	private boolean comesFromAbove(Plattform p) {
 		float plattformYandHeight = p.getPosition().y + p.getSize().y;
-		if (player.getPosition().y < plattformYandHeight
+		if (player.getPosition().y + player.getSpeed().y < plattformYandHeight
 				&& player.getPosition().y  > plattformYandHeight - 10) {
 			return true;
 		} else {
@@ -111,7 +113,7 @@ public class AreaChecker {
 
 	private boolean isOverlapping(Plattform p) {
 		Rectangle platty = new Rectangle(p.getPosition().x, p.getPosition().y,
-				p.getSize().x, p.getSize().y);
+				p.getSize().x, p.getSize().y);		
 		if (Intersector.intersectRectangles(player.getRectangle(), platty)) {			
 			return true;
 		} else {

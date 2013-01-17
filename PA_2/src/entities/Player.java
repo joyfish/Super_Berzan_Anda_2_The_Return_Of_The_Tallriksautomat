@@ -50,12 +50,12 @@ public class Player {
 		// Gör en viss animation utifrån vilket state han är i
 		if (state == State.Running) {
 			falling = false;
-			speed.y = 0;
+			speed.y = 0;			
 		}
 		if (state == State.Standing) {
 			falling = false;
 			speed.y = 0;
-			speed.x = 0;
+			speed.x *= 0.5f;
 		}
 		if (state == State.Jumping) {
 			falling = true;
