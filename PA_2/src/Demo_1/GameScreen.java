@@ -15,10 +15,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.math.Vector2;
 
-import entities.Enemy;
 import entities.Plattform;
 import entities.Player;
+import entities.Springare;
 import entities.Talkzone;
+import entities.Thrower;
 
 
 
@@ -32,13 +33,15 @@ public class GameScreen implements Screen, InputProcessor{
 	private ArrayList<Plattform> plattformList;
 	private ArrayList<Talkzone> talkzoneList;
 	public Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-	private ArrayList<Enemy> enemyList;
+	private ArrayList<Thrower> enemyList;
+	private ArrayList<Springare> springareList;
 	public Dimension applicationSize;
 	
 	public GameScreen(){
 		super();		
 		talkzoneList = new ArrayList<Talkzone>();
-		enemyList = new ArrayList<Enemy>();
+		enemyList = new ArrayList<Thrower>();
+		springareList=new ArrayList<Springare>();
 		player = new Player();
 		background = new Background(this);
 		addPlattforms();		
@@ -48,7 +51,8 @@ public class GameScreen implements Screen, InputProcessor{
 		areaChecker = new AreaChecker(this, player);
 		addTalkzones();
 		
-		enemyList.add(new Enemy(new Vector2(500,400)));		
+		enemyList.add(new Thrower(new Vector2(500,400)));		
+		springareList.add(new Springare(new Vector2(400,400), new Vector2(600,400), 1));
 		Gdx.input.setInputProcessor(this);		
 	}
 	
@@ -76,9 +80,13 @@ public class GameScreen implements Screen, InputProcessor{
 		for(Plattform p : plattformList){
 		p.setOffset(background.getOffset());
 		}
-		for(Enemy e : enemyList){
+		for(Thrower e : enemyList){
 			e.setOffset(background.getOffset());
 			e.act(this);
+		}
+		for(Springare s : springareList){
+			s.setOffset(background.getOffset());
+			s.act();
 		}
 	}
 
@@ -232,8 +240,12 @@ public class GameScreen implements Screen, InputProcessor{
 		return talkzoneList;
 	}
 
-	public ArrayList<Enemy> getEnemies() {
+	public ArrayList<Thrower> getEnemies() {
 		return enemyList;
+	}
+	
+	public ArrayList<Springare> getSpringare(){
+		return springareList;
 	}
 
 

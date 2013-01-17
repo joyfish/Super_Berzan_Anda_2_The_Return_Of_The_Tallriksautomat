@@ -2,7 +2,6 @@ package Demo_1;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -11,11 +10,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 
-import entities.Enemy;
 import entities.Missile;
 import entities.Plattform;
 import entities.Player;
+import entities.Springare;
 import entities.Talkzone;
+import entities.Thrower;
 
 public class Painter {
 
@@ -29,7 +29,8 @@ public class Painter {
 	private ArrayList<Plattform> plattformList;
 	public SpriteBatch spritebatch;
 	private ArrayList<Talkzone> talkzoneList;
-	private ArrayList<Enemy> enemyList;
+	private ArrayList<Thrower> enemyList;
+	private ArrayList<Springare> springareList;
 	private ShapeRenderer shaperenderer;
 	
 	public Painter(GameScreen gs,Player Player, Background Background){
@@ -41,6 +42,8 @@ public class Painter {
 		plattformList = gs.getPlattforms(); 
 		talkzoneList = gs.getTalkzones();
 		enemyList = gs.getEnemies();
+		springareList = gs.getSpringare();
+		
 		shaperenderer = new ShapeRenderer();
 	}
 	
@@ -55,12 +58,17 @@ public class Painter {
 		s = player.getSprite();
 		s.draw(spritebatch);
 		
-		for(Enemy e : enemyList){
+		for(Thrower e : enemyList){
 			if(e.isReady() == false){
 				Missile m = e.getMissile();
 				s = m.getSprite();
 				s.draw(spritebatch);
 			}
+			s = e.getSprite();
+			s.draw(spritebatch);
+		}
+		
+		for(Springare e : springareList){
 			s = e.getSprite();
 			s.draw(spritebatch);
 		}
@@ -97,7 +105,7 @@ public class Painter {
 		
 		
 		
-		for(Enemy e : enemyList){
+		for(Thrower e : enemyList){
 			if(e.isReady() == false){
 			Missile m = e.getMissile();
 			spritebatch.draw(m.getTexture(),m.getPosition().x + e.getOffset().x, m.getPosition().y + e.getOffset().y);

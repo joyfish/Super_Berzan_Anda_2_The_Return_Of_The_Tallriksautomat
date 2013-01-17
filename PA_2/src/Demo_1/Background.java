@@ -22,7 +22,7 @@ public class Background {
 	public Texture background;	
 	public Controller c;
 	public Player p;
-	private float BORDERLINE = 50f; 
+	private float BORDERLINE = 200f; 
 	private ArrayList<Plattform> plattformList;
 	private GameScreen master;
 	private Dimension Screen;

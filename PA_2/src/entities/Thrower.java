@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
-public class Enemy {
+public class Thrower {
 
 	/* "Lärare som kastar papper" */
 	private Vector2 position;
@@ -17,7 +17,7 @@ public class Enemy {
 	private Missile misil;
 	private Sprite sprite;
 	
-	public Enemy(Vector2 Position) {
+	public Thrower(Vector2 Position) {
 		texture = new Texture(Gdx.files.internal("PlayerDemo1.png"));
 		position = Position;
 		offset = new Vector2(0, 0);
