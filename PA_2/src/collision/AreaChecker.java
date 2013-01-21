@@ -29,7 +29,7 @@ public class AreaChecker {
 	public void update() {
 		for (Plattform p : plattformList) {
 			boolean b = isOverlapping(p);
-			if (b == true) {
+			if (willOverlap(p)) {
 				if (comesFromAbove(p)){
 					player.getSpeed().y = 0.1f;
 					player.getPosition().y = p.getPosition().y+p.getSize().y;
@@ -120,6 +120,19 @@ public class AreaChecker {
 			return false;
 		}
 
+	}
+	
+	private boolean willOverlap(Plattform p){
+		Rectangle platty = new Rectangle(p.getPosition().x,p.getPosition().y, p.getSize().x,p.getSize().y);
+		Rectangle play = new Rectangle(player.getRectangle());
+		play.x += player.getSpeed().x;
+		play.y += player.getSpeed().y;
+		if(Intersector.intersectRectangles(platty, play)){
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 
 }

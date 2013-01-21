@@ -13,13 +13,14 @@ public class Player {
 	public static float stopSpeed = 1.5f;
 	public static Vector2 Gravity = new Vector2(0, -0.1f);;
 	public static float maxJumpSpeed = 6f;
-
+	public static float jumpCooldown = 90; 
 	private Vector2 position;
 	private Vector2 speed;
 	public State state;
 	public Boolean lookingright=true;
 	private Sprite sprite;
-	
+	private float ticker = 0;
+	private boolean jumpReady = true;
 	/**
 	 * ser figuren åt höger elelr vänster, vi bästämde att ha en bild för båda fallen, detta kommer gälla
 	 * för alla bilder i animationen om vi inte hittar ett bättre sätt.
@@ -71,6 +72,14 @@ public class Player {
 		if (speed.x<0){
 			lookingright=false;		
 		}
+		if(jumpReady == false){
+			ticker++;
+		} 
+		if (ticker > jumpCooldown){
+			ticker = 0;
+			jumpReady = true;
+		}
+		
 	}
 	public Boolean GetLookingRight(){
 		return lookingright;
@@ -150,7 +159,11 @@ public class Player {
 	 * om figuren inte faller (falling == false) så får figuren hastighet uppåt
 	 */
 	public void jump() {
-		setSpeed(new Vector2(getSpeed().add(0, 5.5f)));
+		if(jumpReady){
+			setSpeed(new Vector2(getSpeed().add(0, 5.5f)));
+			jumpReady = false;
+		}
+		
 	}
 
 	public void extraGravity(){

@@ -12,7 +12,7 @@ public class DesktopLauncher  {
 	 * @param args	
 	 */ 
 	public DesktopLauncher(){
-		new LwjglApplication(new DemoGame(), "Vårat Dem0000", screen.width/2,screen.height/2,true);
+		new LwjglApplication(new DemoGame(), "Vårat Dem0000", screen.width/2 + 200,screen.height/2 + 200,true);
 	}
 	
 	public static void main(String[] args) {
