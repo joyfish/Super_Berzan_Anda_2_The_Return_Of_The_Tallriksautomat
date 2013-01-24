@@ -96,7 +96,7 @@ public class Painter {
 		if(ticker > 500){
 			drawText = false;
 		}
-	}
+	}		
 	
 	public void render(){
 		spritebatch.begin();
@@ -130,6 +130,13 @@ public class Painter {
 		drawText = true;
 		message = m;
 		ticker = 0;
+	}
+
+
+
+	public void renderEnd() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

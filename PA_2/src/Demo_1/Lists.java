@@ -29,7 +29,7 @@ public class Lists {
 		background.addPlattform(new Vector2(4350,0), new Vector2(100,250));
 		background.addPlattform(new Vector2(5050,0), new Vector2(75,75));
 		background.addPlattform(new Vector2(5250,0), new Vector2(200,200));
-		background.addPlattform(new Vector2(5500,200), new Vector2(200,60));
+		background.addPlattform(new Vector2(5400,200), new Vector2(400,60));
 		background.addPlattform(new Vector2(5750,300), new Vector2(200,60));
 		background.addPlattform(new Vector2(5900,0), new Vector2(50,300));
 		background.addPlattform(new Vector2(6000,100), new Vector2(50,50));

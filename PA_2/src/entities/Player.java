@@ -7,13 +7,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player {
-	public static float maxSpeed = 20f;
+	public static float maxSpeed = 6f;
 	public static float acceleration = 0.15f;
 	public static float deAcceleration = 0.98f;
 	public static float stopSpeed = 1.5f;
 	public static Vector2 Gravity = new Vector2(0, -0.1f);;
 	public static float maxJumpSpeed = 6f;
-	public static float jumpCooldown = 90; 
+	public static float jumpCooldown = 40; 
 	private Vector2 position;
 	private Vector2 speed;
 	public State state;

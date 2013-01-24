@@ -15,6 +15,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.math.Vector2;
 
+import entities.Missile;
 import entities.Plattform;
 import entities.Player;
 import entities.Springare;
@@ -36,6 +37,7 @@ public class GameScreen implements Screen, InputProcessor{
 	private ArrayList<Thrower> enemyList;
 	private ArrayList<Springare> springareList;
 	public Dimension applicationSize;
+	public boolean GameOver = false;
 	
 	public GameScreen(){
 		super();		
@@ -73,17 +75,26 @@ public class GameScreen implements Screen, InputProcessor{
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		areaChecker.update();
-		controller.move(LeftDown,RightDown,DownDown,UpDown);		
-		painter.renderSprites();	
+		controller.move(LeftDown,RightDown,DownDown,UpDown);
+		if(!GameOver){
+		painter.renderSprites();
+		} else {
+			painter.renderEnd();
+		}
 		background.update(player.getRectangle());
 		player.act();
+		
 		for(Plattform p : plattformList){
 		p.setOffset(background.getOffset());
 		}
+		
 		for(Thrower e : enemyList){
 			e.setOffset(background.getOffset());
 			e.act(this);
+			Missile m = e.getMissile();
+			m.setOffset(background.getOffset());
 		}
+		
 		for(Springare s : springareList){
 			s.setOffset(background.getOffset());
 			s.act();
@@ -124,7 +135,7 @@ public class GameScreen implements Screen, InputProcessor{
 		if(arg0 == Keys.LEFT) LeftDown = true;
 		if(arg0 == Keys.RIGHT) RightDown = true;
 		if(arg0 == Keys.UP)UpDown = true;
-		if(arg0 == Keys.DOWN)DownDown = true;
+		if(arg0 == Keys.DOWN)DownDown = true;		
 		return false;
 	}
 
@@ -209,14 +220,8 @@ public class GameScreen implements Screen, InputProcessor{
 		return springareList;
 	}
 
-
-
 	public Painter getPainter(){ 
 		return painter;
 	}
-
-
-
-	
 	
 }

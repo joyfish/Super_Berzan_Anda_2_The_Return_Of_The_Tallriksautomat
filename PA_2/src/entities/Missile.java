@@ -13,6 +13,7 @@ public class Missile {
 	private Vector2 position;	
 	private Vector2 speed;	
 	private Sprite sprite;
+	private Vector2 offset;
 	
 	public Missile(Vector2 startPosition, Vector2 playerPos, GameScreen master){
 		position = startPosition;
@@ -22,11 +23,15 @@ public class Missile {
 		} else {
 			speed = new Vector2(-2,0);
 		}
-		
+		offset = new Vector2(0,0);
 		texture = new Texture(Gdx.files.internal("zemisileshue.png"));
 		sprite = new Sprite(texture);
 	}
-	public Vector2 getPosition(){
+	
+	public void setOffset(Vector2 v){
+		offset = v;
+	}
+	public Vector2 getPosition(){		
 		return position;
 	}
 	
@@ -42,8 +47,8 @@ public class Missile {
 		return texture;
 	}
 	public Sprite getSprite() {
-		sprite.setX(position.x);
-		sprite.setY(position.y);
+		sprite.setX(position.x + offset.x);
+		sprite.setY(position.y + offset.y);
 		return sprite;
 	}
 	
