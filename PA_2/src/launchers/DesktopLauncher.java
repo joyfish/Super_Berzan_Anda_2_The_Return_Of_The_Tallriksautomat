@@ -23,11 +23,12 @@ public class DesktopLauncher implements ActionListener{
 	 * @param args	
 	 */ 
 	JFrame frame;
+	Dimension preferredSize;
 	
 	public DesktopLauncher(){
 		frame = giveWindow();
 		frame.setVisible(true);
-		frame.setSize(660, 400);
+		frame.setBounds(screen.width/2 - preferredSize.width/2,screen.height/2 - preferredSize.height/2, preferredSize.width,preferredSize.height);
 	}
 	
 	public JFrame giveWindow(){			
@@ -56,6 +57,7 @@ public class DesktopLauncher implements ActionListener{
 		
 		ImagePanel ip = new ImagePanel();		
 		jf.add(ip,BorderLayout.CENTER);
+		preferredSize = ip.getPreferredSize();
 		return jf;
 	}
 	

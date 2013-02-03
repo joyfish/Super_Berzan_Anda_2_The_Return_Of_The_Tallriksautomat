@@ -1,5 +1,6 @@
 package Demo_1;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -18,6 +19,13 @@ public class ImagePanel extends JPanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public Dimension getPreferredSize(){
+		Dimension dim = new Dimension();
+		dim.height = ii.getHeight(null);
+		dim.width = ii.getWidth(null);
+		return dim;
 	}
 	
 	public void paintComponent(Graphics g){
