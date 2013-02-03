@@ -20,7 +20,7 @@ public class DesktopLauncher implements ActionListener{
 	JFrame frame;
 	
 	public DesktopLauncher(){
-		frame = giveWindow();
+		frame = giveWindow();		
 	}
 	
 	public JFrame giveWindow(){

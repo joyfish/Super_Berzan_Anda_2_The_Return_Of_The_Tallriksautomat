@@ -55,8 +55,12 @@ public class Painter {
 		Sprite s;
 		spritebatch.draw(background.getTexture(), background.getOffset().x, background.getOffset().y);
 		
-		s = player.getSprite();
-		s.draw(spritebatch);
+		for(Talkzone t : talkzoneList){
+			s = t.getZoneSprite();
+			s.draw(spritebatch);
+		}
+		
+		
 		
 		for(Thrower e : enemyList){
 			if(e.isReady() == false){
@@ -73,19 +77,24 @@ public class Painter {
 			s.draw(spritebatch);
 		}
 		
+		s = player.getSprite();
+		s.draw(spritebatch);
+		
 		for(Plattform p: plattformList){
 			s = p.getSprite();
 			s.draw(spritebatch);
 		}				
 		
+		
+		
 		spritebatch.end();
-		shaperenderer.begin(ShapeType.Rectangle);					
-		shaperenderer.setColor(.7f, 0, .9f, .9f);
-		for(Talkzone t : talkzoneList){
-			Rectangle r = t.getZone();
-			shaperenderer.rect(r.x, r.y, r.width, r.height);						
-		}
-		shaperenderer.end();
+//		shaperenderer.begin(ShapeType.Rectangle);					
+//		shaperenderer.setColor(.7f, 0, .9f, .9f);
+//		for(Talkzone t : talkzoneList){
+//			Rectangle r = t.getZone();
+//			shaperenderer.rect(r.x, r.y, r.width, r.height);						
+//		}
+//		shaperenderer.end();
 		if(drawText){
 			
 		BitmapFont bmf = new BitmapFont();
@@ -119,7 +128,8 @@ public class Painter {
 		
 		
 		for (int i = 0; i < talkzoneList.size(); i++) {
-			//Draw talkzones		
+			Talkzone t = talkzoneList.get(i);
+			
 		}
 		spritebatch.end();
 	}
