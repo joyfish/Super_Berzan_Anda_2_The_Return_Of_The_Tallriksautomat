@@ -35,7 +35,7 @@ public class DesktopLauncher implements ActionListener{
 	public DesktopLauncher(){
 		frame = giveWindow();
 		frame.setVisible(true);
-		size= new Rectangle(screen.width/2 - preferredSize.width/2, screen.height/2-preferredSize.height/2, preferredSize.width,preferredSize.height);
+		size= new Rectangle(screen.width/2 - preferredSize.width/2 , screen.height/2-preferredSize.height/2, preferredSize.width+ 200,preferredSize.height+ 200);
 		frame.setBounds(size);
 	}
 	

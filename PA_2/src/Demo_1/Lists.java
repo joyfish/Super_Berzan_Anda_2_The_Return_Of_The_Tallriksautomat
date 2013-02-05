@@ -55,6 +55,22 @@ public class Lists {
 		background.addPlattform(new Vector2(10000,200), new Vector2(100,30));
 		background.addPlattform(new Vector2(10100,0), new Vector2(100,100));
 		background.addPlattform(new Vector2(10275,150), new Vector2(100,30));
+		background.addPlattform(new Vector2(10500,150), new Vector2(100,30));
+		background.addPlattform(new Vector2(10750,250), new Vector2(100,30));
+		background.addPlattform(new Vector2(10500,350), new Vector2(100,30));
+		background.addPlattform(new Vector2(10275,350), new Vector2(100,30));
+//		background.addPlattform(new Vector2(10950,470), new Vector2(100,30)); plattform reserved for enemy
+		background.addPlattform(new Vector2(10050,400), new Vector2(100,30));
+		background.addPlattform(new Vector2(10275,500), new Vector2(100,30));
+		background.addPlattform(new Vector2(10500,500), new Vector2(100,30));
+		background.addPlattform(new Vector2(10850,0), new Vector2(75,500));
+		background.addPlattform(new Vector2(10900,470), new Vector2(100,30));
+		background.addPlattform(new Vector2(11100,300), new Vector2(100,30));
+		background.addPlattform(new Vector2(10900,170), new Vector2(100,30));
+		background.addPlattform(new Vector2(11200,200), new Vector2(70,1000));
+		background.addPlattform(new Vector2(11500,0), new Vector2(250,100));
+		background.addPlattform(new Vector2(11750,0), new Vector2(100,200));
+		background.addPlattform(new Vector2(11850,100), new Vector2(75,75));		
 		alp = background.getPlattforms();
 		return alp;
 	}
