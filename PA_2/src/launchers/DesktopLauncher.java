@@ -1,15 +1,20 @@
 package launchers;
 
 
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Scanner;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -22,13 +27,43 @@ public class DesktopLauncher implements ActionListener{
 	/**
 	 * @param args	
 	 */ 
-	JFrame frame;
+	JFrame frame, options;
 	Dimension preferredSize;
+	Rectangle size;
+	Dimension optionsResolution;
 	
 	public DesktopLauncher(){
 		frame = giveWindow();
 		frame.setVisible(true);
-		frame.setBounds(screen.width/2 - preferredSize.width/2,screen.height/2 - preferredSize.height/2, preferredSize.width,preferredSize.height);
+		size= new Rectangle(screen.width/2 - preferredSize.width/2, screen.height/2-preferredSize.height/2, preferredSize.width,preferredSize.height);
+		frame.setBounds(size);
+	}
+	
+	public JFrame optionsWindow(){
+		JFrame jf = new JFrame("Options");
+		jf.setLayout(new BorderLayout());
+		
+		JPanel buttonpanel = new JPanel();
+		JButton close = new JButton("Close");
+		JButton apply = new JButton("Apply");
+		close.addActionListener(this);
+		apply.addActionListener(this);
+		close.setActionCommand("CLOSEOPTIONS");
+		apply.setActionCommand("APPLYOPTIONS");
+		buttonpanel.add(close);
+		buttonpanel.add(apply);
+		jf.add(buttonpanel,BorderLayout.SOUTH);
+		
+		JPanel center = new JPanel();		
+		center.setLayout(new FlowLayout());
+		
+		String[] screenResolutions = {"Default", "1337x666", "640x400"};
+		JComboBox jcb = new JComboBox<>(screenResolutions);		
+		
+		center.add(jcb);
+		jf.add(center,BorderLayout.CENTER);
+		
+		return jf;
 	}
 	
 	public JFrame giveWindow(){			
@@ -43,10 +78,15 @@ public class DesktopLauncher implements ActionListener{
 		b.setActionCommand("STARTA");
 		bottom.add(b);
 		
+//		JButton opt = new JButton("Options");
+//		opt.addActionListener(this);
+//		opt.setActionCommand("OPTIONS");
+//		bottom.add(opt);
+		
 		JButton b2 = new JButton("Starta på Ljunkan");		
 		b2.addActionListener(this);
 		b2.setActionCommand("TROLLBOLL");
-		bottom.add(b2);
+		bottom.add(b2);				
 		
 		int width = 700;
 		int height = 500;
@@ -70,17 +110,33 @@ public class DesktopLauncher implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if(arg0.getActionCommand().equals("STARTA")){
+		String s = arg0.getActionCommand();
+		if(s.equals("STARTA")){
 			frame.removeAll();
 			frame.dispose();
-			new LwjglApplication(new DemoGame(), "Vårat Dem0000", screen.width/2 + 200,screen.height/2 + 200,true);
+			new LwjglApplication(new DemoGame(), "Vårat Dem0000",size.width,size.height,true);
 		}
-		if(arg0.getActionCommand().equals("TROLLBOLL")){						
-			Toolkit.getDefaultToolkit().beep();
-			
+		if(s.equals("TROLLBOLL")){						
+			Toolkit.getDefaultToolkit().beep();			
+		}
+		if(s.equals("OPTIONS")){
+			startOptions();
+		}
+		if(s.equals("CLOSEOPTIONS")){
+			options.dispose();
+		}
+		if(s.equals("RESOLUTION")){
+			System.out.println(s);
 		}
 						
 	}
+
+	private void startOptions() { 
+		options = optionsWindow();
+		options.setVisible(true);
+		options.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		options.setBounds(size);
+	}	
 
 	
 }
