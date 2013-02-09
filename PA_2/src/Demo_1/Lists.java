@@ -89,7 +89,16 @@ public class Lists {
 		background.addPlattform(new Vector2(11200,200), new Vector2(70,1000));
 		background.addPlattform(new Vector2(11500,0), new Vector2(250,100));
 		background.addPlattform(new Vector2(11750,0), new Vector2(100,200));
-		background.addPlattform(new Vector2(11850,100), new Vector2(75,75));		
+		background.addPlattform(new Vector2(11850,75), new Vector2(75,75));
+		background.addPlattform(new Vector2(12100,250),new Vector2(200,60));
+		background.addPlattform(new Vector2(12500,200),new Vector2(200,60));
+		background.addPlattform(new Vector2(12850,200),new Vector2(100,100));
+		background.addPlattform(new Vector2(13100,390),new Vector2(100,60));		
+		background.addPlattform(new Vector2(13200,0),new Vector2(60,450));
+		background.addPlattform(new Vector2(13260,0),new Vector2(300,500));
+		background.addPlattform(new Vector2(13560,400),new Vector2(100,30));
+		background.addPlattform(new Vector2(13660,200),new Vector2(100,30));
+		background.addPlattform(new Vector2(13760,100),new Vector2(100,30));		
 		alp = background.getPlattforms();
 		return alp;
 	}

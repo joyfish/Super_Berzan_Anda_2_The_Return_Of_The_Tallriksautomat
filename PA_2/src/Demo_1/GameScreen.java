@@ -85,7 +85,9 @@ public class GameScreen implements Screen, InputProcessor {
 //			credits.drawGameOver();
 			break;
 		case(Lists.ENDING):
-			credits.drawEnd();
+			if(credits.drawEnd()){
+				//end game
+			}
 			break;
 		}
 	}
@@ -94,19 +96,16 @@ public class GameScreen implements Screen, InputProcessor {
 		for (Plattform p : plattformList) {
 			p.setOffset(background.getOffset());
 		}
-
 		for (Thrower e : enemyList) {
 			e.setOffset(background.getOffset());
 			e.act(this);
 			Missile m = e.getMissile();
 			m.setOffset(background.getOffset());
 		}
-
 		for (Springare s : springareList) {
 			s.setOffset(background.getOffset());
 			s.act();
 		}
-
 	}
 	
 	@Override
@@ -163,17 +162,26 @@ public class GameScreen implements Screen, InputProcessor {
 		if (arg0 == Keys.DOWN)
 			DownDown = true;
 		
+		//For testing purposes only
 		if(arg0 == Keys.A){
-			state = Lists.INTRO;			
+			state = Lists.INTRO;
+			credits.resetTimer();
 		}
 		if(arg0 == Keys.B){
-			state = Lists.GAME;						
+			state = Lists.GAME;
+			credits.resetTimer();
 		}
 		if(arg0 == Keys.C){
 			state = Lists.GAMEOVER;
+			credits.resetTimer();
 		}
 		if(arg0 == Keys.D){
 			state = Lists.ENDING;
+			credits.resetTimer();
+		}
+		if(arg0 == Keys.E){
+			Vector2 v = background.getOffset();
+			v.x -= 12000;			
 		}
 		return false;
 	}
