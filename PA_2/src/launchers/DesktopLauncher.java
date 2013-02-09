@@ -35,7 +35,7 @@ public class DesktopLauncher implements ActionListener{
 	public DesktopLauncher(){
 		frame = giveWindow();
 		frame.setVisible(true);
-		size= new Rectangle(screen.width/2 - preferredSize.width/2 , screen.height/2-preferredSize.height/2, preferredSize.width+ 200,preferredSize.height+ 200);
+		size= new Rectangle(screen.width/2 - preferredSize.width/2 , screen.height/2-preferredSize.height/2, preferredSize.width,preferredSize.height);
 		frame.setBounds(size);
 	}
 	
@@ -114,7 +114,7 @@ public class DesktopLauncher implements ActionListener{
 		if(s.equals("STARTA")){
 			frame.removeAll();
 			frame.dispose();
-			new LwjglApplication(new DemoGame(), "Vårat Dem0000",size.width,size.height,true);
+			new LwjglApplication(new DemoGame(), "Vårat Dem0000",size.width + 200,size.height + 200,true);
 		}
 		if(s.equals("TROLLBOLL")){						
 			Toolkit.getDefaultToolkit().beep();			

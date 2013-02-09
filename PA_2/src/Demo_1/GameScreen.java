@@ -72,14 +72,17 @@ public class GameScreen implements Screen, InputProcessor {
 	
 	private void renderScreen(){
 		switch (state) {
-		case(Lists.INTRO):
-			credits.drawIntro();
+		case(Lists.INTRO):			
+			if(credits.drawIntro()){
+				credits.resetTimer();
+				state = Lists.GAME;
+			}
 			break;
 		case(Lists.GAME):
 			painter.renderSprites();
 			break;
 		case(Lists.GAMEOVER):
-			credits.drawGameOver();
+//			credits.drawGameOver();
 			break;
 		case(Lists.ENDING):
 			credits.drawEnd();

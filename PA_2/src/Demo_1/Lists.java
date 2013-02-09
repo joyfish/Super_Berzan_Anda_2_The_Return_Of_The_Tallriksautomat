@@ -12,6 +12,22 @@ public class Lists {
 	public static final int GAMEOVER = 3;
 	public static final int ENDING = 4;
 	
+	public static ArrayList<String> getIntroStrings(){
+		ArrayList<String> al = new ArrayList();
+		al.add("Hello World!");
+		al.add("You are a student at Berzeliusskolan");
+		al.add("You are attending your first year and the Berziad has just started");
+		return al;
+	}
+	
+	public static ArrayList<String> getEndingStrings(){
+		ArrayList<String> al = new ArrayList();
+		al.add("Congratulations!");
+		al.add("You have saved berzan from destruction");
+		al.add("May the spirit of Berzelius be forever with you");
+		return al;
+	}
+	
 	public static ArrayList<Plattform> getPlattforms(GameScreen master){
 		ArrayList<Plattform> alp = new ArrayList();
 		Background background = new Background(master);
