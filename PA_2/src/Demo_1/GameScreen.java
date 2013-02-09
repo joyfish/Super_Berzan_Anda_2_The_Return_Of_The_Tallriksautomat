@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
+import launchers.Credits;
 import collision.AreaChecker;
 
 import com.badlogic.gdx.Gdx;
@@ -22,14 +23,13 @@ import entities.Springare;
 import entities.Talkzone;
 import entities.Thrower;
 
-
-
-public class GameScreen implements Screen, InputProcessor{
+public class GameScreen implements Screen, InputProcessor {
 	Player player;
 	Background background;
 	Painter painter;
 	Controller controller;
-	boolean UpDown = false, DownDown = false, RightDown = false, LeftDown = false;
+	boolean UpDown = false, DownDown = false, RightDown = false,
+			LeftDown = false;
 	AreaChecker areaChecker;
 	private ArrayList<Plattform> plattformList;
 	private ArrayList<Talkzone> talkzoneList;
@@ -37,105 +37,141 @@ public class GameScreen implements Screen, InputProcessor{
 	private ArrayList<Thrower> enemyList;
 	private ArrayList<Springare> springareList;
 	public Dimension applicationSize;
-	public boolean GameOver = false;
+	public boolean GameOver = false, won = false;;	
+	int state = Lists.INTRO;
+	Credits credits = new Credits(this);
 	
-	public GameScreen(){
-		super();		
+	public GameScreen() {
+		super();
 		talkzoneList = new ArrayList<Talkzone>();
 		enemyList = new ArrayList<Thrower>();
-		springareList=new ArrayList<Springare>();
+		springareList = new ArrayList<Springare>();
 		player = new Player();
 		background = new Background(this);
-		addPlattforms();		
+		addPlattforms();
 		plattformList = background.getPlattforms();
 		painter = new Painter(this, player, background);
-		controller = new Controller(this);		
+		controller = new Controller(this);
 		areaChecker = new AreaChecker(this, player);
 		addTalkzones();
-		
-		enemyList.add(new Thrower(new Vector2(500,400)));		
-		springareList.add(new Springare(new Vector2(400,400), new Vector2(600,400), 1));
-		Gdx.input.setInputProcessor(this);		
+
+		enemyList.add(new Thrower(new Vector2(500, 400)));
+		springareList.add(new Springare(new Vector2(400, 400), new Vector2(600,
+				400), 1));
+		Gdx.input.setInputProcessor(this);
 	}
-	
-	
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
+	}		
+
+	public ArrayList<Plattform> getPlattforms() {
+		return background.getPlattforms();
 	}	
 	
-	public ArrayList<Plattform> getPlattforms(){
-		return background.getPlattforms();
+	private void renderScreen(){
+		switch (state) {
+		case(Lists.INTRO):
+			credits.drawIntro();
+			break;
+		case(Lists.GAME):
+			painter.renderSprites();
+			break;
+		case(Lists.GAMEOVER):
+			credits.drawGameOver();
+			break;
+		case(Lists.ENDING):
+			credits.drawEnd();
+			break;
+		}
 	}
+	
+	private void setOffset(){
+		for (Plattform p : plattformList) {
+			p.setOffset(background.getOffset());
+		}
 
-	@Override
-	public void render(float arg0) {
-		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		
-		areaChecker.update();
-		controller.move(LeftDown,RightDown,DownDown,UpDown);
-		if(!GameOver){
-		painter.renderSprites();
-		} else {
-			painter.renderEnd();
-		}
-		background.update(player.getRectangle());
-		player.act();
-		
-		for(Plattform p : plattformList){
-		p.setOffset(background.getOffset());
-		}
-		
-		for(Thrower e : enemyList){
+		for (Thrower e : enemyList) {
 			e.setOffset(background.getOffset());
 			e.act(this);
 			Missile m = e.getMissile();
 			m.setOffset(background.getOffset());
 		}
-		
-		for(Springare s : springareList){
+
+		for (Springare s : springareList) {
 			s.setOffset(background.getOffset());
 			s.act();
 		}
+
+	}
+	
+	@Override
+	public void render(float arg0) {		
+		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);		
+		
+		areaChecker.update();
+		controller.move(LeftDown, RightDown, DownDown, UpDown);
+		renderScreen();
+		background.update(player.getRectangle());
+		player.act();
+		setOffset();		
+		
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		applicationSize = new Dimension(width,height);
+		applicationSize = new Dimension(width, height);
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
+
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public boolean keyDown(int arg0) {
 		// TODO Auto-generated method stub
-		if(arg0 == Keys.LEFT) LeftDown = true;
-		if(arg0 == Keys.RIGHT) RightDown = true;
-		if(arg0 == Keys.UP)UpDown = true;
-		if(arg0 == Keys.DOWN)DownDown = true;		
+		if (arg0 == Keys.LEFT)
+			LeftDown = true;
+		if (arg0 == Keys.RIGHT)
+			RightDown = true;
+		if (arg0 == Keys.UP)
+			UpDown = true;
+		if (arg0 == Keys.DOWN)
+			DownDown = true;
+		
+		if(arg0 == Keys.A){
+			state = Lists.INTRO;			
+		}
+		if(arg0 == Keys.B){
+			state = Lists.GAME;						
+		}
+		if(arg0 == Keys.C){
+			state = Lists.GAMEOVER;
+		}
+		if(arg0 == Keys.D){
+			state = Lists.ENDING;
+		}
 		return false;
 	}
 
@@ -147,11 +183,16 @@ public class GameScreen implements Screen, InputProcessor{
 
 	@Override
 	public boolean keyUp(int arg0) {
-		if(arg0 == Keys.LEFT) LeftDown = false;
-		if(arg0 == Keys.RIGHT) RightDown = false;
-		if(arg0 == Keys.UP) UpDown = false;
-		if(arg0 == Keys.DOWN) DownDown = false;
-		if(arg0 == Keys.T) controller.activateTalkzones(player.getRectangle());
+		if (arg0 == Keys.LEFT)
+			LeftDown = false;
+		if (arg0 == Keys.RIGHT)
+			RightDown = false;
+		if (arg0 == Keys.UP)
+			UpDown = false;
+		if (arg0 == Keys.DOWN)
+			DownDown = false;
+		if (arg0 == Keys.T)
+			controller.activateTalkzones(player.getRectangle());
 		return false;
 	}
 
@@ -184,30 +225,31 @@ public class GameScreen implements Screen, InputProcessor{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	public Player getPlayer(){
+
+	public Player getPlayer() {
 		return player;
 	}
-	public Controller getController(){
+
+	public Controller getController() {
 		return controller;
 	}
-	
-	public Background getBackground(){
+
+	public Background getBackground() {
 		return background;
-	}		
-	
-	private void addPlattforms(){ 
+	}
+
+	private void addPlattforms() {
 		ArrayList<Plattform> al = Lists.getPlattforms(this);
 		for (int i = 0; i < al.size(); i++) {
 			background.addPlattform(al.get(i));
 		}
 	}
 
-	private void addTalkzones(){
-		background.addTalkzone(new Vector2(0,0), "Welcome to zone 1");
-		background.addTalkzone(new Vector2(400,0), "Welcome to zone 2");
+	private void addTalkzones() {
+		background.addTalkzone(new Vector2(0, 0), "Welcome to zone 1");
+		background.addTalkzone(new Vector2(400, 0), "Welcome to zone 2");
 	}
-	
+
 	public ArrayList<Talkzone> getTalkzones() {
 		return talkzoneList;
 	}
@@ -215,13 +257,13 @@ public class GameScreen implements Screen, InputProcessor{
 	public ArrayList<Thrower> getEnemies() {
 		return enemyList;
 	}
-	
-	public ArrayList<Springare> getSpringare(){
+
+	public ArrayList<Springare> getSpringare() {
 		return springareList;
 	}
 
-	public Painter getPainter(){ 
+	public Painter getPainter() {
 		return painter;
 	}
-	
+
 }

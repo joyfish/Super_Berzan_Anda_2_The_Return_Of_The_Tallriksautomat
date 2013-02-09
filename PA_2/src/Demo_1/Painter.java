@@ -2,13 +2,14 @@ package Demo_1;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 import entities.Missile;
 import entities.Plattform;
@@ -133,20 +134,10 @@ public class Painter {
 		}
 		spritebatch.end();
 	}
-
-
-
+	
 	public void drawText(String m) {
 		drawText = true;
 		message = m;
 		ticker = 0;
-	}
-
-
-
-	public void renderEnd() {
-		// TODO Auto-generated method stub
-		
-	}
-	
+	}		
 }

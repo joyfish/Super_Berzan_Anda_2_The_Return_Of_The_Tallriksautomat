@@ -7,7 +7,10 @@ import com.badlogic.gdx.math.Vector2;
 import entities.Plattform;
 
 public class Lists {
-
+	public static final int INTRO = 1;
+	public static final int GAME = 2;
+	public static final int GAMEOVER = 3;
+	public static final int ENDING = 4;
 	
 	public static ArrayList<Plattform> getPlattforms(GameScreen master){
 		ArrayList<Plattform> alp = new ArrayList();
