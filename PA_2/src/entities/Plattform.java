@@ -24,7 +24,7 @@ public class Plattform {
 	}
 	
 	public void setOffset(Vector2 Offset){		
-		offset = new Vector2(Offset.x + 500,Offset.y + 400);		
+		offset = new Vector2(Offset.x,Offset.y);		
 	}
 	
 	public Vector2 getOffset(){
@@ -32,6 +32,8 @@ public class Plattform {
 	}
 	
 	public Rectangle getRectangle(){
+		rectangle.x = position.x + offset.x;
+		rectangle.y = position.y + offset.y;
 		return rectangle;
 	}
 	

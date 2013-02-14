@@ -6,27 +6,36 @@ import Demo_1.GameScreen;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
+import entities.Missile;
 import entities.Plattform;
 import entities.Player;
 import entities.State;
 import entities.Talkzone;
+import entities.Thrower;
 
 public class AreaChecker {
 	private Player player;
 	private ArrayList<Plattform> plattformList;
 	private GameScreen superGame;
 	private ArrayList<Talkzone> tz;
-
-	public AreaChecker(GameScreen SuperGame, Player play) {
-		player = play;
+	private ArrayList<Thrower> throwList;
+//	private ArrayList<Missile> missileList;
+	
+	public AreaChecker(GameScreen SuperGame) {
 		plattformList = new ArrayList<>();
-		superGame = SuperGame;
+		superGame = SuperGame;		
+	}
+	
+	public void initialize(){
+		player = superGame.getPlayer(); 
 		plattformList = superGame.getPlattforms();
-		tz = superGame.getTalkzones();		
+		tz = superGame.getTalkzones();
+		throwList = superGame.getEnemies();		
 	}
 
-	public void update() {
+	public void update() {				
 		for (Plattform p : plattformList) {
 			boolean b = isOverlapping(p);
 			if (willOverlap(p)) {
@@ -72,6 +81,11 @@ public class AreaChecker {
 		if (!(player.state == State.Standing || player.state == State.Running)) {			
 			player.gravity();
 		} 
+	}
+
+	private boolean isOutOfBounds(Vector2 position) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	private boolean comesFromAbove(Plattform p) {

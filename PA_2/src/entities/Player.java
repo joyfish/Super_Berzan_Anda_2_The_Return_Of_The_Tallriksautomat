@@ -14,27 +14,16 @@ public class Player {
 	public static Vector2 Gravity = new Vector2(0, -0.1f);;
 	public static float maxJumpSpeed = 6f;
 	public static float jumpCooldown = 40; 
+	private Vector2 offset;
 	private Vector2 position;
 	private Vector2 speed;
 	public State state;
 	public Boolean lookingright=true;
 	private Sprite sprite;
 	private float ticker = 0;
-	private boolean jumpReady = true;
-	/**
-	 * ser figuren åt höger elelr vänster, vi bästämde att ha en bild för båda fallen, detta kommer gälla
-	 * för alla bilder i animationen om vi inte hittar ett bättre sätt.
-	 * annars brukr det skrivas
-	 * drawImage(Image img, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2, ImageObserver observer);  
-	 * drawImage(Image,0,0,width,height,width,0,0height,null);  
-	 */
-	
+	private boolean jumpReady = true;		
 	public Texture lookingrightIMG,servanster;
-	public Rectangle rectangle;
-
-	/**
-	 * faller figuren? true eller false
-	 */
+	public Rectangle rectangle;	
 	private Boolean falling;
 
 	public Player() {
@@ -45,46 +34,74 @@ public class Player {
 		state = State.Jumping;
 		falling = true;
 		sprite = new Sprite(lookingrightIMG);
+		offset = new Vector2(0,0);
+		rectangle = new Rectangle(0,0,sprite.getWidth(),sprite.getHeight());
 	}
 
 	public void act() {
 		// Gör en viss animation utifrån vilket state han är i
-		if (state == State.Running) {
+		switch(state) {
+		case Running:
 			falling = false;
 			speed.y = 0;			
-		}
-		if (state == State.Standing) {
+			break;
+		case Standing:
 			falling = false;
-			speed.y = 0;
 			speed.x *= 0.5f;
-		}
-		if (state == State.Jumping) {
+			speed.y = 0;
+			break;
+		case Jumping:
 			falling = true;
-			speed.x *= (0.99
-					);
-		}
-		if (state == State.Jumprunning) {
+			speed.x *= 0.99;
+			break;
+		case Jumprunning:
 			falling = true;
+			break;
+	
 		}
-		if (speed.x>0){
-			lookingright=true;		
-		}
-		if (speed.x<0){
-			lookingright=false;		
-		}
+//		if (state == State.Running) {
+//			falling = false;
+//			speed.y = 0;			
+//		}
+//		if (state == State.Standing) {
+//			falling = false;
+//			speed.y = 0;
+//			speed.x *= 0.5f;
+//		}
+//		if (state == State.Jumping) {
+//			falling = true;
+//			speed.x *= (0.99);
+//		}		
+//		if (state == State.Jumprunning) {
+//			falling = true;
+//		}
+		
+//		if (speed.x>0){
+//			lookingright=true;		
+//		}
+//		if (speed.x<0){
+//			lookingright=false;		
+//		}
+		
 		if(jumpReady == false){
 			ticker++;
 		} 
 		if (ticker > jumpCooldown){
 			ticker = 0;
 			jumpReady = true;
-		}
-		
+		}	
+		position.y += speed.y;
+		position.x += speed.x;
 	}
+	
 	public Boolean GetLookingRight(){
 		return lookingright;
 	}
 
+	public void setOffset(Vector2 Offset2){
+		offset = Offset2;
+	}
+	
 	public void gravity() {
 		if (isStanding()) {
 			speed.y = 0;
@@ -98,8 +115,8 @@ public class Player {
 	}
 
 	public Rectangle getRectangle() {
-		rectangle = new Rectangle(position.x, position.y, lookingrightIMG.getWidth(),
-				lookingrightIMG.getHeight());
+		rectangle.x = position.x + offset.x;
+		rectangle.y = position.y + offset.y;
 		return rectangle;
 	}
 
@@ -112,6 +129,8 @@ public class Player {
 	}
 
 	public Vector2 getPosition() {
+//		position.x = position.x + offset.x;
+//		position.y = position.y + offset.y;
 		return position;
 	}
 

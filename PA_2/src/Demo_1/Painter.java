@@ -23,7 +23,7 @@ public class Painter {
 	private boolean drawText = false;
 	private String message = "";
 	public OrthographicCamera cam;
-	public GameScreen gs;
+	public GameScreen master;
 	public int ticker = 0;
 	public Player player;
 	public Background background;	
@@ -34,20 +34,22 @@ public class Painter {
 	private ArrayList<Springare> springareList;
 	private ShapeRenderer shaperenderer;
 	
-	public Painter(GameScreen gs,Player Player, Background Background){
-		player = Player;
-		background = Background;
+	public Painter(GameScreen gs){
+		master = gs;
 		spritebatch = new SpriteBatch();
 		cam = new OrthographicCamera(20,20);
-		cam.position.set(10, 10, 0);
-		plattformList = gs.getPlattforms(); 
-		talkzoneList = gs.getTalkzones();
-		enemyList = gs.getEnemies();
-		springareList = gs.getSpringare();
-		
+		cam.position.set(10, 10, 0);				
 		shaperenderer = new ShapeRenderer();
 	}
 	
+	public void initialize(){
+		player = master.getPlayer();
+		background = master.getBackground();
+		plattformList = master.getPlattforms(); 
+		talkzoneList = master.getTalkzones();
+		enemyList = master.getEnemies();
+		springareList = master.getSpringare();
+	}
 	
 	
 	public void renderSprites(){
@@ -111,16 +113,14 @@ public class Painter {
 	public void render(){
 		spritebatch.begin();
 		spritebatch.draw(background.getTexture(), background.getOffset().x, background.getOffset().y);
-		spritebatch.draw(player.getTexture(), player.getPosition().x, player.getPosition().y);
-		
-		
+		spritebatch.draw(player.getTexture(), player.getPosition().x, player.getPosition().y);				
 		
 		for(Thrower e : enemyList){
 			if(e.isReady() == false){
 			Missile m = e.getMissile();
-			spritebatch.draw(m.getTexture(),m.getPosition().x + e.getOffset().x, m.getPosition().y + e.getOffset().y);
+			spritebatch.draw(m.getTexture(),m.getPosition().x, m.getPosition().y);
 			}
-			spritebatch.draw(e.getTexture(),e.getPosition().x + e.getOffset().x,e.getPosition().y + e.getOffset().y);
+			spritebatch.draw(e.getTexture(),e.getPosition().x ,e.getPosition().y);
 		}
 		for(Plattform p : plattformList){
 		spritebatch.draw(p.getTexture(), p.getPosition().x,p.getPosition().y ,p.getTexture().getWidth(),p.getTexture().getHeight());

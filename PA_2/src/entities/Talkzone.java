@@ -17,7 +17,7 @@ public class Talkzone {
 	public Talkzone(Vector2 Position, String m){
 		position = Position;
 		message = m;
-		offset = new Vector2(-500,-400);
+		offset = new Vector2(0,0);
 		talkperson = new Sprite(new Texture(Gdx.files.internal("Talk.png")));
 	}
 	
@@ -65,6 +65,6 @@ public class Talkzone {
 	}
 
 	public void setOffset(Vector2 Offset) {
-		offset = new Vector2(Offset.x + 500, Offset.y + 400);		
+		offset = new Vector2(Offset.x, Offset.y);		
 	}
 }

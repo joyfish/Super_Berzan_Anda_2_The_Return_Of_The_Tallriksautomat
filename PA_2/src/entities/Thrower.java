@@ -36,6 +36,9 @@ public class Thrower {
 		if (missilePosition.x+offset.x < 0 || missilePosition.x+offset.x > master.applicationSize.width) {
 			isReady = true;
 		}
+		if(missilePosition.y + offset.y < -100 || missilePosition.y + offset.y > master.applicationSize.height ){
+			isReady = true;
+		}
 	}
 
 	public Texture getTexture() {
@@ -51,6 +54,8 @@ public class Thrower {
 	}
 
 	public Vector2 getPosition() {
+		position.x = position.x + offset.x;
+		position.y = position.y + offset.y;
 		return position;
 	}
 
@@ -67,5 +72,6 @@ public class Thrower {
 		sprite.setY(position.y + offset.y);
 		return sprite;
 	}
+	
 	
 }

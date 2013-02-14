@@ -48,19 +48,24 @@ public class GameScreen implements Screen, InputProcessor {
 		springareList = new ArrayList<Springare>();
 		player = new Player();
 		background = new Background(this);
-		addPlattforms();
-		plattformList = background.getPlattforms();
-		painter = new Painter(this, player, background);
+		addPlattforms();		
+		painter = new Painter(this);
 		controller = new Controller(this);
-		areaChecker = new AreaChecker(this, player);
+		areaChecker = new AreaChecker(this);
 		addTalkzones();
-
-		enemyList.add(new Thrower(new Vector2(500, 400)));
-		springareList.add(new Springare(new Vector2(400, 400), new Vector2(600,
-				400), 1));
+		initialize();
+		enemyList.add(new Thrower(new Vector2(0, 0)));		
 		Gdx.input.setInputProcessor(this);
 	}
 
+	private void initialize(){
+		plattformList = background.getPlattforms();
+		background.initialize();
+		painter.initialize();
+		controller.initialize();
+		areaChecker.initialize();
+	}
+	
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -93,18 +98,23 @@ public class GameScreen implements Screen, InputProcessor {
 	}
 	
 	private void setOffset(){
+		Vector2 tempoffset = background.getOffset();
+		player.setOffset(tempoffset);
 		for (Plattform p : plattformList) {
-			p.setOffset(background.getOffset());
+			p.setOffset(tempoffset);
 		}
 		for (Thrower e : enemyList) {
-			e.setOffset(background.getOffset());
+			e.setOffset(tempoffset);
 			e.act(this);
 			Missile m = e.getMissile();
-			m.setOffset(background.getOffset());
+			m.setOffset(tempoffset);
 		}
 		for (Springare s : springareList) {
-			s.setOffset(background.getOffset());
+			s.setOffset(tempoffset);
 			s.act();
+		}
+		for(Talkzone t : talkzoneList){
+			t.setOffset(tempoffset);			
 		}
 	}
 	
@@ -135,7 +145,7 @@ public class GameScreen implements Screen, InputProcessor {
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub			
 	}
 
 	@Override

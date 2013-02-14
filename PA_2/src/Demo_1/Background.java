@@ -31,33 +31,34 @@ public class Background {
 	
 	public Background(GameScreen Master){
 		Screen = Toolkit.getDefaultToolkit().getScreenSize();
-		master = Master;
-		p=master.getPlayer();
+		master = Master;			
 		plattformList = new ArrayList<>();
-		offset = new Vector2(-500,-400);
+		offset = new Vector2(0,0);
 		background = new Texture(Gdx.files.internal("BakrundDemo2.1.png"));
-		talkzoneList = Master.getTalkzones();
+		talkzoneList = master.getTalkzones();
 	}		
+	
+	public void initialize(){
+		c = master.getController();
+		p=master.getPlayer();			
+	}
 	
 	
 	/*gräns för bana*/
 	
 	public void update(Rectangle playerRectangle) {		
-		if (playerRectangle.x <= BORDERLINE) {
-			
-			master.controller.dontmoveL=true;
-			offset.x -= p.getSpeed().x;  
+		if (playerRectangle.x <= BORDERLINE) {			
+			c.playerAtLeftBorder = true;			 
 		}else{
-			master.controller.dontmoveL=false;
+			c.playerAtLeftBorder = false;
 		}
 		
 		
 		
 		if (playerRectangle.x + playerRectangle.width >= Screen.width/2 - BORDERLINE) {
-			master.controller.dontmoveR=true;
-			offset.x -= p.getSpeed().x;
+			c.playerAtRightBorder = true;			
 		}else{
-			master.controller.dontmoveR=false;
+			c.playerAtRightBorder = false;
 		}
 		
 		
@@ -79,8 +80,7 @@ public class Background {
 		return talkzoneList;
 	}
 	
-	public void addTalkzone(Vector2 position, String Message){
-		//TODO
+	public void addTalkzone(Vector2 position, String Message){		
 		talkzoneList.add(new Talkzone(position, Message));
 	}
 	
