@@ -28,42 +28,40 @@ public class GameScreen implements Screen, InputProcessor {
 	Background background;
 	Painter painter;
 	Controller controller;
+	EntityMaster entityMaster;
 	boolean UpDown = false, DownDown = false, RightDown = false,
 			LeftDown = false;
 	AreaChecker areaChecker;
 	private ArrayList<Plattform> plattformList;
 	private ArrayList<Talkzone> talkzoneList;
-	public Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-	private ArrayList<Thrower> enemyList;
-	private ArrayList<Springare> springareList;
+	public Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();		
 	public Dimension applicationSize;
 	public boolean GameOver = false, won = false;;	
 	int state = Lists.INTRO;
 	Credits credits = new Credits(this);
 	
 	public GameScreen() {
-		super();
-		talkzoneList = new ArrayList<Talkzone>();
-		enemyList = new ArrayList<Thrower>();
-		springareList = new ArrayList<Springare>();
+		super();				
 		player = new Player();
-		background = new Background(this);
-		addPlattforms();		
+		background = new Background(this);				
 		painter = new Painter(this);
 		controller = new Controller(this);
 		areaChecker = new AreaChecker(this);
+		entityMaster = new EntityMaster(this);
+		addPlattforms();
 		addTalkzones();
-		initialize();
-		enemyList.add(new Thrower(new Vector2(0, 0)));		
+		initialize();			
 		Gdx.input.setInputProcessor(this);
 	}
 
-	private void initialize(){
-		plattformList = background.getPlattforms();
+	private void initialize(){		
 		background.initialize();
 		painter.initialize();
 		controller.initialize();
 		areaChecker.initialize();
+		entityMaster.initialize();
+		plattformList = background.getPlattforms();
+		talkzoneList = background.getTalkzones();
 	}
 	
 	@Override
@@ -95,28 +93,7 @@ public class GameScreen implements Screen, InputProcessor {
 			}
 			break;
 		}
-	}
-	
-	private void setOffset(){
-		Vector2 tempoffset = background.getOffset();
-		player.setOffset(tempoffset);
-		for (Plattform p : plattformList) {
-			p.setOffset(tempoffset);
-		}
-		for (Thrower e : enemyList) {
-			e.setOffset(tempoffset);
-			e.act(this);
-			Missile m = e.getMissile();
-			m.setOffset(tempoffset);
-		}
-		for (Springare s : springareList) {
-			s.setOffset(tempoffset);
-			s.act();
-		}
-		for(Talkzone t : talkzoneList){
-			t.setOffset(tempoffset);			
-		}
-	}
+	}	
 	
 	@Override
 	public void render(float arg0) {		
@@ -125,10 +102,9 @@ public class GameScreen implements Screen, InputProcessor {
 		
 		areaChecker.update();
 		controller.move(LeftDown, RightDown, DownDown, UpDown);
-		renderScreen();
-		background.update(player.getRectangle());
+		renderScreen();		
 		player.act();
-		setOffset();		
+		entityMaster.act();			
 		
 	}
 
@@ -275,12 +251,12 @@ public class GameScreen implements Screen, InputProcessor {
 		return talkzoneList;
 	}
 
-	public ArrayList<Thrower> getEnemies() {
-		return enemyList;
+	public ArrayList<Thrower> getThrowers() {
+		return entityMaster.getThrowers();
 	}
 
-	public ArrayList<Springare> getSpringare() {
-		return springareList;
+	public ArrayList<Springare> getRunners() {
+		return entityMaster.getRunners();
 	}
 
 	public Painter getPainter() {

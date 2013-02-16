@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Vector2;
 
 import entities.Plattform;
+import entities.Springare;
+import entities.Thrower;
 
 public class Lists {
 	public static final int INTRO = 1;
@@ -101,6 +103,18 @@ public class Lists {
 		background.addPlattform(new Vector2(13760,100),new Vector2(100,30));		
 		alp = background.getPlattforms();
 		return alp;
+	}
+
+	public static ArrayList<Springare> getRunners() {
+		ArrayList<Springare> al = new ArrayList();
+//		al.add(new Springare(new Vector2(),new Vector2(),5));
+		return al;
+	}
+
+	public static ArrayList<Thrower> getThrowers() {
+		ArrayList<Thrower> al = new ArrayList ();
+		al.add(new Thrower(new Vector2()));
+		return al;
 	}
 	
 }

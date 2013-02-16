@@ -47,8 +47,8 @@ public class Painter {
 		background = master.getBackground();
 		plattformList = master.getPlattforms(); 
 		talkzoneList = master.getTalkzones();
-		enemyList = master.getEnemies();
-		springareList = master.getSpringare();
+		enemyList = master.getThrowers();
+		springareList = master.getRunners();
 	}
 	
 	
@@ -56,15 +56,14 @@ public class Painter {
 		ticker++;
 		spritebatch.begin();
 		Sprite s;
+		//Background
 		spritebatch.draw(background.getTexture(), background.getOffset().x, background.getOffset().y);
-		
+		//Talkzones
 		for(Talkzone t : talkzoneList){
 			s = t.getZoneSprite();
 			s.draw(spritebatch);
 		}
-		
-		
-		
+		//Throwers and their missiles		
 		for(Thrower e : enemyList){
 			if(e.isReady() == false){
 				Missile m = e.getMissile();
@@ -74,32 +73,23 @@ public class Painter {
 			s = e.getSprite();
 			s.draw(spritebatch);
 		}
-		
-		for(Springare e : springareList){
-			s = e.getSprite();
+		//Runners
+		for(Springare spr : springareList){
+			s = spr.getSprite();
 			s.draw(spritebatch);
 		}
-		
+		//Player
 		s = player.getSprite();
 		s.draw(spritebatch);
-		
+		//Plattforms
 		for(Plattform p: plattformList){
 			s = p.getSprite();
 			s.draw(spritebatch);
 		}				
-		
-		
-		
+					
 		spritebatch.end();
-//		shaperenderer.begin(ShapeType.Rectangle);					
-//		shaperenderer.setColor(.7f, 0, .9f, .9f);
-//		for(Talkzone t : talkzoneList){
-//			Rectangle r = t.getZone();
-//			shaperenderer.rect(r.x, r.y, r.width, r.height);						
-//		}
-//		shaperenderer.end();
-		if(drawText){
-			
+		//Text message (talkzone messages)
+		if(drawText){			
 		BitmapFont bmf = new BitmapFont();
 		spritebatch.begin();		
 		bmf.draw(spritebatch, message, 10, 300);
@@ -110,34 +100,14 @@ public class Painter {
 		}
 	}		
 	
-	public void render(){
-		spritebatch.begin();
-		spritebatch.draw(background.getTexture(), background.getOffset().x, background.getOffset().y);
-		spritebatch.draw(player.getTexture(), player.getPosition().x, player.getPosition().y);				
-		
-		for(Thrower e : enemyList){
-			if(e.isReady() == false){
-			Missile m = e.getMissile();
-			spritebatch.draw(m.getTexture(),m.getPosition().x, m.getPosition().y);
-			}
-			spritebatch.draw(e.getTexture(),e.getPosition().x ,e.getPosition().y);
-		}
-		for(Plattform p : plattformList){
-		spritebatch.draw(p.getTexture(), p.getPosition().x,p.getPosition().y ,p.getTexture().getWidth(),p.getTexture().getHeight());
-		}
-		
-		
-		
-		for (int i = 0; i < talkzoneList.size(); i++) {
-			Talkzone t = talkzoneList.get(i);
-			
-		}
-		spritebatch.end();
-	}
-	
+	/**
+	 * Call this method if you have a message to convey to the the one playing the game
+	 * @param m
+	 */
 	public void drawText(String m) {
 		drawText = true;
 		message = m;
 		ticker = 0;
-	}		
+	}
+	
 }

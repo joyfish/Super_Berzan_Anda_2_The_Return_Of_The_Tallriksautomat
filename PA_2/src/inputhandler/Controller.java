@@ -50,8 +50,11 @@ public class Controller {
 	
 	public void move(boolean leftDown, boolean rightDown, boolean downDown,
 			boolean upDown) {
+		//Set Sprite
 		if(leftDown) p.setLeftSprite();
 		if(rightDown) p.setRightSprite();
+		
+		//state control
 		switch(p.state) {
 		case Standing:
 			if(leftDown){
@@ -96,48 +99,7 @@ public class Controller {
 		
 			
 			
-//		if (p.state == State.Standing) {
-//			if (leftDown) {
-//				p.setSpeed(new Vector2(p.getSpeed()
-//						.add(-Player.acceleration, 0)));
-//				p.state = State.Running;
-//			}
-//			if (rightDown) {
-//				p.setSpeed(new Vector2(p.getSpeed().add(Player.acceleration, 0)));
-//				p.state = State.Running;
-//			}
-//			if (upDown) {
-//				p.jump();
-//				p.state = State.Jumping;
-//			}
-//		}
-
-//		if (p.state == State.Jumping) {
-//			if (leftDown) {
-//				p.setSpeed(new Vector2(p.getSpeed()
-//						.add(-Player.acceleration, 0)));
-//			}
-//			if (rightDown) {
-//				p.setSpeed(new Vector2(p.getSpeed().add(Player.acceleration, 0)));
-//			}
-//			if(downDown){
-//				p.extraGravity();
-//			}
-//		}
 		
-//		if(p.state == State.Jumprunning){
-//			if(downDown){
-//				p.extraGravity();
-//			}
-//		}
-		
-//		if (p.state == State.Running) {
-//			if (upDown) {
-//				p.jump();
-//				p.state = State.Jumprunning;
-//			}
-//		}
-
 		//Maxspeed
 		if (p.getSpeed().x > Player.maxSpeed) {
 			p.setSpeed(new Vector2(Player.maxSpeed, p.getSpeed().y));
@@ -152,35 +114,11 @@ public class Controller {
 			p.setSpeed(new Vector2(p.getSpeed().x, -Player.maxJumpSpeed));
 		}			
 		
-//		if(playerAtLeftBorder || playerAtRightBorder){
-//			if(flag){
-//			lastSideSpeed = p.getSpeed().x;
-//			flag = false;
-//			}
-//			p.setSpeed(new Vector2(p.getSpeed().x - p.getSpeed().x,p.getSpeed().y));
-//			offset.x += lastSideSpeed;
-//		} else {
-//			flag = true;
-//		}
+		//Border operations
+		if(playerAtLeftBorder || playerAtRightBorder){
+			p.getPosition().x -= p.getSpeed().x;
+			offset.x -= p.getSpeed().x;
+		}
 		
-		
-//		if (dontmoveL) {
-//			/* omhastigheten är negativ (rör sig åt vänster */
-//			if (p.getSpeed().x < 0) {
-//				p.setPosition(p.getPosition().add(
-//						new Vector2(0, p.getSpeed().y)));
-//			} else {/* annars gös som vanligt */
-//				p.setPosition(p.getPosition().add(p.getSpeed()));
-//			}
-//		} else if (dontmoveR) {
-//			if (p.getSpeed().x > 0) {
-//				p.setPosition(p.getPosition().add(
-//						new Vector2(0, p.getSpeed().y)));
-//			} else {
-//				p.setPosition(p.getPosition().add(p.getSpeed()));
-//			}
-//		} else {
-//			p.setPosition(p.getPosition().add(p.getSpeed()));
-//		}
 	}
 }

@@ -17,22 +17,15 @@ public class Missile {
 	private float ticker = 0;
 	private float startX, startY;	
 	private float deltaX;
+	private float distanceTraveled;
 	
-	public Missile(Vector2 startPosition, Vector2 playerPos, GameScreen master) {
+	public Missile(Vector2 startPosition, Vector2 playerPos, Vector2 offset) {
 		position = startPosition;
-		offset = master.getBackground().getOffset();
+		this.offset = offset;
 		startY = position.y + offset.y;
 		startX = position.x + offset.x;
 		deltaX = playerPos.x - startX;
-		System.out.println("The difference between player and thrower: "+ deltaX);
-		
-//		if (playerPos.x > startPosition.x
-//				+ master.getBackground().getOffset().x) {
-//			speed = new Vector2(2, 0);
-//			position.add(32, 0);
-//		} else {
-//			speed = new Vector2(-2, 0);
-//		}		
+		distanceTraveled = 0;
 		texture = new Texture(Gdx.files.internal("zemisileshue.png"));
 		sprite = new Sprite(texture);
 	}
@@ -48,21 +41,21 @@ public class Missile {
 	public void act() {
 //		position.add(speed);
 		ticker += 1;
+		distanceTraveled += fx(deltaX);
 		position.x += fx(deltaX); //speed
-		if(Math.abs(ticker/deltaX) < 1){
+		if(Math.abs(distanceTraveled/deltaX) < 1){
 			position.y = startY + Math.abs(fy(ticker));
 		} else {
 			position.y += -1f; //gravity
 		}		
-
 	}
 
 	
 	private float fy(float ticker2) {
 		float f = 0;
 		// y = A * Sin(Bx)
-		if(Math.PI * ticker/deltaX < Math.PI){
-		f = (float)(10 * Math.sin(Math.PI * ticker/deltaX));
+		if(distanceTraveled/deltaX < 1){
+		f = (float)(10 * Math.sin(Math.PI * distanceTraveled/deltaX));
 		} else {
 			f = -2f;
 		}
@@ -75,8 +68,7 @@ public class Missile {
 			return 1f;
 		} else {
 			return -1f;
-		}
-		
+		}	
 	}
 
 	public Rectangle getRectangle() {

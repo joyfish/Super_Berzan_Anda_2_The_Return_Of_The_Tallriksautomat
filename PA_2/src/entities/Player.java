@@ -17,8 +17,7 @@ public class Player {
 	private Vector2 offset;
 	private Vector2 position;
 	private Vector2 speed;
-	public State state;
-	public Boolean lookingright=true;
+	public State state;	
 	private Sprite sprite;
 	private float ticker = 0;
 	private boolean jumpReady = true;		
@@ -39,7 +38,8 @@ public class Player {
 	}
 
 	public void act() {
-		// Gör en viss animation utifrån vilket state han är i
+		// Gör en viss animation utifrån vilket state han är i.
+		//state control
 		switch(state) {
 		case Running:
 			falling = false;
@@ -59,30 +59,8 @@ public class Player {
 			break;
 	
 		}
-//		if (state == State.Running) {
-//			falling = false;
-//			speed.y = 0;			
-//		}
-//		if (state == State.Standing) {
-//			falling = false;
-//			speed.y = 0;
-//			speed.x *= 0.5f;
-//		}
-//		if (state == State.Jumping) {
-//			falling = true;
-//			speed.x *= (0.99);
-//		}		
-//		if (state == State.Jumprunning) {
-//			falling = true;
-//		}
 		
-//		if (speed.x>0){
-//			lookingright=true;		
-//		}
-//		if (speed.x<0){
-//			lookingright=false;		
-//		}
-		
+		//Jump cooldown
 		if(jumpReady == false){
 			ticker++;
 		} 
@@ -90,12 +68,11 @@ public class Player {
 			ticker = 0;
 			jumpReady = true;
 		}	
+		
+		//position += speed
 		position.y += speed.y;
 		position.x += speed.x;
-	}
-	
-	public Boolean GetLookingRight(){
-		return lookingright;
+				
 	}
 
 	public void setOffset(Vector2 Offset2){
@@ -160,23 +137,8 @@ public class Player {
 	
 	public void setRightSprite(){
 		sprite.setTexture(lookingrightIMG);
-	}
-	public Texture getTexture() {
-		if (lookingright){
-			return lookingrightIMG;
-		}else{
-			return servanster;
-		}
-		
-	}
-
-	public float getStopSpeed() {
-		return stopSpeed;
-	}
-
-	/**
-	 * om figuren inte faller (falling == false) så får figuren hastighet uppåt
-	 */
+	}		
+	
 	public void jump() {
 		if(jumpReady){
 			setSpeed(new Vector2(getSpeed().add(0, 5.5f)));
