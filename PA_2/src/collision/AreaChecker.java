@@ -11,6 +11,7 @@ import Demo_1.GameScreen;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 import entities.Plattform;
 import entities.Player;
@@ -46,12 +47,10 @@ public class AreaChecker {
 
 	public void update() {
 		//Plattform collision
-		for (Plattform p : plattformList) {
-			boolean b = isOverlapping(p);
+		for (Plattform p : plattformList) {			
 			if (willOverlap(p)) {
 				if (comesFromAbove(p)){
-					player.getSpeed().y = 0.1f;
-					player.getPosition().y = p.getPosition().y+p.getSize().y;
+					player.getSpeed().y = 0.1f;					
 					player.state = State.Standing;					
 				}
 				if (comesFromBelow(p)){
@@ -71,6 +70,7 @@ public class AreaChecker {
 			} 
 		}
 		
+		//Talkzone activation
 		for (int i = 0; i < tz.size(); i++) {
 			Talkzone talkzone = tz.get(i);
 			if(Intersector.overlapRectangles(player.getRectangle() , talkzone.getZone())){
@@ -87,14 +87,14 @@ public class AreaChecker {
 		}
 		
 		//Player at Border
-		Rectangle pr = player.getRectangle();
+		Vector2 pr = player.getPosition();
 		if (pr.x <= Background.BORDERLINE) {			
 			controller.playerAtLeftBorder = true;			 
 		}else{
 			controller.playerAtLeftBorder = false;
 		}
 		
-		if (pr.x + pr.width >= Screen.width/2 - Background.BORDERLINE) {
+		if (pr.x >= Screen.width/2 - Background.BORDERLINE) {
 			controller.playerAtRightBorder = true;			
 		}else{
 			controller.playerAtRightBorder = false;
@@ -143,10 +143,8 @@ public class AreaChecker {
 		}
 	}
 
-	private boolean isOverlapping(Plattform p) {
-		Rectangle platty = new Rectangle(p.getPosition().x, p.getPosition().y,
-				p.getSize().x, p.getSize().y);		
-		if (Intersector.intersectRectangles(player.getRectangle(), platty)) {			
+	private boolean isOverlapping(Plattform p) {		
+		if (Intersector.intersectRectangles(player.getRectangle(), p.getRectangle())) {			
 			return true;
 		} else {
 			return false;
@@ -155,7 +153,7 @@ public class AreaChecker {
 	}
 	
 	private boolean willOverlap(Plattform p){
-		Rectangle platty = new Rectangle(p.getPosition().x,p.getPosition().y, p.getSize().x,p.getSize().y);
+		Rectangle platty = new Rectangle(p.getRectangle());
 		Rectangle play = new Rectangle(player.getRectangle());
 		play.x += player.getSpeed().x;
 		play.y += player.getSpeed().y;

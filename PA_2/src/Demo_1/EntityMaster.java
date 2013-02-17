@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Vector2;
 
 import entities.Missile;
+import entities.Plattform;
 import entities.Player;
 import entities.Springare;
 import entities.Talkzone;
@@ -14,7 +15,7 @@ public class EntityMaster {
 	private GameScreen master;
 	private Background background;
 	private Player player;
-	private ArrayList<Talkzone> talkzones;
+	private ArrayList<Talkzone> talkzones;	
 	public ArrayList<Springare> runners;
 	public ArrayList<Thrower> throwers;
 	
@@ -61,6 +62,7 @@ public class EntityMaster {
 	 */
 	private void letEntitiesAct() {
 		player.act();
+		
 		for(Springare sr : runners){
 			sr.act();
 		}
@@ -88,6 +90,9 @@ public class EntityMaster {
 		for(Thrower tr : throwers){
 			tr.setOffset(tempoffset);
 		}
+		for(Plattform p : background.getPlattforms()){
+			p.setOffset(tempoffset);
+		}		
 	}
 
 	/**

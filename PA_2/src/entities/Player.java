@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player {
-	public static float maxSpeed = 6f;
+	public static float maxSpeed = 5f;
 	public static float acceleration = 0.15f;
 	public static float deAcceleration = 0.98f;
 	public static float stopSpeed = 1.5f;
@@ -24,7 +24,10 @@ public class Player {
 	public Texture lookingrightIMG,servanster;
 	public Rectangle rectangle;	
 	private Boolean falling;
-
+	public Boolean atBorder = false;
+	public boolean atLeftBorder = false;
+	public boolean atRightBorder = false;
+	
 	public Player() {
 		speed = new Vector2(0, 0);
 		position = new Vector2(120, 40);
@@ -72,7 +75,12 @@ public class Player {
 		//position += speed
 		position.y += speed.y;
 		position.x += speed.x;
-				
+		
+		if(atLeftBorder){
+			position.x -= speed.x;			
+		}else if(atRightBorder){
+			position.x -= speed.x;			
+		}
 	}
 
 	public void setOffset(Vector2 Offset2){
@@ -106,8 +114,6 @@ public class Player {
 	}
 
 	public Vector2 getPosition() {
-//		position.x = position.x + offset.x;
-//		position.y = position.y + offset.y;
 		return position;
 	}
 

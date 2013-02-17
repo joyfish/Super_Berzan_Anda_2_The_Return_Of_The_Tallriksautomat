@@ -115,9 +115,15 @@ public class Controller {
 		}			
 		
 		//Border operations
-		if(playerAtLeftBorder || playerAtRightBorder){
-			p.getPosition().x -= p.getSpeed().x;
-			offset.x -= p.getSpeed().x;
+		if(playerAtLeftBorder && p.getSpeed().x < 0){			
+			p.atLeftBorder = true;					
+			b.getOffset().x -= p.getSpeed().x;
+		} else if(playerAtRightBorder && p.getSpeed().x > 0){
+			p.atRightBorder = true;			
+			b.getOffset().x -= p.getSpeed().x;
+		} else {
+			p.atLeftBorder = false;
+			p.atRightBorder = false;
 		}
 		
 	}

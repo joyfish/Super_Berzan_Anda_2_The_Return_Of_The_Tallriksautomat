@@ -52,6 +52,7 @@ public class GameScreen implements Screen, InputProcessor {
 		addTalkzones();
 		initialize();			
 		Gdx.input.setInputProcessor(this);
+		System.out.println("Construction finished");
 	}
 
 	private void initialize(){		
@@ -61,7 +62,7 @@ public class GameScreen implements Screen, InputProcessor {
 		areaChecker.initialize();
 		entityMaster.initialize();
 		plattformList = background.getPlattforms();
-		talkzoneList = background.getTalkzones();
+		talkzoneList = background.getTalkzones();		
 	}
 	
 	@Override
@@ -82,7 +83,7 @@ public class GameScreen implements Screen, InputProcessor {
 			}
 			break;
 		case(Lists.GAME):
-			painter.renderSprites();
+			painter.renderDebug();
 			break;
 		case(Lists.GAMEOVER):
 //			credits.drawGameOver();
@@ -138,15 +139,10 @@ public class GameScreen implements Screen, InputProcessor {
 
 	@Override
 	public boolean keyDown(int arg0) {
-		// TODO Auto-generated method stub
-		if (arg0 == Keys.LEFT)
-			LeftDown = true;
-		if (arg0 == Keys.RIGHT)
-			RightDown = true;
-		if (arg0 == Keys.UP)
-			UpDown = true;
-		if (arg0 == Keys.DOWN)
-			DownDown = true;
+		if (arg0 == Keys.LEFT)LeftDown = true;
+		if (arg0 == Keys.RIGHT)RightDown = true;
+		if (arg0 == Keys.UP)UpDown = true;
+		if (arg0 == Keys.DOWN)DownDown = true;
 		
 		//For testing purposes only
 		if(arg0 == Keys.A){
@@ -165,10 +161,10 @@ public class GameScreen implements Screen, InputProcessor {
 			state = Lists.ENDING;
 			credits.resetTimer();
 		}
-		if(arg0 == Keys.E){
-			Vector2 v = background.getOffset();
-			v.x -= 12000;			
-		}
+//		if(arg0 == Keys.E){
+//			Vector2 v = background.getOffset();
+//			v.x -= 12000;			
+//		}
 		return false;
 	}
 
@@ -248,7 +244,7 @@ public class GameScreen implements Screen, InputProcessor {
 	}
 
 	public ArrayList<Talkzone> getTalkzones() {
-		return talkzoneList;
+		return background.getTalkzones();
 	}
 
 	public ArrayList<Thrower> getThrowers() {
