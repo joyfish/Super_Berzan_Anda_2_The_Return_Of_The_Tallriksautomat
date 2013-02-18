@@ -48,20 +48,25 @@ public class AreaChecker {
 	public void update() {
 		//Plattform collision
 		for (Plattform p : plattformList) {			
-			if (willOverlap(p)) {
+			if (willOverlap(p)) {	
+//				System.out.println("Entered!! Player: " + player.getPosition() + " || plattform: " + p.getPosition() + " || Offset: " + p.getOffset());
 				if (comesFromAbove(p)){
+					System.out.println("Comes from above!");
 					player.getSpeed().y = 0.1f;					
 					player.state = State.Standing;					
 				}
 				if (comesFromBelow(p)){
+					System.out.println("Comes from below!");
 					player.getSpeed().y = -0.1f;
 					player.getPosition().y -= 1f;					
 				}
 				if (comesFromLeftOfPlattform(p) && (player.state != State.Standing)) {
+					System.out.println("Comes from plattforms left!");
 					player.getSpeed().x = -0.1f;
 					player.getPosition().x -= 5f;					
 				}
 				if (comesFromRightOfPlattform(p)  && (player.state != State.Standing)) {
+					System.out.println("Comes from plattforms right!");
 					player.getSpeed().x = 0.1f;
 					player.getPosition().x += 5f;					
 				}
@@ -118,7 +123,7 @@ public class AreaChecker {
 
 	private boolean comesFromBelow(Plattform p) {
 		float playerYandHeight = player.getPosition().y + player.getSprite().getHeight();		
-		if (playerYandHeight < p.getPosition().y + 10 && playerYandHeight > p.getPosition().y) {			
+		if (playerYandHeight < p.getRectangle().y + 10 && playerYandHeight > p.getRectangle().y) {			
 			return true;
 		} else {
 			return false;
@@ -127,7 +132,7 @@ public class AreaChecker {
 
 	private boolean comesFromLeftOfPlattform(Plattform p) {
 		float playerXandWidth = player.getPosition().x + player.lookingrightIMG.getWidth();
-		if (playerXandWidth > p.getPosition().x && playerXandWidth < p.getPosition().x+10) {
+		if (playerXandWidth > p.getRectangle().x && playerXandWidth < p.getRectangle().x+10) {
 			return true;
 		} else {
 			return false;
@@ -135,8 +140,8 @@ public class AreaChecker {
 	}
 
 	private boolean comesFromRightOfPlattform(Plattform p) {
-		float plattformXandWidth = p.getPosition().x + p.getSize().x;
-		if (player.getPosition().x < plattformXandWidth && player.getPosition().x > p.getPosition().x + p.getSize().x-10 ) {
+		float plattformXandWidth = p.getPosition().x + p.getRectangle().width;
+		if (player.getRectangle().x < plattformXandWidth && player.getPosition().x > plattformXandWidth-10 ) {
 			return true;
 		} else {
 			return false;
@@ -154,7 +159,7 @@ public class AreaChecker {
 	
 	private boolean willOverlap(Plattform p){
 		Rectangle platty = new Rectangle(p.getRectangle());
-		Rectangle play = new Rectangle(player.getRectangle());
+		Rectangle play = new Rectangle(player.getPosition().x, player.getPosition().y,player.getRectangle().width,player.getRectangle().height);
 		play.x += player.getSpeed().x;
 		play.y += player.getSpeed().y;
 		if(Intersector.intersectRectangles(platty, play)){

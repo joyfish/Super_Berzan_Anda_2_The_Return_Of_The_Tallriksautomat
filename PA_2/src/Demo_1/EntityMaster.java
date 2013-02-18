@@ -18,10 +18,12 @@ public class EntityMaster {
 	private ArrayList<Talkzone> talkzones;	
 	public ArrayList<Springare> runners;
 	public ArrayList<Thrower> throwers;
+	private ArrayList<Plattform> plattforms;
 	
 	/**
 	 * Lets all entities act and sets their offset
 	 * make sure to call the .act() method inside the render() method of the game 
+	 * 
 	 * @param superGame 
 	 */
 	public EntityMaster(GameScreen superGame){
@@ -45,7 +47,7 @@ public class EntityMaster {
 		background = master.getBackground();
 		player = master.getPlayer();
 		talkzones = master.getTalkzones();
-		
+		plattforms = master.getPlattforms();
 	}
 	
 	/**
@@ -61,8 +63,7 @@ public class EntityMaster {
 	 * Lets every single moving entity act
 	 */
 	private void letEntitiesAct() {
-		player.act();
-		
+		player.act();		
 		for(Springare sr : runners){
 			sr.act();
 		}
@@ -79,7 +80,7 @@ public class EntityMaster {
 	 * Sets the offset of all entities in the game
 	 */
 	private void setEntityOffsets(){
-		Vector2 tempoffset = background.getOffset();
+		Vector2 tempoffset = background.getOffset();		
 		player.setOffset(tempoffset);
 		for(Talkzone tz: talkzones){
 			tz.setOffset(tempoffset);
@@ -90,7 +91,7 @@ public class EntityMaster {
 		for(Thrower tr : throwers){
 			tr.setOffset(tempoffset);
 		}
-		for(Plattform p : background.getPlattforms()){
+		for(Plattform p : plattforms){
 			p.setOffset(tempoffset);
 		}		
 	}

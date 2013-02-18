@@ -104,7 +104,6 @@ public class GameScreen implements Screen, InputProcessor {
 		areaChecker.update();
 		controller.move(LeftDown, RightDown, DownDown, UpDown);
 		renderScreen();		
-		player.act();
 		entityMaster.act();			
 		
 	}
@@ -145,6 +144,13 @@ public class GameScreen implements Screen, InputProcessor {
 		if (arg0 == Keys.DOWN)DownDown = true;
 		
 		//For testing purposes only
+		if(arg0 == Keys.J){
+			System.out.println("Offset: " + background.getOffset());
+			System.out.println("Player Position: " + player.getPosition());
+			for(Plattform p : plattformList){
+				System.out.println("Position: " + p.getPosition());
+			}
+		}
 		if(arg0 == Keys.A){
 			state = Lists.INTRO;
 			credits.resetTimer();

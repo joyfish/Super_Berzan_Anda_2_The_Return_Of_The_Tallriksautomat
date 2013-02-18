@@ -54,10 +54,10 @@ public class Painter {
 	public void renderDebug(){
 		shaperenderer.begin(ShapeType.Rectangle);
 		Rectangle r;
-		
+		ticker++;
 		for(Thrower e : enemyList){
 			r = e.getRectangle();
-			shaperenderer.setColor(Color.BLACK);
+			shaperenderer.setColor(Color.ORANGE);
 			shaperenderer.rect(r.x, r.y, r.width, r.height);
 			if(e.isReady() == false){
 				r = e.getMissile().getRectangle();
@@ -83,7 +83,19 @@ public class Painter {
 		shaperenderer.setColor(Color.RED);
 		r = new Rectangle(player.getPosition().x,player.getPosition().y,player.getSprite().getWidth(),player.getSprite().getHeight());
 		shaperenderer.rect(r.x, r.y, r.width, r.height);
+		
+		
 		shaperenderer.end();
+		spritebatch.begin();
+		if (drawText) {
+			BitmapFont bmf = new BitmapFont();
+			bmf.draw(spritebatch, message, 10, 300);
+		}
+		spritebatch.end();
+		if (ticker > 500) {
+			drawText = false;
+		}
+
 	}
 
 	public void renderSprites() {
