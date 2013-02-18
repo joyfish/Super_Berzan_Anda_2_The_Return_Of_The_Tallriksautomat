@@ -5,17 +5,15 @@ package launchers;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.Scanner;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Demo_1.ImagePanel;
@@ -54,13 +52,26 @@ public class DesktopLauncher implements ActionListener{
 		buttonpanel.add(apply);
 		jf.add(buttonpanel,BorderLayout.SOUTH);
 		
+		
+		//Top
+		JPanel top = new JPanel();
+		top.setLayout(new FlowLayout());		
+		top.add(new JLabel("Välj din egen stil:"));
+		jf.add(top, BorderLayout.NORTH);
+		
+		//Center
 		JPanel center = new JPanel();		
-		center.setLayout(new FlowLayout());
+		center.setLayout(new GridLayout(4,4,10,10));
 		
-		String[] screenResolutions = {"Default", "1337x666", "640x400"};
-		JComboBox jcb = new JComboBox<>(screenResolutions);		
+		for(int i = 0; i < 16; i++){
+			center.add(new ImageButton());
+		}
+//		
+//		String[] screenResolutions = {"Default", "1337x666", "640x400"};
+//		JComboBox jcb = new JComboBox<>(screenResolutions);		
+//		
+//		center.add(jcb);
 		
-		center.add(jcb);
 		jf.add(center,BorderLayout.CENTER);
 		
 		return jf;
@@ -87,7 +98,7 @@ public class DesktopLauncher implements ActionListener{
 		b2.addActionListener(this);
 		b2.setActionCommand("TROLLBOLL");
 		bottom.add(b2);				
-		
+				
 		int width = 700;
 		int height = 500;
 		bottom.setSize(width, height);
