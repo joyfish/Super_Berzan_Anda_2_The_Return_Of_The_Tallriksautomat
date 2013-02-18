@@ -33,7 +33,7 @@ public class Plattform {
 	
 	public Rectangle getRectangle(){		
 		rectangle.x = position.x + offset.x;
-		rectangle.y = position.y + offset.x;
+		rectangle.y = position.y + offset.y;
 		return rectangle;
 	}
 	

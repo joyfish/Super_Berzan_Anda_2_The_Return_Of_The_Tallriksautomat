@@ -147,7 +147,7 @@ public class Player {
 	
 	public void jump() {
 		if(jumpReady){
-			setSpeed(new Vector2(getSpeed().add(0, 5.5f)));
+			setSpeed(new Vector2(getSpeed().add(0, 5.5f))); //5.5f
 			jumpReady = false;
 		}
 		

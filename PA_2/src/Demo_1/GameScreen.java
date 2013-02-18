@@ -83,7 +83,7 @@ public class GameScreen implements Screen, InputProcessor {
 			}
 			break;
 		case(Lists.GAME):
-			painter.renderDebug();
+			painter.renderSprites();
 			break;
 		case(Lists.GAMEOVER):
 //			credits.drawGameOver();

@@ -41,7 +41,7 @@ public class DesktopLauncher implements ActionListener{
 	
 	public JFrame optionsWindow(){
 		JFrame jf = new JFrame("Options");
-		jf.setLayout(new BorderLayout());
+		jf.setLayout(new BorderLayout());				
 		
 		JPanel buttonpanel = new JPanel();
 		JButton close = new JButton("Close");
@@ -78,10 +78,10 @@ public class DesktopLauncher implements ActionListener{
 		b.setActionCommand("STARTA");
 		bottom.add(b);
 		
-//		JButton opt = new JButton("Options");
-//		opt.addActionListener(this);
-//		opt.setActionCommand("OPTIONS");
-//		bottom.add(opt);
+		JButton opt = new JButton("Options");
+		opt.addActionListener(this);
+		opt.setActionCommand("OPTIONS");
+		bottom.add(opt);
 		
 		JButton b2 = new JButton("Starta på Ljunkan");		
 		b2.addActionListener(this);
@@ -134,7 +134,7 @@ public class DesktopLauncher implements ActionListener{
 	private void startOptions() { 
 		options = optionsWindow();
 		options.setVisible(true);
-		options.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		options.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		options.setBounds(size);
 	}	
 
