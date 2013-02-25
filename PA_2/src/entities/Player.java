@@ -13,21 +13,23 @@ public class Player {
 	public static float stopSpeed = 1.5f;
 	public static Vector2 Gravity = new Vector2(0, -0.1f);;
 	public static float maxJumpSpeed = 6f;
-	public static float jumpCooldown = 40; 
+	public static float jumpCooldown = 40;
 	private Vector2 offset;
 	private Vector2 position;
 	private Vector2 speed;
-	public State state;	
+	public State state;
 	private Sprite sprite;
 	private float ticker = 0;
-	private boolean jumpReady = true;		
-	public Texture lookingrightIMG,servanster;
-	public Rectangle rectangle;	
+	private boolean jumpReady = true;
+	public Texture lookingrightIMG, servanster;
+	public Rectangle rectangle;
 	private Boolean falling;
 	public Boolean atBorder = false;
 	public boolean atLeftBorder = false;
 	public boolean atRightBorder = false;
-	
+	public int health = 5;
+	public int healthTicker;
+
 	public Player() {
 		speed = new Vector2(0, 0);
 		position = new Vector2(120, 40);
@@ -36,17 +38,18 @@ public class Player {
 		state = State.Jumping;
 		falling = true;
 		sprite = new Sprite(lookingrightIMG);
-		offset = new Vector2(0,0);
-		rectangle = new Rectangle(0,0,sprite.getWidth(),sprite.getHeight());
+		offset = new Vector2(0, 0);
+		rectangle = new Rectangle(0, 0, sprite.getWidth(), sprite.getHeight());
+		healthTicker = 0;
 	}
 
 	public void act() {
 		// Gör en viss animation utifrån vilket state han är i.
-		//state control
-		switch(state) {
+		// state control
+		switch (state) {
 		case Running:
 			falling = false;
-			speed.y = 0;			
+			speed.y = 0;
 			break;
 		case Standing:
 			falling = false;
@@ -60,33 +63,37 @@ public class Player {
 		case Jumprunning:
 			falling = true;
 			break;
-	
+
 		}
-		
-		//Jump cooldown
-		if(jumpReady == false){
+
+		// Jump cooldown
+		if (jumpReady == false) {
 			ticker++;
-		} 
-		if (ticker > jumpCooldown){
+		}
+		if (ticker > jumpCooldown) {
 			ticker = 0;
 			jumpReady = true;
-		}	
-		
-		//position += speed
+		}
+
+		// position += speed
 		position.y += speed.y;
 		position.x += speed.x;
-		
-		if(atLeftBorder){
-			position.x -= speed.x;			
-		}else if(atRightBorder){
-			position.x -= speed.x;			
+						
+		if (healthTicker > 0) {
+			healthTicker--;
+		}
+
+		if (atLeftBorder) {
+			position.x -= speed.x;
+		} else if (atRightBorder) {
+			position.x -= speed.x;
 		}
 	}
 
-	public void setOffset(Vector2 Offset2){
+	public void setOffset(Vector2 Offset2) {
 		offset = Offset2;
 	}
-	
+
 	public void gravity() {
 		if (isStanding()) {
 			speed.y = 0;
@@ -103,6 +110,14 @@ public class Player {
 		rectangle.x = position.x + offset.x;
 		rectangle.y = position.y + offset.y;
 		return rectangle;
+	}
+
+	public void damage() {
+		if (healthTicker < 1) {
+			System.out.println("Damaged!");
+			health--;
+			healthTicker = 250;
+		}
 	}
 
 	public void setSpeed(Vector2 newSpeed) {
@@ -137,28 +152,28 @@ public class Player {
 		return deAcceleration;
 	}
 
-	public void setLeftSprite(){
+	public void setLeftSprite() {
 		sprite.setTexture(servanster);
 	}
-	
-	public void setRightSprite(){
+
+	public void setRightSprite() {
 		sprite.setTexture(lookingrightIMG);
-	}		
-	
-	public void jump() {
-		if(jumpReady){
-			setSpeed(new Vector2(getSpeed().add(0, 5.5f))); //5.5f
-			jumpReady = false;
-		}
-		
 	}
 
-	public void extraGravity(){
-		if(falling){
+	public void jump() {
+		if (jumpReady) {
+			setSpeed(new Vector2(getSpeed().add(0, 5.5f))); // 5.5f
+			jumpReady = false;
+		}
+
+	}
+
+	public void extraGravity() {
+		if (falling) {
 			getSpeed().add(0, -1);
 		}
 	}
-	
+
 	public boolean isFalling() {
 		return falling;
 	}

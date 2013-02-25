@@ -104,7 +104,8 @@ public class GameScreen implements Screen, InputProcessor {
 		areaChecker.update();
 		controller.move(LeftDown, RightDown, DownDown, UpDown);
 		renderScreen();		
-		entityMaster.act();			
+		entityMaster.act();
+		background.adjustBackground();
 		
 	}
 

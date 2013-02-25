@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import entities.Missile;
 import entities.Plattform;
 import entities.Player;
 import entities.Springare;
@@ -104,6 +105,38 @@ public class AreaChecker {
 		}else{
 			controller.playerAtRightBorder = false;
 		}			
+		
+		//Destroy Missiles
+		for(Thrower t : throwList){
+			if(t.isReady() == false){
+				Missile m = t.getMissile();
+				for(Plattform p: plattformList){
+					if(Intersector.intersectRectangles(m.getRectangle(), p.getRectangle())){
+						t.removeMissile();
+						break;
+					}
+				}
+			}
+		}
+		
+		//Hurt player
+		for(Thrower t : throwList){
+			if(t.isReady() == false){
+			Missile m = t.getMissile();
+			Rectangle r = new Rectangle(player.getPosition().x,player.getPosition().y,player.getRectangle().width,player.getRectangle().height);
+			if(Intersector.intersectRectangles(m.getRectangle(), new Rectangle(r))){
+				player.damage();
+				t.removeMissile();
+			}
+			}
+		}
+		
+		for (Springare spr : runners) {
+			Rectangle r = new Rectangle(player.getPosition().x,player.getPosition().y,player.getRectangle().width,player.getRectangle().height);
+			if(Intersector.intersectRectangles(spr.getRectangle(), new Rectangle(r))){
+				player.damage();
+			}
+		}
 		
 		//Gravity
 		if (!(player.state == State.Standing || player.state == State.Running)) {			

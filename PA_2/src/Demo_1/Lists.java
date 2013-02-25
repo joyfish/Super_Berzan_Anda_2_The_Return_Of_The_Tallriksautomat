@@ -2,6 +2,8 @@ package Demo_1;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 import entities.Plattform;
@@ -28,6 +30,13 @@ public class Lists {
 		al.add("You have saved berzan from destruction");
 		al.add("May the spirit of Berzelius be forever with you");
 		return al;
+	}
+	
+	public static ArrayList<Texture> getBackgrounds(){
+		ArrayList<Texture> tet = new ArrayList();
+		tet.add(new Texture(Gdx.files.internal("BakrundDemo1.png")));
+		tet.add(new Texture(Gdx.files.internal("BakrundDemo2.1.png")));		
+		return tet;
 	}
 	
 	public static ArrayList<Plattform> getPlattforms(GameScreen master){

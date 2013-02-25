@@ -41,6 +41,7 @@ public class DesktopLauncher implements ActionListener{
 		JFrame jf = new JFrame("Options");
 		jf.setLayout(new BorderLayout());				
 		
+		//Bottom
 		JPanel buttonpanel = new JPanel();
 		JButton close = new JButton("Close");
 		JButton apply = new JButton("Apply");
@@ -51,8 +52,7 @@ public class DesktopLauncher implements ActionListener{
 		buttonpanel.add(close);
 		buttonpanel.add(apply);
 		jf.add(buttonpanel,BorderLayout.SOUTH);
-		
-		
+				
 		//Top
 		JPanel top = new JPanel();
 		top.setLayout(new FlowLayout());		
@@ -62,16 +62,9 @@ public class DesktopLauncher implements ActionListener{
 		//Center
 		JPanel center = new JPanel();		
 		center.setLayout(new GridLayout(4,4,10,10));
-		
 		for(int i = 0; i < 16; i++){
 			center.add(new ImageButton());
 		}
-//		
-//		String[] screenResolutions = {"Default", "1337x666", "640x400"};
-//		JComboBox jcb = new JComboBox<>(screenResolutions);		
-//		
-//		center.add(jcb);
-		
 		jf.add(center,BorderLayout.CENTER);
 		
 		return jf;

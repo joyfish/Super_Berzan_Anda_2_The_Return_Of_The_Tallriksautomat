@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,7 +25,7 @@ public class Painter {
 	private String message = "";
 	public OrthographicCamera cam;
 	public GameScreen master;
-	public int ticker = 0;
+	public int messageTicker = 0, backgroundTicker = 0;
 	public Player player;
 	public Background background;
 	private ArrayList<Plattform> plattformList;
@@ -33,13 +34,16 @@ public class Painter {
 	private ArrayList<Thrower> enemyList;
 	private ArrayList<Springare> springareList;
 	private ShapeRenderer shaperenderer;
-
+	private ArrayList<Texture> allTextures;
+	private Texture currentBackground, nextBackground;
+	private boolean showNextBackground = false;
 	public Painter(GameScreen gs) {
 		master = gs;
 		spritebatch = new SpriteBatch();
 		cam = new OrthographicCamera(20, 20);
 		cam.position.set(10, 10, 0);
 		shaperenderer = new ShapeRenderer();
+		allTextures = Lists.getBackgrounds();
 	}
 
 	public void initialize() {
@@ -50,41 +54,41 @@ public class Painter {
 		enemyList = master.getThrowers();
 		springareList = master.getRunners();
 	}
-	
-	public void renderDebug(){
+
+	public void renderDebug() {
 		shaperenderer.begin(ShapeType.Rectangle);
 		Rectangle r;
-		ticker++;
-		for(Thrower e : enemyList){
+		messageTicker++;
+		for (Thrower e : enemyList) {
 			r = e.getRectangle();
 			shaperenderer.setColor(Color.ORANGE);
 			shaperenderer.rect(r.x, r.y, r.width, r.height);
-			if(e.isReady() == false){
+			if (e.isReady() == false) {
 				r = e.getMissile().getRectangle();
 				shaperenderer.setColor(Color.MAGENTA);
 				shaperenderer.rect(r.x, r.y, r.width, r.height);
 			}
 		}
-		for(Talkzone tz : talkzoneList){
+		for (Talkzone tz : talkzoneList) {
 			r = tz.getZone();
 			shaperenderer.setColor(Color.PINK);
 			shaperenderer.rect(r.x, r.y, r.width, r.height);
 		}
-		for(Springare sr : springareList){
+		for (Springare sr : springareList) {
 			r = sr.getRectangle();
 			shaperenderer.setColor(Color.BLUE);
 			shaperenderer.rect(r.x, r.y, r.width, r.height);
 		}
-		for(Plattform p : plattformList){
+		for (Plattform p : plattformList) {
 			shaperenderer.setColor(Color.GREEN);
 			r = p.getRectangle();
 			shaperenderer.rect(r.x, r.y, r.width, r.height);
 		}
 		shaperenderer.setColor(Color.RED);
-		r = new Rectangle(player.getPosition().x,player.getPosition().y,player.getSprite().getWidth(),player.getSprite().getHeight());
+		r = new Rectangle(player.getPosition().x, player.getPosition().y,
+				player.getSprite().getWidth(), player.getSprite().getHeight());
 		shaperenderer.rect(r.x, r.y, r.width, r.height);
-		
-		
+
 		shaperenderer.end();
 		spritebatch.begin();
 		if (drawText) {
@@ -92,17 +96,23 @@ public class Painter {
 			bmf.draw(spritebatch, message, 10, 300);
 		}
 		spritebatch.end();
-		if (ticker > 500) {
+		if (messageTicker > 500) {
 			drawText = false;
 		}
 
 	}
 
 	public void renderSprites() {
-		ticker++;
+		messageTicker++;
 		spritebatch.begin();
 		Sprite s;
 		// Background
+		if(showNextBackground){
+			if(backgroundTicker< 50){
+				Color c = spritebatch.getColor();
+				spritebatch.setColor(c.r,c.g,c.b, 1 - 50/backgroundTicker);
+			}
+		} 
 		spritebatch.draw(background.getTexture(), background.getOffset().x,
 				background.getOffset().y);
 		// Talkzones
@@ -136,16 +146,26 @@ public class Painter {
 		// Text message (talkzone messages)
 		if (drawText) {
 			BitmapFont bmf = new BitmapFont();
-
 			bmf.draw(spritebatch, message, 10, 300);
-
 		}
 
 		spritebatch.end();
 
-		if (ticker > 500) {
+		if (messageTicker > 500) {
 			drawText = false;
 		}
+	}
+
+	public void nextLeftBackroung(){
+		showNextBackground = true;
+		nextBackground = allTextures.get(allTextures.indexOf(currentBackground) - 1);
+		backgroundTicker = 0;
+	}
+	
+	public void nextRightBackground() {
+		showNextBackground = true;
+		nextBackground = allTextures.get(allTextures.indexOf(currentBackground) + 1);
+		backgroundTicker = 0;
 	}
 
 	/**
@@ -157,7 +177,7 @@ public class Painter {
 	public void drawText(String m) {
 		drawText = true;
 		message = m;
-		ticker = 0;
+		messageTicker = 0;
 	}
 
 }

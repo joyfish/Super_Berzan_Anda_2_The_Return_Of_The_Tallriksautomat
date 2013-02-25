@@ -35,13 +35,17 @@ public class Thrower {
 
 		Vector2 missilePosition = misil.getPosition();
 		if (missilePosition.x+offset.x < -20 || missilePosition.x+offset.x > master.applicationSize.width) {
-			isReady = true;
+			removeMissile();
 		}
 		if(missilePosition.y + offset.y < -100 || missilePosition.y + offset.y > master.applicationSize.height ){
-			isReady = true;
+			removeMissile();
 		}
 	}
 
+	public void removeMissile(){
+		isReady = true;
+	}
+	
 	public Texture getTexture() {
 		return texture;
 	}

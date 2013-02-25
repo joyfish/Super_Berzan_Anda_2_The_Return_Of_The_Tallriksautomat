@@ -27,7 +27,7 @@ public class Background {
 	private GameScreen master;
 	private Dimension Screen;
 	private ArrayList<Talkzone> talkzoneList;
-	
+	private ArrayList<Texture> allTextures;
 	/**
 	 * Keeps track of all the plattforms in the game.
 	 * Keeps track of the offset of everything tied to the background
@@ -39,7 +39,8 @@ public class Background {
 		plattformList = new ArrayList<Plattform>();
 		talkzoneList = new ArrayList<Talkzone>();
 		offset = new Vector2(0,0);
-		background = new Texture(Gdx.files.internal("BakrundDemo2.1.png"));		
+		allTextures = Lists.getBackgrounds();
+		background = allTextures.get(0);
 	}		
 	
 	/**
@@ -102,7 +103,18 @@ public class Background {
 		return background;
 	}
 	
-	
+	/**
+	 * Adjusts the background according to the offset
+	 * @param x
+	 */
+	public void adjustBackground(){
+		if(offset.x > -1000 && background != allTextures.get(0)){
+			background = allTextures.get(0);
+		} else if (offset.x <= -1000 && offset.x > -2000 && background != allTextures.get(1)){
+			background = allTextures.get(1);
+		}
+			
+	}
 	
 	
 }
