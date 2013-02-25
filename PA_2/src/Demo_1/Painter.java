@@ -25,7 +25,7 @@ public class Painter {
 	private String message = "";
 	public OrthographicCamera cam;
 	public GameScreen master;
-	public int messageTicker = 0, backgroundTicker = 0;
+	public int messageTicker = 0;
 	public Player player;
 	public Background background;
 	private ArrayList<Plattform> plattformList;
@@ -42,8 +42,7 @@ public class Painter {
 		spritebatch = new SpriteBatch();
 		cam = new OrthographicCamera(20, 20);
 		cam.position.set(10, 10, 0);
-		shaperenderer = new ShapeRenderer();
-		allTextures = Lists.getBackgrounds();
+		shaperenderer = new ShapeRenderer();		
 	}
 
 	public void initialize() {
@@ -106,13 +105,7 @@ public class Painter {
 		messageTicker++;
 		spritebatch.begin();
 		Sprite s;
-		// Background
-		if(showNextBackground){
-			if(backgroundTicker< 50){
-				Color c = spritebatch.getColor();
-				spritebatch.setColor(c.r,c.g,c.b, 1 - 50/backgroundTicker);
-			}
-		} 
+		// Background		
 		spritebatch.draw(background.getTexture(), background.getOffset().x,
 				background.getOffset().y);
 		// Talkzones
@@ -155,19 +148,7 @@ public class Painter {
 			drawText = false;
 		}
 	}
-
-	public void nextLeftBackroung(){
-		showNextBackground = true;
-		nextBackground = allTextures.get(allTextures.indexOf(currentBackground) - 1);
-		backgroundTicker = 0;
-	}
 	
-	public void nextRightBackground() {
-		showNextBackground = true;
-		nextBackground = allTextures.get(allTextures.indexOf(currentBackground) + 1);
-		backgroundTicker = 0;
-	}
-
 	/**
 	 * Call this method if you have a message to convey to the the one playing
 	 * the game

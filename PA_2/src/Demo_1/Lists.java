@@ -35,7 +35,7 @@ public class Lists {
 	public static ArrayList<Texture> getBackgrounds(){
 		ArrayList<Texture> tet = new ArrayList();
 		tet.add(new Texture(Gdx.files.internal("BakrundDemo1.png")));
-		tet.add(new Texture(Gdx.files.internal("BakrundDemo2.1.png")));		
+				
 		return tet;
 	}
 	
@@ -124,6 +124,10 @@ public class Lists {
 		ArrayList<Thrower> al = new ArrayList ();
 		al.add(new Thrower(new Vector2()));
 		return al;
+	}
+
+	public static Texture getBackgroundImage() {
+		return new Texture(Gdx.files.internal("BakrundDemo2.1.png"));		
 	}
 	
 }

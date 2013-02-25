@@ -99,14 +99,11 @@ public class GameScreen implements Screen, InputProcessor {
 	@Override
 	public void render(float arg0) {		
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);		
-		
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);				
 		areaChecker.update();
 		controller.move(LeftDown, RightDown, DownDown, UpDown);
 		renderScreen();		
-		entityMaster.act();
-		background.adjustBackground();
-		
+		entityMaster.act();				
 	}
 
 	@Override

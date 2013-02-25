@@ -38,9 +38,8 @@ public class Background {
 		master = Master;			
 		plattformList = new ArrayList<Plattform>();
 		talkzoneList = new ArrayList<Talkzone>();
-		offset = new Vector2(0,0);
-		allTextures = Lists.getBackgrounds();
-		background = allTextures.get(0);
+		offset = new Vector2(0,0);	
+		background = Lists.getBackgroundImage();
 	}		
 	
 	/**
@@ -102,19 +101,7 @@ public class Background {
 	public Texture getTexture(){
 		return background;
 	}
-	
-	/**
-	 * Adjusts the background according to the offset
-	 * @param x
-	 */
-	public void adjustBackground(){
-		if(offset.x > -1000 && background != allTextures.get(0)){
-			background = allTextures.get(0);
-		} else if (offset.x <= -1000 && offset.x > -2000 && background != allTextures.get(1)){
-			background = allTextures.get(1);
-		}
-			
-	}
+		
 	
 	
 }
