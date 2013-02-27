@@ -51,23 +51,19 @@ public class AreaChecker {
 		for (Plattform p : plattformList) {			
 			if (willOverlap(p)) {	
 //				System.out.println("Entered!! Player: " + player.getPosition() + " || plattform: " + p.getPosition() + " || Offset: " + p.getOffset());
-				if (comesFromAbove(p)){
-					System.out.println("Comes from above!");
+				if (comesFromAbove(p)){			
 					player.getSpeed().y = 0.1f;					
 					player.state = State.Standing;					
 				}
-				if (comesFromBelow(p)){
-					System.out.println("Comes from below!");
+				if (comesFromBelow(p)){			
 					player.getSpeed().y = -0.1f;
 					player.getPosition().y -= 1f;					
 				}
-				if (comesFromLeftOfPlattform(p) && (player.state != State.Standing)) {
-					System.out.println("Comes from plattforms left!");
+				if (comesFromLeftOfPlattform(p) && (player.state != State.Standing)) {			
 					player.getSpeed().x = -0.1f;
 					player.getPosition().x -= 5f;					
 				}
-				if (comesFromRightOfPlattform(p)  && (player.state != State.Standing)) {
-					System.out.println("Comes from plattforms right!");
+				if (comesFromRightOfPlattform(p)  && (player.state != State.Standing)) {			
 					player.getSpeed().x = 0.1f;
 					player.getPosition().x += 5f;					
 				}
@@ -134,7 +130,7 @@ public class AreaChecker {
 		for (Springare spr : runners) {
 			Rectangle r = new Rectangle(player.getPosition().x,player.getPosition().y,player.getRectangle().width,player.getRectangle().height);
 			if(Intersector.intersectRectangles(spr.getRectangle(), new Rectangle(r))){
-				player.damage();
+				player.damage();				
 			}
 		}
 		

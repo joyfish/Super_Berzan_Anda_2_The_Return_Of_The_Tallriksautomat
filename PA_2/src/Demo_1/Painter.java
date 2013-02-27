@@ -2,6 +2,7 @@ package Demo_1;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -37,12 +38,14 @@ public class Painter {
 	private ArrayList<Texture> allTextures;
 	private Texture currentBackground, nextBackground;
 	private boolean showNextBackground = false;
+	private Sprite heart;
 	public Painter(GameScreen gs) {
 		master = gs;
 		spritebatch = new SpriteBatch();
 		cam = new OrthographicCamera(20, 20);
 		cam.position.set(10, 10, 0);
-		shaperenderer = new ShapeRenderer();		
+		shaperenderer = new ShapeRenderer();
+		heart = new Sprite(new Texture(Gdx.files.internal("heart-icon.png")));
 	}
 
 	public void initialize() {
@@ -141,9 +144,16 @@ public class Painter {
 			BitmapFont bmf = new BitmapFont();
 			bmf.draw(spritebatch, message, 10, 300);
 		}
-
+		int hearts = player.getHealth();
+		for (int i = 0; i < hearts; i++) {
+			int x = 10 + i*70;
+			int y = 530;			
+			heart.setX(x);
+			heart.setY(y);
+			heart.draw(spritebatch);
+		}
 		spritebatch.end();
-
+		
 		if (messageTicker > 500) {
 			drawText = false;
 		}

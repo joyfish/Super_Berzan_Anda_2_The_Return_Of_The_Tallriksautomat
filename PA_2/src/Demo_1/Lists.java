@@ -117,12 +117,15 @@ public class Lists {
 	public static ArrayList<Springare> getRunners() {
 		ArrayList<Springare> al = new ArrayList();
 //		al.add(new Springare(new Vector2(),new Vector2(),5));
+		al.add(new Springare(new Vector2(1100,0), new Vector2(1400,0),1));
+		al.add(new Springare(new Vector2(1100,0), new Vector2(1400,0),2));
+		al.add(new Springare(new Vector2(1100,0), new Vector2(1400,0),3));
 		return al;
 	}
 
 	public static ArrayList<Thrower> getThrowers() {
 		ArrayList<Thrower> al = new ArrayList ();
-		al.add(new Thrower(new Vector2()));
+		al.add(new Thrower(new Vector2(3800,0)));
 		return al;
 	}
 

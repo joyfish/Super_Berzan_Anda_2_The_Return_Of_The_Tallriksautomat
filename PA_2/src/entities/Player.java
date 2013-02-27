@@ -106,6 +106,10 @@ public class Player {
 		state = s;
 	}
 
+	public Rectangle getScreenRextangle(){
+		return new Rectangle(position.x,position.y,rectangle.width,rectangle.height);
+	}
+	
 	public Rectangle getRectangle() {
 		rectangle.x = position.x + offset.x;
 		rectangle.y = position.y + offset.y;
@@ -113,8 +117,7 @@ public class Player {
 	}
 
 	public void damage() {
-		if (healthTicker < 1) {
-			System.out.println("Damaged!");
+		if (healthTicker < 1) {			
 			health--;
 			healthTicker = 250;
 		}
@@ -186,6 +189,18 @@ public class Player {
 		sprite.setX(position.x);
 		sprite.setY(position.y);
 		return sprite;
+	}
+
+	public int getHealth() {
+		return health;
+	}
+	
+	public boolean isDamageReady(){
+		if(healthTicker < 1){
+			return true;
+		} else {
+		return false;
+		}
 	}
 
 }
