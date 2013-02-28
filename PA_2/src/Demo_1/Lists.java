@@ -58,10 +58,10 @@ public class Lists {
 		background.addPlattform(new Vector2(4250,100), new Vector2(50,50));
 		background.addPlattform(new Vector2(4350,0), new Vector2(100,250));
 		background.addPlattform(new Vector2(5050,0), new Vector2(75,75));
-		background.addPlattform(new Vector2(5250,0), new Vector2(200,200));
-		background.addPlattform(new Vector2(5400,200), new Vector2(400,60));
+		background.addPlattform(new Vector2(5250,0), new Vector2(150,200));
+		background.addPlattform(new Vector2(5400,140), new Vector2(400,60));
 		background.addPlattform(new Vector2(5750,300), new Vector2(200,60));
-		background.addPlattform(new Vector2(5900,0), new Vector2(50,300));
+//		background.addPlattform(new Vector2(5900,0), new Vector2(50,300));
 		background.addPlattform(new Vector2(6000,100), new Vector2(50,50));
 		background.addPlattform(new Vector2(6200,150), new Vector2(200,60));
 		background.addPlattform(new Vector2(6450,50), new Vector2(100,30));
@@ -89,10 +89,10 @@ public class Lists {
 		background.addPlattform(new Vector2(10750,250), new Vector2(100,30));
 		background.addPlattform(new Vector2(10500,350), new Vector2(100,30));
 		background.addPlattform(new Vector2(10275,350), new Vector2(100,30));
-//		background.addPlattform(new Vector2(10950,470), new Vector2(100,30)); plattform reserved for enemy
+		background.addPlattform(new Vector2(10950,470), new Vector2(100,30)); // plattform reserved for enemy
 		background.addPlattform(new Vector2(10050,400), new Vector2(100,30));
-		background.addPlattform(new Vector2(10275,500), new Vector2(100,30));
-		background.addPlattform(new Vector2(10500,500), new Vector2(100,30));
+//		background.addPlattform(new Vector2(10275,500), new Vector2(100,30));
+//		background.addPlattform(new Vector2(10500,500), new Vector2(100,30));
 		background.addPlattform(new Vector2(10850,0), new Vector2(75,500));
 		background.addPlattform(new Vector2(10900,470), new Vector2(100,30));
 		background.addPlattform(new Vector2(11100,300), new Vector2(100,30));
@@ -120,12 +120,25 @@ public class Lists {
 		al.add(new Springare(new Vector2(1100,0), new Vector2(1400,0),1));
 		al.add(new Springare(new Vector2(1100,0), new Vector2(1400,0),2));
 		al.add(new Springare(new Vector2(1100,0), new Vector2(1400,0),3));
+		
+		al.add(new Springare(new Vector2(5950,0), new Vector2(6300,0),1));
+		al.add(new Springare(new Vector2(5950,0), new Vector2(6300,0),2));
+		al.add(new Springare(new Vector2(5950,0), new Vector2(6300,0),3));
+		
+		al.add(new Springare(new Vector2(8000,0),new Vector2(8400,0),1));
+		al.add(new Springare(new Vector2(8000,0),new Vector2(8400,0),2));
+		al.add(new Springare(new Vector2(8000,0),new Vector2(8400,0),3));
+		
+		al.add(new Springare(new Vector2(9350,0),new Vector2(9650,0),2));
+		al.add(new Springare(new Vector2(9350,0),new Vector2(9650,0),1));
 		return al;
 	}
 
 	public static ArrayList<Thrower> getThrowers() {
 		ArrayList<Thrower> al = new ArrayList ();
 		al.add(new Thrower(new Vector2(3800,0)));
+		al.add(new Thrower(new Vector2(6650,210)));
+		al.add(new Thrower(new Vector2(10950,500)));
 		return al;
 	}
 
@@ -134,3 +147,6 @@ public class Lists {
 	}
 	
 }
+
+
+
