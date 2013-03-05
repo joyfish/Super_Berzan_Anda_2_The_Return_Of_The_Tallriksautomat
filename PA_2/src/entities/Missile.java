@@ -21,7 +21,7 @@ public class Missile {
 	public Missile(Vector2 startPosition, Vector2 playerPos, Vector2 offset) {
 		position = startPosition;
 		this.offset = offset;
-		startY = position.y + offset.y;
+		startY = position.y + offset.y + 10;
 		startX = position.x + offset.x;
 		deltaX = playerPos.x - startX;
 		distanceTraveled = 0;

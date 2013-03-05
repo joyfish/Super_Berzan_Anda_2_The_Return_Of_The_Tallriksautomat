@@ -18,34 +18,45 @@ public class Thrower {
 	private Missile misil;
 	private Sprite sprite;
 	private Rectangle rect;
+	private int missileCooldown = 0;
+
 	public Thrower(Vector2 Position) {
 		texture = new Texture(Gdx.files.internal("PlayerDemo1.png"));
 		position = Position;
 		offset = new Vector2(0, 0);
 		sprite = new Sprite(texture);
-		rect = new Rectangle(position.x,position.y,sprite.getWidth(),sprite.getHeight());
+		rect = new Rectangle(position.x, position.y, sprite.getWidth(),
+				sprite.getHeight());
 	}
 
 	public void act(GameScreen master) {
-		if (isReady) {
-			misil = new Missile(new Vector2(position), master.getPlayer().getPosition(), offset);
+		if (isReady && missileCooldown > 50) {
+			misil = new Missile(new Vector2(position), master.getPlayer()
+					.getPosition(), offset);			
 			isReady = false;
+			missileCooldown = 0;
 		}
-		misil.act();
+		if (misil != null) {
+			misil.act();
+			Vector2 missilePosition = misil.getPosition();
+			if (missilePosition.x + offset.x < -20
+					|| missilePosition.x + offset.x > master.applicationSize.width) {
+				removeMissile();
+			}
+			if (missilePosition.y + offset.y < -100
+					|| missilePosition.y + offset.y > master.applicationSize.height) {
+				removeMissile();
+			}
+		}
+		missileCooldown++;
 
-		Vector2 missilePosition = misil.getPosition();
-		if (missilePosition.x+offset.x < -20 || missilePosition.x+offset.x > master.applicationSize.width) {
-			removeMissile();
-		}
-		if(missilePosition.y + offset.y < -100 || missilePosition.y + offset.y > master.applicationSize.height ){
-			removeMissile();
-		}
+		
 	}
 
-	public void removeMissile(){
+	public void removeMissile() {
 		isReady = true;
 	}
-	
+
 	public Texture getTexture() {
 		return texture;
 	}
@@ -72,17 +83,16 @@ public class Thrower {
 		offset = offset2;
 	}
 
-	public Rectangle getRectangle(){
+	public Rectangle getRectangle() {
 		rect.x = position.x + offset.x;
 		rect.y = position.y + offset.y;
 		return rect;
 	}
-	
-	public Sprite getSprite(){
+
+	public Sprite getSprite() {
 		sprite.setX(position.x + offset.x);
 		sprite.setY(position.y + offset.y);
 		return sprite;
 	}
-	
-	
+
 }

@@ -34,6 +34,9 @@ public class EntityMaster {
 		for(Thrower t : Lists.getThrowers()){
 			throwers.add(t);
 		}
+		for(Thrower t : Lists.getJacob()){
+			throwers.add(t);
+		}
 	}
 	
 	/**
@@ -69,7 +72,10 @@ public class EntityMaster {
 		for(Thrower tr : throwers){
 			tr.act(master);
 			Missile e = tr.getMissile();
-			e.act();
+			if(e != null){
+				e.act();
+			}
+			
 		}
 		
 		

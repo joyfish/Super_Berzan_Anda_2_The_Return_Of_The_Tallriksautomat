@@ -21,6 +21,7 @@ public class Lists {
 		al.add("Hello World!");
 		al.add("You are a student at Berzeliusskolan");
 		al.add("You are attending your first year and the Berziad has just started");
+		al.add("to talk to people stand close to them and press 't'");
 		return al;
 	}
 	
@@ -34,15 +35,13 @@ public class Lists {
 	
 	public static ArrayList<Texture> getBackgrounds(){
 		ArrayList<Texture> tet = new ArrayList();
-		tet.add(new Texture(Gdx.files.internal("BakrundDemo1.png")));
-				
+		tet.add(new Texture(Gdx.files.internal("BakrundDemo1.png")));				
 		return tet;
 	}
 	
 	public static ArrayList<Plattform> getPlattforms(GameScreen master){
 		ArrayList<Plattform> alp = new ArrayList();
-		Background background = new Background(master);
-		background.addPlattform(new Vector2(), new Vector2());		
+		Background background = new Background(master);			
 		background.addPlattform(new Vector2(300,0), new Vector2(100,150));
 		background.addPlattform(new Vector2(600,100), new Vector2(200,60));
 		background.addPlattform(new Vector2(900,0), new Vector2(150,200));
@@ -66,7 +65,7 @@ public class Lists {
 		background.addPlattform(new Vector2(6200,150), new Vector2(200,60));
 		background.addPlattform(new Vector2(6450,50), new Vector2(100,30));
 		background.addPlattform(new Vector2(6450,300), new Vector2(100,30));
-		background.addPlattform(new Vector2(6650,150), new Vector2(200,60));
+		background.addPlattform(new Vector2(6650,150), new Vector2(150,60));
 		background.addPlattform(new Vector2(6850,0), new Vector2(50,300));
 		background.addPlattform(new Vector2(6900,250), new Vector2(100,10));
 		background.addPlattform(new Vector2(7100,150), new Vector2(200,60));  
@@ -86,11 +85,12 @@ public class Lists {
 		background.addPlattform(new Vector2(10100,0), new Vector2(100,100));
 		background.addPlattform(new Vector2(10275,150), new Vector2(100,30));
 		background.addPlattform(new Vector2(10500,150), new Vector2(100,30));
-		background.addPlattform(new Vector2(10750,250), new Vector2(100,30));
+		background.addPlattform(new Vector2(10700,250), new Vector2(100,30));
 		background.addPlattform(new Vector2(10500,350), new Vector2(100,30));
-		background.addPlattform(new Vector2(10275,350), new Vector2(100,30));
-		background.addPlattform(new Vector2(10950,470), new Vector2(100,30)); // plattform reserved for enemy
-		background.addPlattform(new Vector2(10050,400), new Vector2(100,30));
+//		background.addPlattform(new Vector2(10400,325), new Vector2(50,30));
+//		background.addPlattform(new Vector2(10275,350), new Vector2(100,30));
+//		background.addPlattform(new Vector2(10950,470), new Vector2(100,30)); // plattform reserved for enemy
+//		background.addPlattform(new Vector2(10050,400), new Vector2(100,30));
 //		background.addPlattform(new Vector2(10275,500), new Vector2(100,30));
 //		background.addPlattform(new Vector2(10500,500), new Vector2(100,30));
 		background.addPlattform(new Vector2(10850,0), new Vector2(75,500));
@@ -131,6 +131,11 @@ public class Lists {
 		
 		al.add(new Springare(new Vector2(9350,0),new Vector2(9650,0),2));
 		al.add(new Springare(new Vector2(9350,0),new Vector2(9650,0),1));
+		
+		al.add(new Springare(new Vector2(11100,0),new Vector2(11350,0),1));
+		al.add(new Springare(new Vector2(11100,0),new Vector2(11350,0),2));
+		al.add(new Springare(new Vector2(11100,0),new Vector2(11350,0),3));
+		
 		return al;
 	}
 
@@ -138,15 +143,19 @@ public class Lists {
 		ArrayList<Thrower> al = new ArrayList ();
 		al.add(new Thrower(new Vector2(3800,0)));
 		al.add(new Thrower(new Vector2(6650,210)));
-		al.add(new Thrower(new Vector2(10950,500)));
+		al.add(new Thrower(new Vector2(10300,0)));
+		al.add(new Thrower(new Vector2(11700,100)));
 		return al;
 	}
 
+	public static ArrayList<Thrower> getJacob(){
+		ArrayList<Thrower> al = new ArrayList ();		
+		al.add(new Thrower(new Vector2(14050,0)));
+		return al;
+	}
+	
 	public static Texture getBackgroundImage() {
 		return new Texture(Gdx.files.internal("BakrundDemo2.1.png"));		
 	}
 	
 }
-
-
-

@@ -165,10 +165,9 @@ public class GameScreen implements Screen, InputProcessor {
 			state = Lists.ENDING;
 			credits.resetTimer();
 		}
-//		if(arg0 == Keys.E){
-//			Vector2 v = background.getOffset();
-//			v.x -= 12000;			
-//		}
+		if(arg0 == Keys.E){
+			System.out.println(player.getPosition().x - background.offset.x);			
+		}
 		return false;
 	}
 
