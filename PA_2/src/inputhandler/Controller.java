@@ -19,19 +19,20 @@ public class Controller {
 	private GameScreen gamescreen;
 	private Player p;
 	private Background b;
-	public Boolean dontmoveL = false, dontmoveR = false;	
+	public Boolean dontmoveL = false, dontmoveR = false;
 	private ArrayList<Talkzone> talkzoneList;
 	private Painter painter;
 	public boolean playerAtLeftBorder = false;
 	public boolean playerAtRightBorder = false;
-	private float lastSideSpeed = 0; 
+	private float lastSideSpeed = 0;
 	private Vector2 offset;
 	boolean flag = true;
+
 	public Controller(GameScreen Gamescreen) {
-		gamescreen = Gamescreen;		
+		gamescreen = Gamescreen;
 	}
-	
-	public void initialize(){
+
+	public void initialize() {
 		p = gamescreen.getPlayer();
 		b = gamescreen.getBackground();
 		talkzoneList = b.getTalkzones();
@@ -39,34 +40,36 @@ public class Controller {
 		offset = b.getOffset();
 	}
 
-	public void activateTalkzones(Rectangle playerRectangle){		
-			for (int i = 0; i < talkzoneList.size(); i++) {
-				Talkzone tz = talkzoneList.get(i);
-				if(Intersector.overlapRectangles(tz.getZone(), playerRectangle)){
-					painter.drawText(tz.getMessage());
+	public void activateTalkzones(Rectangle playerRectangle) {
+		for (int i = 0; i < talkzoneList.size(); i++) {
+			Talkzone tz = talkzoneList.get(i);
+			if (Intersector.overlapRectangles(tz.getZone(), playerRectangle)) {
+				painter.drawText(tz.getMessage());
 			}
 		}
 	}
-	
+
 	public void move(boolean leftDown, boolean rightDown, boolean downDown,
 			boolean upDown) {
-		//Set Sprite
-		if(leftDown) p.setLeftSprite();
-		if(rightDown) p.setRightSprite();
-		
-		//state control
-		switch(p.state) {
+		// Set Sprite
+		if (leftDown)
+			p.setLeftSprite();
+		if (rightDown)
+			p.setRightSprite();
+
+		// state control
+		switch (p.state) {
 		case Standing:
-			if(leftDown){
+			if (leftDown) {
 				p.setSpeed(new Vector2(p.getSpeed()
 						.add(-Player.acceleration, 0)));
 				p.state = State.Running;
 			}
-			if(rightDown){
+			if (rightDown) {
 				p.setSpeed(new Vector2(p.getSpeed().add(Player.acceleration, 0)));
 				p.state = State.Running;
 			}
-			if(upDown){
+			if (upDown) {
 				p.jump();
 				p.state = State.Jumping;
 			}
@@ -85,22 +88,18 @@ public class Controller {
 			if (rightDown) {
 				p.setSpeed(new Vector2(p.getSpeed().add(Player.acceleration, 0)));
 			}
-			if(downDown){
+			if (downDown) {
 				p.extraGravity();
 			}
 			break;
 		case Jumprunning:
-			if(downDown){
+			if (downDown) {
 				p.extraGravity();
 			}
-			break;						
+			break;
 		}
-			
-		
-			
-			
-		
-		//Maxspeed
+
+		// Maxspeed
 		if (p.getSpeed().x > Player.maxSpeed) {
 			p.setSpeed(new Vector2(Player.maxSpeed, p.getSpeed().y));
 		}
@@ -112,19 +111,19 @@ public class Controller {
 		}
 		if (p.getSpeed().y < -Player.maxJumpSpeed) {
 			p.setSpeed(new Vector2(p.getSpeed().x, -Player.maxJumpSpeed));
-		}			
-		
-		//Border operations
-		if(playerAtLeftBorder && p.getSpeed().x < 0){			
-			p.atLeftBorder = true;					
+		}
+
+		// Border operations
+		if (playerAtLeftBorder && p.getSpeed().x < 0) {
+			p.atLeftBorder = true;
 			b.getOffset().x -= p.getSpeed().x;
-		} else if(playerAtRightBorder && p.getSpeed().x > 0){
-			p.atRightBorder = true;			
+		} else if (playerAtRightBorder && p.getSpeed().x > 0) {
+			p.atRightBorder = true;
 			b.getOffset().x -= p.getSpeed().x;
 		} else {
 			p.atLeftBorder = false;
 			p.atRightBorder = false;
 		}
-		
+
 	}
 }

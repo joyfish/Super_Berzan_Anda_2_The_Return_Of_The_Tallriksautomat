@@ -39,6 +39,7 @@ public class Painter {
 	private Texture currentBackground, nextBackground;
 	private boolean showNextBackground = false;
 	private Sprite heart;
+	
 	public Painter(GameScreen gs) {
 		master = gs;
 		spritebatch = new SpriteBatch();
@@ -116,6 +117,8 @@ public class Painter {
 			s = t.getZoneSprite();
 			s.draw(spritebatch);
 		}
+		s = master.getJacob().getZoneSprite();
+		s.draw(spritebatch);
 		// Throwers and their missiles
 		for (Thrower e : enemyList) {
 			if (e.isReady() == false) {
@@ -151,12 +154,18 @@ public class Painter {
 			heart.setX(x);
 			heart.setY(y);
 			heart.draw(spritebatch);
-		}
+		}		
+		 
 		spritebatch.end();
 		
 		if (messageTicker > 500) {
 			drawText = false;
 		}
+	}
+	
+	public void dispose(){
+		spritebatch.dispose();
+		shaperenderer.dispose();
 	}
 	
 	/**

@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import entities.Plattform;
 import entities.Springare;
+import entities.Talkzone;
 import entities.Thrower;
 
 public class Lists {
@@ -158,10 +159,10 @@ public class Lists {
 	}
 	
 	
-	public static ArrayList<Thrower> getJacob(){
-		ArrayList<Thrower> al = new ArrayList ();		
-		al.add(new Thrower(new Vector2(14050,0)));
-		return al;
+	public static Talkzone getJacob(){
+		Talkzone tz = new Talkzone(new Vector2(14050,0), new Vector2(200,200), "");
+//		tz.setTexture(Gdx.files.internal("Jacob.png"));
+		return tz;
 	}
 	
 	public static Texture getBackgroundImage() {

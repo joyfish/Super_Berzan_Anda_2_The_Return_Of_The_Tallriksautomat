@@ -15,6 +15,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 
 import entities.Plattform;
@@ -40,6 +41,7 @@ public class GameScreen implements Screen, InputProcessor {
 	int state = Lists.INTRO;
 	Credits credits = new Credits(this);
 	SoundPlayer sp;
+	Talkzone jacobZone = Lists.getJacob();
 	
 	public GameScreen() {
 		super();				
@@ -49,12 +51,12 @@ public class GameScreen implements Screen, InputProcessor {
 		controller = new Controller(this);
 		areaChecker = new AreaChecker(this);
 		entityMaster = new EntityMaster(this);
-		sp = new SoundPlayer();		
+		sp = new SoundPlayer();	
+		jacobZone.setMessage("Welcome to the end");
 		addPlattforms();
 		addTalkzones();
 		initialize();			
-		Gdx.input.setInputProcessor(this);
-		
+		Gdx.input.setInputProcessor(this);		
 //		System.out.println("Construction finished");
 	}
 
@@ -70,7 +72,8 @@ public class GameScreen implements Screen, InputProcessor {
 	
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		sp.dispose();
+		painter.dispose();		
 	}		
 
 	public ArrayList<Plattform> getPlattforms() {
@@ -95,11 +98,15 @@ public class GameScreen implements Screen, InputProcessor {
 			while(credits.drawEnd()){
 				
 			}
+			dispose();
 			break;
 		}
 	}	
 	
 	private boolean loseCondition(){
+		if(jacobZone.isInside()){
+			return false;
+		}
 		if(player.health <= 0){
 			return true;
 		} else {
@@ -108,7 +115,7 @@ public class GameScreen implements Screen, InputProcessor {
 	}
 	
 	private void winCondition(){
-		if(player.getScreenRextangle().x - background.offset.x > 14100){			
+		if(won){			
 			state = Lists.ENDING;
 		}
 	}
@@ -122,6 +129,10 @@ public class GameScreen implements Screen, InputProcessor {
 		renderScreen();		
 		entityMaster.act();
 		winCondition();		
+		if(loseCondition()){
+			state = Lists.GAMEOVER;
+		}
+		jacobZone.setOffset(background.getOffset());
 	}
 
 	@Override
@@ -158,15 +169,7 @@ public class GameScreen implements Screen, InputProcessor {
 		if (arg0 == Keys.RIGHT)RightDown = true;
 		if (arg0 == Keys.UP)UpDown = true;
 		if (arg0 == Keys.DOWN)DownDown = true;
-		
-		//For testing purposes only
-		if(arg0 == Keys.J){
-			System.out.println("Offset: " + background.getOffset());
-			System.out.println("Player Position: " + player.getPosition());
-			for(Plattform p : plattformList){
-				System.out.println("Position: " + p.getPosition());
-			}
-		}
+				
 		if(arg0 == Keys.A){
 			state = Lists.INTRO;
 			credits.resetTimer();
@@ -185,7 +188,7 @@ public class GameScreen implements Screen, InputProcessor {
 		}
 		if(arg0 == Keys.E){
 			System.out.println(player.getPosition().x - background.offset.x);			
-		}
+		}		
 		return false;
 	}
 
@@ -205,8 +208,10 @@ public class GameScreen implements Screen, InputProcessor {
 			UpDown = false;
 		if (arg0 == Keys.DOWN)
 			DownDown = false;
-		if (arg0 == Keys.T)
-			controller.activateTalkzones(player.getRectangle());
+		if (arg0 == Keys.T){
+			controller.activateTalkzones(player.getScreenRextangle());
+			if(Intersector.overlapRectangles(player.getScreenRextangle(), jacobZone.getZone())) won = true;
+		}
 		return false;
 	}
 
@@ -278,6 +283,10 @@ public class GameScreen implements Screen, InputProcessor {
 
 	public Painter getPainter() {
 		return painter;
+	}
+
+	public Talkzone getJacob() {
+		return jacobZone;
 	}
 
 }

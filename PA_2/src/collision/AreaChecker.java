@@ -81,13 +81,18 @@ public class AreaChecker {
 		//Talkzone activation
 		for (int i = 0; i < tz.size(); i++) {
 			Talkzone talkzone = tz.get(i);
-			if(Intersector.overlapRectangles(player.getRectangle() , talkzone.getZone())){
+			if(Intersector.overlapRectangles(player.getScreenRextangle(), talkzone.getZone())){
 				talkzone.entered();
 			} else {
 				talkzone.exited();
-			}
+			}			
 		}
-					
+		
+		Talkzone jacob = superGame.getJacob();
+		if(Intersector.overlapRectangles(player.getScreenRextangle(), jacob.getZone())){
+			jacob.entered();
+		}
+		
 		//Ground collision
 		if(player.getPosition().y + player.getSpeed().y <= 0){
 			player.state = State.Standing;
