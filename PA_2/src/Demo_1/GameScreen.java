@@ -6,9 +6,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
-import sounds.Sound;
-
 import launchers.Credits;
+import sounds.SoundPlayer;
 import collision.AreaChecker;
 
 import com.badlogic.gdx.Gdx;
@@ -18,7 +17,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.math.Vector2;
 
-import entities.Missile;
 import entities.Plattform;
 import entities.Player;
 import entities.Springare;
@@ -41,6 +39,7 @@ public class GameScreen implements Screen, InputProcessor {
 	public boolean GameOver = false, won = false;;	
 	int state = Lists.INTRO;
 	Credits credits = new Credits(this);
+	SoundPlayer sp;
 	
 	public GameScreen() {
 		super();				
@@ -50,10 +49,12 @@ public class GameScreen implements Screen, InputProcessor {
 		controller = new Controller(this);
 		areaChecker = new AreaChecker(this);
 		entityMaster = new EntityMaster(this);
+		sp = new SoundPlayer();		
 		addPlattforms();
 		addTalkzones();
 		initialize();			
 		Gdx.input.setInputProcessor(this);
+		
 //		System.out.println("Construction finished");
 	}
 
@@ -98,9 +99,16 @@ public class GameScreen implements Screen, InputProcessor {
 		}
 	}	
 	
+	private boolean loseCondition(){
+		if(player.health <= 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	private void winCondition(){
-		if(player.getScreenRextangle().x - background.offset.x > 14100){
-			System.out.println("win");
+		if(player.getScreenRextangle().x - background.offset.x > 14100){			
 			state = Lists.ENDING;
 		}
 	}
@@ -113,7 +121,7 @@ public class GameScreen implements Screen, InputProcessor {
 		controller.move(LeftDown, RightDown, DownDown, UpDown);
 		renderScreen();		
 		entityMaster.act();
-		winCondition();
+		winCondition();		
 	}
 
 	@Override
@@ -128,9 +136,8 @@ public class GameScreen implements Screen, InputProcessor {
 	}
 
 	@Override
-	public void show() {
-		Sound.play("RRR.wav");
-		// TODO Auto-generated method stub			
+	public void show() {		
+		sp.loopRedRiverRock();	
 	}
 
 	@Override
@@ -253,7 +260,7 @@ public class GameScreen implements Screen, InputProcessor {
 	}
 
 	private void addTalkzones() {
-		background.addTalkzone(new Vector2(0, 0), "Welcome to zone 1");
+		background.addTalkzone(new Vector2(0, 0), "Welcome to berzan! Dance some by pressing Left Arrow and Right Arrow");
 		background.addTalkzone(new Vector2(400, 0), "Welcome to zone 2");
 	}
 
