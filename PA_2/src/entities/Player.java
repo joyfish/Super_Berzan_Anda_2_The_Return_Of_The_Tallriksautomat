@@ -1,5 +1,9 @@
 package entities;
 
+import java.util.ArrayList;
+
+import Demo_1.Lists;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -21,7 +25,7 @@ public class Player {
 	private Sprite sprite;
 	private float ticker = 0;
 	private boolean jumpReady = true;
-	public Texture lookingrightIMG, servanster;
+	private boolean looksLeft = false;
 	public Rectangle rectangle;
 	private Boolean falling;
 	public Boolean atBorder = false;
@@ -29,18 +33,20 @@ public class Player {
 	public boolean atRightBorder = false;
 	public int health = 5;
 	public int healthTicker;
-
+	private int currentIndex = 0;
+	private ArrayList<Texture> runnerTexture;
+	
 	public Player() {
 		speed = new Vector2(0, 0);
 		position = new Vector2(120, 40);
-		lookingrightIMG = new Texture(Gdx.files.internal("gubbeconsept2.png"));
-		servanster = new Texture(Gdx.files.internal("gubbeconsept1.png"));
 		state = State.Jumping;
 		falling = true;
-		sprite = new Sprite(lookingrightIMG);
+		runnerTexture = Lists.getTextures();
+		sprite = new Sprite(runnerTexture.get(currentIndex));
 		offset = new Vector2(0, 0);
 		rectangle = new Rectangle(0, 0, sprite.getWidth(), sprite.getHeight());
 		healthTicker = 0;
+		
 	}
 
 	public void act() {
@@ -50,6 +56,7 @@ public class Player {
 		case Running:
 			falling = false;
 			speed.y = 0;
+			nextAnimation();
 			break;
 		case Standing:
 			falling = false;
@@ -61,6 +68,7 @@ public class Player {
 			speed.x *= 0.99;
 			break;
 		case Jumprunning:
+			nextAnimation();
 			falling = true;
 			break;
 
@@ -82,7 +90,7 @@ public class Player {
 		if (healthTicker > 0) {
 			healthTicker--;
 		}
-
+		
 		if (atLeftBorder) {
 			position.x -= speed.x;
 		} else if (atRightBorder) {
@@ -94,6 +102,8 @@ public class Player {
 		offset = Offset2;
 	}
 
+	
+	
 	public void gravity() {
 		if (isStanding()) {
 			speed.y = 0;
@@ -102,6 +112,14 @@ public class Player {
 		}
 	}
 
+	private void nextAnimation(){
+		if(currentIndex >= 26){
+			currentIndex = 0;
+		}		
+		sprite.setTexture(runnerTexture.get(currentIndex));
+		currentIndex++;
+	}
+	
 	public void setState(State s) {
 		state = s;
 	}
@@ -156,11 +174,11 @@ public class Player {
 	}
 
 	public void setLeftSprite() {
-		sprite.setTexture(servanster);
+		looksLeft = true;
 	}
 
 	public void setRightSprite() {
-		sprite.setTexture(lookingrightIMG);
+		looksLeft = false;
 	}
 
 	public void jump() {
@@ -185,7 +203,13 @@ public class Player {
 		return !falling;
 	}
 
-	public Sprite getSprite() {
+	public Sprite getSprite() {		
+		if(looksLeft && sprite.isFlipX() == false){
+			sprite.flip(true, false);
+			looksLeft = false;
+		} else if (looksLeft == false && sprite.isFlipX()){
+			sprite.flip(true, false);
+		}
 		sprite.setX(position.x);
 		sprite.setY(position.y);
 		return sprite;

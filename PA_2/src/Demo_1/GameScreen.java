@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
+import sounds.Sound;
+
 import launchers.Credits;
 import collision.AreaChecker;
 
@@ -52,7 +54,7 @@ public class GameScreen implements Screen, InputProcessor {
 		addTalkzones();
 		initialize();			
 		Gdx.input.setInputProcessor(this);
-		System.out.println("Construction finished");
+//		System.out.println("Construction finished");
 	}
 
 	private void initialize(){		
@@ -86,15 +88,22 @@ public class GameScreen implements Screen, InputProcessor {
 			painter.renderSprites();
 			break;
 		case(Lists.GAMEOVER):
-//			credits.drawGameOver();
+			credits.drawGameOver();
 			break;
 		case(Lists.ENDING):
-			if(credits.drawEnd()){
-				//end game
+			while(credits.drawEnd()){
+				
 			}
 			break;
 		}
 	}	
+	
+	private void winCondition(){
+		if(player.getScreenRextangle().x - background.offset.x > 14100){
+			System.out.println("win");
+			state = Lists.ENDING;
+		}
+	}
 	
 	@Override
 	public void render(float arg0) {		
@@ -103,7 +112,8 @@ public class GameScreen implements Screen, InputProcessor {
 		areaChecker.update();
 		controller.move(LeftDown, RightDown, DownDown, UpDown);
 		renderScreen();		
-		entityMaster.act();				
+		entityMaster.act();
+		winCondition();
 	}
 
 	@Override
@@ -119,6 +129,7 @@ public class GameScreen implements Screen, InputProcessor {
 
 	@Override
 	public void show() {
+		Sound.play("RRR.wav");
 		// TODO Auto-generated method stub			
 	}
 

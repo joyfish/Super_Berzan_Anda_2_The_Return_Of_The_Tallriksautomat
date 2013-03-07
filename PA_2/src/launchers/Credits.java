@@ -48,12 +48,14 @@ public class Credits {
 		}
 	}
 
-//	public boolean drawGameOver() {
-//		spritebatch.begin();
-//		bmf.draw(spritebatch, gameover, 300, 300);
-//		spritebatch.end();
-//		ticker++;
-//	}
+	public boolean drawGameOver() {
+		spritebatch.begin();
+		
+		bmf.draw(spritebatch, "game over", 300, 300);
+		spritebatch.end();
+		ticker++;
+		return true;
+	}
 
 	public boolean drawEnd() {
 		spritebatch.begin();		

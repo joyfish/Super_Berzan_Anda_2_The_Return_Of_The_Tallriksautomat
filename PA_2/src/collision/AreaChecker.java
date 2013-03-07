@@ -51,22 +51,27 @@ public class AreaChecker {
 		for (Plattform p : plattformList) {			
 			if (willOverlap(p)) {	
 //				System.out.println("Entered!! Player: " + player.getPosition() + " || plattform: " + p.getPosition() + " || Offset: " + p.getOffset());
-				if (comesFromLeftOfPlattform(p) && (player.state != State.Standing)) {			
-					player.getSpeed().x = -0.1f;
-					player.getPosition().x -= 5f;					
-				}
-				if (comesFromRightOfPlattform(p)  && (player.state != State.Standing)) {			
-					player.getSpeed().x = 0.1f;
-					player.getPosition().x += 5f;					
-				}
 				if (comesFromAbove(p)){			
 					player.getSpeed().y = 0.1f;					
-					player.state = State.Standing;					
+					player.state = State.Standing;
+					continue;
 				}
 				if (comesFromBelow(p)){			
 					player.getSpeed().y = -0.1f;
-					player.getPosition().y -= 1f;					
+					player.getPosition().y -= 1f;
+					continue;
 				}
+				if (comesFromLeftOfPlattform(p) ) {			
+					player.getSpeed().x = -0.1f;
+					player.getPosition().x -= 1f;
+					continue;
+				}
+				if (comesFromRightOfPlattform(p)) {			
+					player.getSpeed().x = 0.1f;
+					player.getPosition().x += 1f;
+					continue;
+				}
+				
 				
 			} else if (player.getPosition().y > 0 && (player.state == State.Running)){
 				player.state = State.Jumprunning;
@@ -161,7 +166,7 @@ public class AreaChecker {
 	}
 
 	private boolean comesFromLeftOfPlattform(Plattform p) {
-		float playerXandWidth = player.getPosition().x + player.lookingrightIMG.getWidth();
+		float playerXandWidth = player.getPosition().x + player.getSprite().getWidth();
 		if (playerXandWidth > p.getRectangle().x && playerXandWidth < p.getRectangle().x+10) {
 			return true;
 		} else {

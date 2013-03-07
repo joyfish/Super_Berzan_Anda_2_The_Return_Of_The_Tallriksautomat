@@ -148,6 +148,16 @@ public class Lists {
 		return al;
 	}
 
+	public static ArrayList<Texture> getTextures(){
+		ArrayList<Texture> al = new ArrayList<>();
+		for (int i =1; i <= 26; i++) {
+			Texture t = new Texture(Gdx.files.internal("pic\\huvudlös" + i + ".png"));
+			al.add(t);
+		}
+		return al;
+	}
+	
+	
 	public static ArrayList<Thrower> getJacob(){
 		ArrayList<Thrower> al = new ArrayList ();		
 		al.add(new Thrower(new Vector2(14050,0)));
