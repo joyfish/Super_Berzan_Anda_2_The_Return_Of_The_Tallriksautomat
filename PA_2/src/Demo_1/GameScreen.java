@@ -35,104 +35,107 @@ public class GameScreen implements Screen, InputProcessor {
 	AreaChecker areaChecker;
 	private ArrayList<Plattform> plattformList;
 	private ArrayList<Talkzone> talkzoneList;
-	public Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();		
+	public Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 	public Dimension applicationSize;
-	public boolean GameOver = false, won = false;;	
+	public boolean GameOver = false, won = false;;
 	int state = Lists.INTRO;
+	int endingTimer = 0;
 	Credits credits = new Credits(this);
 	SoundPlayer sp;
 	Talkzone jacobZone = Lists.getJacob();
 	DemoGame master;
-	
+
 	public GameScreen(DemoGame dg) {
-		super();				
+		super();
 		master = dg;
 		player = new Player();
-		background = new Background(this);				
+		background = new Background(this);
 		painter = new Painter(this);
 		controller = new Controller(this);
 		areaChecker = new AreaChecker(this);
 		entityMaster = new EntityMaster(this);
-		sp = new SoundPlayer();	
-		jacobZone.setMessage("Welcome to the end");	
+		sp = new SoundPlayer();		
 		initialize();
-		Gdx.input.setInputProcessor(this);		
-//		System.out.println("Construction finished");
+		Gdx.input.setInputProcessor(this);
+		// System.out.println("Construction finished");
 	}
 
-	private void initialize(){		
+	private void initialize() {
 		background.initialize();
 		painter.initialize();
 		controller.initialize();
 		areaChecker.initialize();
 		entityMaster.initialize();
 		plattformList = background.getPlattforms();
-		talkzoneList = background.getTalkzones();		
+		talkzoneList = background.getTalkzones();
 	}
-	
+
 	@Override
-	public void dispose() {		
+	public void dispose() {
 		sp.dispose();
-		painter.dispose();		
-	}		
+		painter.dispose();
+	}
 
 	public ArrayList<Plattform> getPlattforms() {
 		return background.getPlattforms();
-	}	
-	
-	private void endGame(){
+	}
+
+	private void endGame() {
 		master.endGame();
 	}
-	
-	private void renderScreen(){
+
+	private void renderScreen() {
 		switch (state) {
-		case(Lists.INTRO):			
-			if(credits.drawIntro()){
+		case (Lists.INTRO):
+			if (credits.drawIntro()) {
 				credits.resetTimer();
 				state = Lists.GAME;
 			}
 			break;
-		case(Lists.GAME):
+		case (Lists.GAME):
 			painter.renderSprites();
 			break;
-		case(Lists.GAMEOVER):
+		case (Lists.GAMEOVER):
 			credits.drawGameOver();
 			break;
-		case(Lists.ENDING):
-			while(credits.drawEnd()){
+		case (Lists.ENDING):
+			while (credits.drawEnd()) {
 				dispose();
-			} 			
+			}
 			break;
 		}
-	}	
-	
-	private boolean loseCondition(){
-		if(jacobZone.isInside()){
+	}
+
+	private boolean loseCondition() {
+		if (jacobZone.isInside()) {
 			return false;
 		}
-		if(player.health <= 0){
+		if (player.health <= 0) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
-	private void winCondition(){
-		if(won){			
-			state = Lists.ENDING;
+
+	private void winCondition() {
+		if (won) {
+			if (endingTimer > 500) {
+				state = Lists.ENDING;
+			}
+			endingTimer++;
 		}
 	}
-	
+
 	@Override
-	public void render(float arg0) {		
+	public void render(float arg0) {
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);				
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		areaChecker.update();
 		controller.move(LeftDown, RightDown, DownDown, UpDown);
-		renderScreen();		
+		renderScreen();
 		entityMaster.act();
-		winCondition();		
-		if(loseCondition()){
+		winCondition();
+		if (loseCondition()) {
 			state = Lists.GAMEOVER;
 		}
 		jacobZone.setOffset(background.getOffset());
@@ -150,8 +153,8 @@ public class GameScreen implements Screen, InputProcessor {
 	}
 
 	@Override
-	public void show() {		
-		sp.loopRedRiverRock();	
+	public void show() {
+		sp.loopRedRiverRock();
 	}
 
 	@Override
@@ -168,31 +171,36 @@ public class GameScreen implements Screen, InputProcessor {
 
 	@Override
 	public boolean keyDown(int arg0) {
-		if (arg0 == Keys.LEFT)LeftDown = true;
-		if (arg0 == Keys.RIGHT)RightDown = true;
-		if (arg0 == Keys.UP)UpDown = true;
-		if (arg0 == Keys.DOWN)DownDown = true;
-				
-		if(arg0 == Keys.A){
+		if (arg0 == Keys.LEFT)
+			LeftDown = true;
+		if (arg0 == Keys.RIGHT)
+			RightDown = true;
+		if (arg0 == Keys.UP)
+			UpDown = true;
+		if (arg0 == Keys.DOWN)
+			DownDown = true;
+
+		if (arg0 == Keys.A) {
 			state = Lists.INTRO;
 			credits.resetTimer();
 		}
-		if(arg0 == Keys.B){
+		if (arg0 == Keys.B) {
 			state = Lists.GAME;
 			credits.resetTimer();
 		}
-		if(arg0 == Keys.C){
+		if (arg0 == Keys.C) {
 			state = Lists.GAMEOVER;
 			credits.resetTimer();
 		}
-		if(arg0 == Keys.D){
+		if (arg0 == Keys.D) {
 			state = Lists.ENDING;
 			credits.resetTimer();
 		}
-		if(arg0 == Keys.E){
-			System.out.println("x: " + (player.getPosition().x - background.offset.x));
+		if (arg0 == Keys.E) {
+			System.out.println("x: "
+					+ (player.getPosition().x - background.offset.x));
 			System.out.println("y: " + player.getPosition().y);
-		}		
+		}
 		return false;
 	}
 
@@ -212,9 +220,12 @@ public class GameScreen implements Screen, InputProcessor {
 			UpDown = false;
 		if (arg0 == Keys.DOWN)
 			DownDown = false;
-		if (arg0 == Keys.T){
+		if (arg0 == Keys.T) {
 			controller.activateTalkzones(player.getScreenRextangle());
-			if(Intersector.overlapRectangles(player.getScreenRextangle(), jacobZone.getZone())) won = true;
+			if (Intersector.overlapRectangles(player.getScreenRextangle(),
+				jacobZone.getZone()))
+				won = true;
+				painter.drawText(jacobZone.getMessage());
 		}
 		return false;
 	}

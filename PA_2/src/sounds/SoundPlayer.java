@@ -13,7 +13,7 @@ public class SoundPlayer {
 	public void loopRedRiverRock(){
 		music = Gdx.audio.newMusic(Gdx.files.internal("src/sounds/RRR.ogg"));
 		music.setLooping(true);
-		music.setVolume(0f);
+		music.setVolume(0.5f);
 		music.play();
 	}
 

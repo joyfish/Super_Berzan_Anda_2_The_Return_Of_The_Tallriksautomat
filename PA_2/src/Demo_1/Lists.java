@@ -42,7 +42,7 @@ public class Lists {
 	
 	public static ArrayList<Plattform> getPlattforms(GameScreen master){
 		ArrayList<Plattform> alp = new ArrayList();
-		alp.add(new Plattform(new Vector2(-300,0), new Vector2(800,1000)));	
+		alp.add(new Plattform(new Vector2(-800,0), new Vector2(800,1000)));	
 		alp.add(new Plattform(new Vector2(300,0), new Vector2(100,150)));
 		alp.add(new Plattform(new Vector2(600,100), new Vector2(200,60)));
 		alp.add(new Plattform(new Vector2(900,0), new Vector2(150,200)));
@@ -171,7 +171,7 @@ public class Lists {
 	}
  		
 	public static Talkzone getJacob(){
-		Talkzone tz = new Talkzone(new Vector2(14050,0), new Vector2(200,200), "");
+		Talkzone tz = new Talkzone(new Vector2(14050,0), new Vector2(200,200), "Thanks for rescuing me. Now, how do you plan on escaping?");
 		return tz;
 	}	
 	
