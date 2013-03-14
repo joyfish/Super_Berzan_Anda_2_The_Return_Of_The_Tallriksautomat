@@ -45,8 +45,7 @@ public class Player {
 		sprite = new Sprite(runnerTexture.get(currentIndex));
 		offset = new Vector2(0, 0);
 		rectangle = new Rectangle(0, 0, sprite.getWidth(), sprite.getHeight());
-		healthTicker = 0;
-		
+		healthTicker = 0;		
 	}
 
 	public void act() {
@@ -71,7 +70,6 @@ public class Player {
 			nextAnimation();
 			falling = true;
 			break;
-
 		}
 
 		// Jump cooldown
@@ -89,6 +87,10 @@ public class Player {
 						
 		if (healthTicker > 0) {
 			healthTicker--;
+		}
+		
+		if(position.x - offset.x < 0){
+			offset.x = position.x;
 		}
 		
 		if (atLeftBorder) {

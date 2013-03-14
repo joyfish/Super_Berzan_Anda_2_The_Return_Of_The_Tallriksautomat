@@ -69,7 +69,7 @@ public class Painter {
 			if (e.isReady() == false) {
 				r = e.getMissile().getRectangle();
 				shaperenderer.setColor(Color.MAGENTA);
-				shaperenderer.rect(r.x, r.y, r.width, r.height);
+				shaperenderer.rect(r.x, r.y, r.width, r.height);				
 			}
 		}
 		for (Talkzone tz : talkzoneList) {
@@ -124,6 +124,7 @@ public class Painter {
 			if (e.isReady() == false) {
 				Missile m = e.getMissile();
 				s = m.getSprite();
+				s.rotate(1.5f);
 				s.draw(spritebatch);
 			}
 			s = e.getSprite();

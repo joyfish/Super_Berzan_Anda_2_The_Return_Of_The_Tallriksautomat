@@ -29,6 +29,7 @@ public class DesktopLauncher implements ActionListener{
 	Dimension preferredSize;
 	Rectangle size;
 	Dimension optionsResolution;
+	LwjglApplication game;
 	
 	public DesktopLauncher(){
 		frame = giveWindow();
@@ -118,7 +119,7 @@ public class DesktopLauncher implements ActionListener{
 		if(s.equals("STARTA")){
 			frame.removeAll();
 			frame.dispose();
-			new LwjglApplication(new DemoGame(), "Vårat Dem0000",size.width + 200,size.height + 200,true);
+			game = new LwjglApplication(new DemoGame(this), "Vårat Dem0000",size.width + 200,size.height + 200,true);
 		}
 		if(s.equals("TROLLBOLL")){						
 			Toolkit.getDefaultToolkit().beep();			
@@ -140,6 +141,10 @@ public class DesktopLauncher implements ActionListener{
 		options.setVisible(true);
 		options.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		options.setBounds(size);
+	}
+
+	public void endGame() {				
+		game = null;
 	}	
 
 	

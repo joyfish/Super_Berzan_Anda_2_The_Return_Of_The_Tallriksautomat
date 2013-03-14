@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import launchers.Credits;
+import launchers.DemoGame;
 import sounds.SoundPlayer;
 import collision.AreaChecker;
 
@@ -16,7 +17,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Vector2;
 
 import entities.Plattform;
 import entities.Player;
@@ -42,9 +42,11 @@ public class GameScreen implements Screen, InputProcessor {
 	Credits credits = new Credits(this);
 	SoundPlayer sp;
 	Talkzone jacobZone = Lists.getJacob();
+	DemoGame master;
 	
-	public GameScreen() {
+	public GameScreen(DemoGame dg) {
 		super();				
+		master = dg;
 		player = new Player();
 		background = new Background(this);				
 		painter = new Painter(this);
@@ -52,10 +54,8 @@ public class GameScreen implements Screen, InputProcessor {
 		areaChecker = new AreaChecker(this);
 		entityMaster = new EntityMaster(this);
 		sp = new SoundPlayer();	
-		jacobZone.setMessage("Welcome to the end");
-		addPlattforms();
-		addTalkzones();
-		initialize();			
+		jacobZone.setMessage("Welcome to the end");	
+		initialize();
 		Gdx.input.setInputProcessor(this);		
 //		System.out.println("Construction finished");
 	}
@@ -71,7 +71,7 @@ public class GameScreen implements Screen, InputProcessor {
 	}
 	
 	@Override
-	public void dispose() {
+	public void dispose() {		
 		sp.dispose();
 		painter.dispose();		
 	}		
@@ -79,6 +79,10 @@ public class GameScreen implements Screen, InputProcessor {
 	public ArrayList<Plattform> getPlattforms() {
 		return background.getPlattforms();
 	}	
+	
+	private void endGame(){
+		master.endGame();
+	}
 	
 	private void renderScreen(){
 		switch (state) {
@@ -96,9 +100,8 @@ public class GameScreen implements Screen, InputProcessor {
 			break;
 		case(Lists.ENDING):
 			while(credits.drawEnd()){
-				
-			}
-			dispose();
+				dispose();
+			} 			
 			break;
 		}
 	}	
@@ -187,7 +190,8 @@ public class GameScreen implements Screen, InputProcessor {
 			credits.resetTimer();
 		}
 		if(arg0 == Keys.E){
-			System.out.println(player.getPosition().x - background.offset.x);			
+			System.out.println("x: " + (player.getPosition().x - background.offset.x));
+			System.out.println("y: " + player.getPosition().y);
 		}		
 		return false;
 	}
@@ -255,18 +259,6 @@ public class GameScreen implements Screen, InputProcessor {
 
 	public Background getBackground() {
 		return background;
-	}
-
-	private void addPlattforms() {
-		ArrayList<Plattform> al = Lists.getPlattforms(this);
-		for (int i = 0; i < al.size(); i++) {
-			background.addPlattform(al.get(i));
-		}
-	}
-
-	private void addTalkzones() {
-		background.addTalkzone(new Vector2(0, 0), "Welcome to berzan! Dance some by pressing Left Arrow and Right Arrow");
-		background.addTalkzone(new Vector2(400, 0), "Welcome to zone 2");
 	}
 
 	public ArrayList<Talkzone> getTalkzones() {

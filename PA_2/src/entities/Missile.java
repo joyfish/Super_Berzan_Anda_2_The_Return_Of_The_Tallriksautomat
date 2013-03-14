@@ -50,6 +50,10 @@ public class Missile {
 		}		
 	}
 
+	public float getTicker(){
+		return ticker;
+	}
+	
 	
 	private float fy(float ticker2) {
 		float f = 0;

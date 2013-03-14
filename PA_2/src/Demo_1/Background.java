@@ -36,8 +36,8 @@ public class Background {
 	public Background(GameScreen Master){
 		Screen = Toolkit.getDefaultToolkit().getScreenSize();
 		master = Master;			
-		plattformList = new ArrayList<Plattform>();
-		talkzoneList = new ArrayList<Talkzone>();
+		plattformList = Lists.getPlattforms(master);
+		talkzoneList = Lists.getTalkzone();
 		offset = new Vector2(0,0);	
 		background = Lists.getBackgroundImage();
 	}		
