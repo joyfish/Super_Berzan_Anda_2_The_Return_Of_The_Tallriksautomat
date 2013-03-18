@@ -1,5 +1,9 @@
 package entities;
 
+import java.util.ArrayList;
+
+import Demo_1.Lists;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -13,12 +17,15 @@ public class Talkzone {
 	private String message;
 	private boolean isInside = false;
 	private Sprite	talkperson;
+	private ArrayList<Texture> textures;
+	private int currentIndex = 0;
 	
 	public Talkzone(Vector2 Position, String m){
 		position = Position;
 		message = m;
 		offset = new Vector2(0,0);
-		talkperson = new Sprite(new Texture(Gdx.files.internal("Talk.png")));
+		talkperson = new Sprite(new Texture(Gdx.files.internal("pic\\jhonny7.png")));
+		textures = Lists.getJhonny();
 	}
 	
 	public Talkzone(Vector2 Position, Vector2 Size, String m){		
@@ -50,13 +57,25 @@ public class Talkzone {
 		position = newPosition;
 	}
 	
-	public Rectangle getZone(){
+	public Rectangle getZone(){		
 		return new Rectangle(position.x+offset.x, position.y+offset.y, size.x, size.y);
+	}
+	
+	private void nextAnimation(){
+		if(currentIndex >= 3){
+			currentIndex = 0;
+		}
+		talkperson.setTexture(textures.get(currentIndex));
+		currentIndex += 1;
+	}
+	
+	public void act(){
+		nextAnimation();
 	}
 	
 	public Sprite getZoneSprite(){
 		talkperson.setX(position.x + offset.x + size.x/2);
-		talkperson.setY(position.y + offset.y);
+		talkperson.setY(position.y + offset.y);		
 		return talkperson;
 	}
 	

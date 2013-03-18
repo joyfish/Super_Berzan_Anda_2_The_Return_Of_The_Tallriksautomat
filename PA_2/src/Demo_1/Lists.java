@@ -1,5 +1,5 @@
 package Demo_1;
-
+	
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -7,15 +7,23 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 import entities.Plattform;
-import entities.Springare;
+import entities.Runner;
 import entities.Talkzone;
 import entities.Thrower;
-
+	
 public class Lists {
 	public static final int INTRO = 1;
 	public static final int GAME = 2;
 	public static final int GAMEOVER = 3;
 	public static final int ENDING = 4;
+	
+	public static ArrayList<Texture> getJhonny(){
+		ArrayList<Texture> al = new ArrayList<Texture>();
+		for (int i = 7; i <= 9; i++) {
+			al.add(new Texture(Gdx.files.internal("pic\\jhonny" + i + ".png")));
+		}
+		return al;
+	}
 	
 	public static ArrayList<String> getIntroStrings(){
 		ArrayList<String> al = new ArrayList();
@@ -114,32 +122,32 @@ public class Lists {
 		alp.add(new Plattform(new Vector2(14450,0),new Vector2(200,1000)));	
 		return alp;
 	}
-
-	public static ArrayList<Springare> getRunners() {
-		ArrayList<Springare> al = new ArrayList();
+	
+	public static ArrayList<Runner> getRunners() {
+		ArrayList<Runner> al = new ArrayList();
 //		al.add(new Springare(new Vector2(),new Vector2(),5));
-		al.add(new Springare(new Vector2(1100,0), new Vector2(1400,0),1));
-		al.add(new Springare(new Vector2(1100,0), new Vector2(1400,0),2));
-		al.add(new Springare(new Vector2(1100,0), new Vector2(1400,0),3));
+		al.add(new Runner(new Vector2(1100,0), new Vector2(1400,0),1));
+		al.add(new Runner(new Vector2(1100,0), new Vector2(1400,0),2));
+		al.add(new Runner(new Vector2(1100,0), new Vector2(1400,0),3));
 		
-		al.add(new Springare(new Vector2(5950,0), new Vector2(6300,0),1));
-		al.add(new Springare(new Vector2(5950,0), new Vector2(6300,0),2));
-		al.add(new Springare(new Vector2(5950,0), new Vector2(6300,0),3));
+		al.add(new Runner(new Vector2(5950,0), new Vector2(6300,0),1));
+		al.add(new Runner(new Vector2(5950,0), new Vector2(6300,0),2));
+		al.add(new Runner(new Vector2(5950,0), new Vector2(6300,0),3));
 		
-		al.add(new Springare(new Vector2(8000,0),new Vector2(8400,0),1));
-		al.add(new Springare(new Vector2(8000,0),new Vector2(8400,0),2));
-		al.add(new Springare(new Vector2(8000,0),new Vector2(8400,0),3));
+		al.add(new Runner(new Vector2(8000,0),new Vector2(8400,0),1));
+		al.add(new Runner(new Vector2(8000,0),new Vector2(8400,0),2));
+		al.add(new Runner(new Vector2(8000,0),new Vector2(8400,0),3));
 		
-		al.add(new Springare(new Vector2(9350,0),new Vector2(9650,0),2));
-		al.add(new Springare(new Vector2(9350,0),new Vector2(9650,0),1));
+		al.add(new Runner(new Vector2(9350,0),new Vector2(9650,0),2));
+		al.add(new Runner(new Vector2(9350,0),new Vector2(9650,0),1));
 		
-		al.add(new Springare(new Vector2(11100,0),new Vector2(11350,0),1));
-		al.add(new Springare(new Vector2(11100,0),new Vector2(11350,0),2));
-		al.add(new Springare(new Vector2(11100,0),new Vector2(11350,0),3));
+		al.add(new Runner(new Vector2(11100,0),new Vector2(11350,0),1));
+		al.add(new Runner(new Vector2(11100,0),new Vector2(11350,0),2));
+		al.add(new Runner(new Vector2(11100,0),new Vector2(11350,0),3));
 		
 		return al;
 	}
-
+	
 	public static ArrayList<Thrower> getThrowers() {
 		ArrayList<Thrower> al = new ArrayList ();
 		al.add(new Thrower(new Vector2(3800,0)));
@@ -148,35 +156,42 @@ public class Lists {
 		al.add(new Thrower(new Vector2(11700,100)));
 		return al;
 	}
-
-	public static ArrayList<Texture> getTextures(){
+	
+	public static ArrayList<Texture> getRunTextures(){
 		ArrayList<Texture> al = new ArrayList<>();
 		for (int i =1; i <= 26; i++) {
 			Texture t = new Texture(Gdx.files.internal("pic\\huvudlös" + i + ".png"));
 			al.add(t);
 		}
 		return al;
-	}
-	
+	}	
 	
 	public static ArrayList<Talkzone> getTalkzone(){
 		ArrayList<Talkzone> al = new ArrayList<Talkzone>();
 		al.add(new Talkzone(new Vector2(0,0), "Welcome to berzan! Dance some by pressing Left, Right and Up Arrow"));
-		al.add(new Talkzone(new Vector2(750,0), "On the other side there are a pack of a special breed we call högstadiebarn, they are dangerous!"));
-		al.add(new Talkzone(new Vector2(3075,200),"One of the teachers is rampaging and throwing dangerous studentliteratur everywhere! To much homework kills you."));
-		al.add(new Talkzone(new Vector2(5500,0),"I don't know what happened. Everyone just started behaving strangely after Jacob disappeared. Please find him!"));
-		al.add(new Talkzone(new Vector2(10880,500), "Don't worry about the laws of physics. Gravity doesn't hurt if you don't believe in it."));
-		al.add(new Talkzone(new Vector2(8950,0),"Please find Jacob, you're our only hope!"));		
+		al.add(new Talkzone(new Vector2(650,0), "On the other side there are a pack of a special breed we call högstadiebarn, they are dangerous!"));
+		al.add(new Talkzone(new Vector2(3075,200),"One of the teachers is rampaging and throwing dangerous studentliteratur everywhere! To much homework kills you"));
+		al.add(new Talkzone(new Vector2(5500,0)," Everyone started behaving strangely after Jakob disappeared. Go find him you slimy nolla!"));
+		al.add(new Talkzone(new Vector2(10880,500), "Don't worry about the laws of physics. Gravity doesn't hurt if you don't believe in it"));
+		al.add(new Talkzone(new Vector2(8950,0),"Please find Jakob or you'll be a slimy nolla for the rest of your life"));		
 		return al;
 	}
- 		
+	
 	public static Talkzone getJacob(){
 		Talkzone tz = new Talkzone(new Vector2(14050,0), new Vector2(200,200), "Thanks for rescuing me. Now, how do you plan on escaping?");
 		return tz;
 	}	
 	
 	public static Texture getBackgroundImage() {
-		return new Texture(Gdx.files.internal("BakrundDemo2.1.png"));		
+		return new Texture(Gdx.files.internal("BakrundDemo2.1.png"));
+	}
+	
+	public static ArrayList<Texture> getJumpTextures() {
+		ArrayList<Texture> al = new ArrayList<Texture>();
+		for (int i = 17; i >= 1; i--) {
+			al.add(new Texture(Gdx.files.internal("pic\\jump" + i + ".png")));
+		}
+		return al;
 	}
 	
 }

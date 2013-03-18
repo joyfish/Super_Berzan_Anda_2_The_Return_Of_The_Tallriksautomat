@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Thrower {
-
 	/* "Lärare som kastar papper" */
 	private Vector2 position;
 	private boolean isReady = true;
@@ -49,7 +48,6 @@ public class Thrower {
 			}
 		}
 		missileCooldown++;
-
 		
 	}
 

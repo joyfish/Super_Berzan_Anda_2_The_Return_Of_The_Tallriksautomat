@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import entities.Missile;
 import entities.Plattform;
 import entities.Player;
-import entities.Springare;
+import entities.Runner;
 import entities.Talkzone;
 import entities.Thrower;
 
@@ -16,7 +16,7 @@ public class EntityMaster {
 	private Background background;
 	private Player player;
 	private ArrayList<Talkzone> talkzones;	
-	public ArrayList<Springare> runners;
+	public ArrayList<Runner> runners;
 	public ArrayList<Thrower> throwers;
 	
 	/**
@@ -28,7 +28,7 @@ public class EntityMaster {
 		master = superGame;
 		runners = new ArrayList();
 		throwers = new ArrayList();
-		for(Springare spr : Lists.getRunners()){
+		for(Runner spr : Lists.getRunners()){
 			runners.add(spr);
 		}
 		for(Thrower t : Lists.getThrowers()){
@@ -62,8 +62,10 @@ public class EntityMaster {
 	 */
 	private void letEntitiesAct() {
 		player.act();
-		
-		for(Springare sr : runners){
+		for(Talkzone t : talkzones){
+			t.act();
+		}
+		for(Runner sr : runners){
 			sr.act();
 		}
 		for(Thrower tr : throwers){
@@ -72,9 +74,7 @@ public class EntityMaster {
 			if(e != null){
 				e.act();
 			}			
-		}
-		
-		
+		}				
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class EntityMaster {
 		for(Talkzone tz: talkzones){
 			tz.setOffset(tempoffset);
 		}
-		for(Springare sr : runners){
+		for(Runner sr : runners){
 			sr.setOffset(tempoffset);
 		}
 		for(Thrower tr : throwers){
@@ -109,7 +109,7 @@ public class EntityMaster {
 	 * Returns all the runners (kids) 
 	 * @return
 	 */
-	public ArrayList<Springare> getRunners() {
+	public ArrayList<Runner> getRunners() {
 		return runners;
 	}
 	

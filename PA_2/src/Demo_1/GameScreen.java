@@ -20,7 +20,7 @@ import com.badlogic.gdx.math.Intersector;
 
 import entities.Plattform;
 import entities.Player;
-import entities.Springare;
+import entities.Runner;
 import entities.Talkzone;
 import entities.Thrower;
 
@@ -223,9 +223,10 @@ public class GameScreen implements Screen, InputProcessor {
 		if (arg0 == Keys.T) {
 			controller.activateTalkzones(player.getScreenRextangle());
 			if (Intersector.overlapRectangles(player.getScreenRextangle(),
-				jacobZone.getZone()))
+				jacobZone.getZone())){
 				won = true;
 				painter.drawText(jacobZone.getMessage());
+			}
 		}
 		return false;
 	}
@@ -280,7 +281,7 @@ public class GameScreen implements Screen, InputProcessor {
 		return entityMaster.getThrowers();
 	}
 
-	public ArrayList<Springare> getRunners() {
+	public ArrayList<Runner> getRunners() {
 		return entityMaster.getRunners();
 	}
 

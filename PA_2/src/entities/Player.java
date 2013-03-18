@@ -28,21 +28,22 @@ public class Player {
 	private boolean looksLeft = false;
 	public Rectangle rectangle;
 	private Boolean falling;
-	public Boolean atBorder = false;
 	public boolean atLeftBorder = false;
 	public boolean atRightBorder = false;
 	public int health = 5;
 	public int healthTicker;
-	private int currentIndex = 0;
+	private int runIndex = 0, jumpIndex = 0;
 	private ArrayList<Texture> runnerTexture;
+	private ArrayList<Texture> jumpTexture;
 	
 	public Player() {
 		speed = new Vector2(0, 0);
 		position = new Vector2(120, 40);
 		state = State.Jumping;
 		falling = true;
-		runnerTexture = Lists.getTextures();
-		sprite = new Sprite(runnerTexture.get(currentIndex));
+		runnerTexture = Lists.getRunTextures();
+		jumpTexture = Lists.getJumpTextures();
+		sprite = new Sprite(runnerTexture.get(runIndex));
 		offset = new Vector2(0, 0);
 		rectangle = new Rectangle(0, 0, sprite.getWidth(), sprite.getHeight());
 		healthTicker = 0;		
@@ -63,6 +64,7 @@ public class Player {
 			speed.y = 0;
 			break;
 		case Jumping:
+			nextAnimation();
 			falling = true;
 			speed.x *= 0.99;
 			break;
@@ -115,11 +117,23 @@ public class Player {
 	}
 
 	private void nextAnimation(){
-		if(currentIndex >= 26){
-			currentIndex = 0;
+		if(state == State.Running){
+		if(runIndex >= 26){
+			runIndex = 0;
 		}		
-		sprite.setTexture(runnerTexture.get(currentIndex));
-		currentIndex++;
+		sprite.setTexture(runnerTexture.get(runIndex));
+		runIndex++;
+		}
+		if(state == State.Jumping){
+			if(jumpIndex >= 16){
+				jumpIndex = 16;
+			}
+			sprite.setTexture(jumpTexture.get(jumpIndex));
+			jumpIndex++;
+		} else {
+			jumpIndex = 0;
+		}
+		
 	}
 	
 	public void setState(State s) {

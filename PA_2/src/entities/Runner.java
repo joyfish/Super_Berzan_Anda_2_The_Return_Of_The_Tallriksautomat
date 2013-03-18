@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class Springare {
+public class Runner {
 	private Vector2 position;
 	private Vector2 patrolPoint1, patrolPoint2;
 	private float patrolerSpeed;
@@ -15,7 +15,7 @@ public class Springare {
 	private Sprite sprite;
 	private boolean isGoingRight = true;
 
-	public Springare(Vector2 start, Vector2 end, float speed) {
+	public Runner(Vector2 start, Vector2 end, float speed) {
 		texture = new Texture(Gdx.files.internal("gubbeconsept3.png"));
 		sprite = new Sprite(texture);
 		

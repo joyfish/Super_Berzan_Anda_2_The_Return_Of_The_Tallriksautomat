@@ -16,7 +16,7 @@ import com.badlogic.gdx.math.Rectangle;
 import entities.Missile;
 import entities.Plattform;
 import entities.Player;
-import entities.Springare;
+import entities.Runner;
 import entities.Talkzone;
 import entities.Thrower;
 
@@ -33,7 +33,7 @@ public class Painter {
 	public SpriteBatch spritebatch;
 	private ArrayList<Talkzone> talkzoneList;
 	private ArrayList<Thrower> enemyList;
-	private ArrayList<Springare> springareList;
+	private ArrayList<Runner> springareList;
 	private ShapeRenderer shaperenderer;
 	private ArrayList<Texture> allTextures;
 	private Texture currentBackground, nextBackground;
@@ -77,7 +77,7 @@ public class Painter {
 			shaperenderer.setColor(Color.PINK);
 			shaperenderer.rect(r.x, r.y, r.width, r.height);
 		}
-		for (Springare sr : springareList) {
+		for (Runner sr : springareList) {
 			r = sr.getRectangle();
 			shaperenderer.setColor(Color.BLUE);
 			shaperenderer.rect(r.x, r.y, r.width, r.height);
@@ -131,7 +131,7 @@ public class Painter {
 			s.draw(spritebatch);
 		}
 		// Runners
-		for (Springare spr : springareList) {
+		for (Runner spr : springareList) {
 			s = spr.getSprite();
 			s.draw(spritebatch);
 		}

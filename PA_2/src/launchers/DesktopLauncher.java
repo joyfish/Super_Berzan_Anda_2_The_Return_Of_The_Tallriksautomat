@@ -16,7 +16,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Demo_1.ImagePanel;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 

@@ -16,7 +16,7 @@ import com.badlogic.gdx.math.Vector2;
 import entities.Missile;
 import entities.Plattform;
 import entities.Player;
-import entities.Springare;
+import entities.Runner;
 import entities.State;
 import entities.Talkzone;
 import entities.Thrower;
@@ -27,7 +27,7 @@ public class AreaChecker {
 	private GameScreen superGame;
 	private ArrayList<Talkzone> tz;
 	private ArrayList<Thrower> throwList;
-	private ArrayList<Springare> runners;
+	private ArrayList<Runner> runners;
 	private Dimension Screen;
 	private Controller controller;
 	
@@ -138,7 +138,7 @@ public class AreaChecker {
 			}
 		}
 		
-		for (Springare spr : runners) {
+		for (Runner spr : runners) {
 			Rectangle r = new Rectangle(player.getPosition().x,player.getPosition().y,player.getRectangle().width,player.getRectangle().height);
 			if(Intersector.intersectRectangles(spr.getRectangle(), new Rectangle(r))){
 				player.damage();				

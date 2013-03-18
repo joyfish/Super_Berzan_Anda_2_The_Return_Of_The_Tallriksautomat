@@ -3,15 +3,18 @@ package entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class Plattform {
-	Vector2 offset;
-	Vector2 position;	
-	Vector2 size;	
-	Texture t = new Texture(Gdx.files.internal("Platform.png"));
-	Rectangle rectangle;
+	private Vector2 offset;
+	private Vector2 position;	
+	private Vector2 size;	
+	private Texture t = new Texture(Gdx.files.internal("Platform.png"));
+	private Rectangle rectangle;
 	private Sprite sprite;
 	
 	public Plattform(Vector2 startPosition, Vector2 Size){
@@ -20,7 +23,7 @@ public class Plattform {
 		this.rectangle = new Rectangle(position.x,position.y,size.x,size.y);
 		offset = new Vector2(0, 0);		
 		sprite = new Sprite(t);										
-		sprite.setSize(Size.x, Size.y);		
+		sprite.setSize(Size.x, Size.y);				
 	}
 	
 	public void setOffset(Vector2 Offset){		

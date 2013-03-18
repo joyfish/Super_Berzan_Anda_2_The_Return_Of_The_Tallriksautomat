@@ -16,12 +16,9 @@ import entities.Plattform;
 import entities.Player;
 import entities.Talkzone;
 
-public class Background {
-	
+public class Background {	
 	public Vector2 offset;
-	public Texture background;	
-	public Controller c;
-	public Player p;
+	public Texture background;			
 	public static float BORDERLINE = 200f; 
 	private ArrayList<Plattform> plattformList;
 	private GameScreen master;

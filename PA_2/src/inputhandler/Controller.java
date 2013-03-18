@@ -35,8 +35,8 @@ public class Controller {
 	public void initialize() {
 		p = gamescreen.getPlayer();
 		b = gamescreen.getBackground();
-		talkzoneList = b.getTalkzones();
 		painter = gamescreen.getPainter();
+		talkzoneList = b.getTalkzones();		
 		offset = b.getOffset();
 	}
 
